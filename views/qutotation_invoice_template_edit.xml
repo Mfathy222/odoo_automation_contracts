@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="custom_external_layout_striped_header_only_shape" inherit_id="web.external_layout_striped" priority="50">
+        <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
+            <div t-attf-class="o_company_#{company.id}_layout header" style="width: 100%;max-width: none;margin: 0;padding: 0;direction: ltr;box-sizing: border-box;">
+                <div style="display: block;height: 35px;background: #1e5397;margin: 0 -50px 20px -50px;padding: 0;border: 0;box-sizing: border-box;"></div>
+                <table style="width: 100%;border-collapse: collapse;table-layout: fixed;direction: ltr;margin: 0;padding: 0;border: 0 !important;">
+                    <tbody style="border: 0 !important;">
+                        <tr style="border: 0 !important;">
+                            <td name="company_address" style="width: 60%;vertical-align: top;text-align: left;padding-left: 0;padding-right: 0;direction: ltr;border: 0 !important;">
+                                <div style="padding-left: 30px; box-sizing: border-box;">
+                                    <ul class="list-unstyled" name="company_address_list" style="margin: 0;padding: 0;list-style: none;text-align: left;direction: ltr; ">
+                                        <li t-if="company.is_company_details_empty">
+                                            <span t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}">
+                                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center">
+                                                    <strong>Company address block</strong>
+                                                    <div>Contains the company address.</div>
+                                                </div>
+                                            </span>
+                                        </li>
+                                        <li t-else="">
+                                            <span t-field="company.company_details">
+                                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center">
+                                                    <strong>Company details block</strong>
+                                                    <div>Contains the company details.</div>
+                                                </div>
+                                            </span>
+                                        </li>
+                                        <li t-if="not forced_vat"></li>
+                                        <li t-else="">
+                                            <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>:
+                                            <span t-esc="forced_vat">US12345671</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td style="width: 100%;vertical-align: top;text-align: right;padding-left: 0;padding-right: 10px;direction: ltr;border: 0 !important;">
+                                <div style="width: 100%;text-align: right;direction: ltr;box-sizing: border-box;">
+                                    <img t-if="company.logo" class="o_company_logo_big" t-att-src="image_data_uri(company.logo)" alt="Logo" style="max-width: 120px;max-height: 150px;width: auto;height: auto; padding-right: 20px;"/>
+                                    <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold mt-2" style="font-size: 15px;text-align: right;direction: rtl;unicode-bidi: embed;color: #383636;">
+                                    Company tagline
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: block;border-bottom: 1px solid #6c98c9;margin: 5px 50px 0 50px;padding: 0;border-left: 0;border-right: 0;box-sizing: border-box;"></div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- address -->
+
+
+    <!-- <template id="custom_sale_report_customer_address_right" inherit_id="sale.report_saleorder_document" priority="95">
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <t t-set="partner_lang" t-value="doc.partner_id.lang or ''"/>
+            <t t-set="is_arabic_partner" t-value="partner_lang.startswith('ar')"/>
+            <t t-set="address">
+                <t t-if="is_arabic_partner">
+                    <style type="text/css">
+                    .o_snail_mail .address {
+                        padding-top: 0px !important;
+                    }
+                    .address.row.mb-4 {
+                        width: 100% !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                        direction: rtl !important;
+                        text-align: right !important;
+                    }
+                    .address.row.mb-4 > div[name="address"] {
+                        margin-left: auto !important;
+                        margin-right: 0 !important;
+                        text-align: right !important;
+                        direction: rtl !important;
+                    }
+                    .address.row.mb-4 > div[name="address"] address,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address div,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address span {
+                        text-align: right !important;
+                        direction: rtl !important;
+                    }
+                    </style>
+                    <div style="width: 100%; font-weight: 600; text-align: right; direction: rtl;">
+                        <div style="display: inline-block; vertical-align: top; font-size: 18px; line-height: 1.35; font-weight: 600; text-align: right; direction: rtl;">
+                            <div t-field="doc.partner_id" class="mb-0" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+
+                            <p t-if="doc.partner_id.vat" class="mb-0" style="margin: 4px 0 0 0; font-weight: 600;">
+                                <t t-if="doc.company_id.account_fiscal_country_id.vat_label" t-out="doc.company_id.account_fiscal_country_id.vat_label"/>
+                                <t t-else="">Tax ID</t>:
+                                <span t-field="doc.partner_id.vat"/>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <style type="text/css">
+                    .o_snail_mail .address {
+                        padding-top: 0px !important;
+                    }
+                    .address.row.mb-4 {
+                        width: 100% !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                        direction: ltr !important;
+                        text-align: left !important;
+                    }
+                    .address.row.mb-4 > div[name="address"] {
+                        margin-left: 0 !important;
+                        margin-right: auto !important;
+                        text-align: left !important;
+                        direction: ltr !important;
+                    }
+                    .address.row.mb-4 > div[name="address"] address,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address div,
+                    .address.row.mb-4 > div[name="address"] .o_portal_address span {
+                        text-align: left !important;
+                        direction: ltr !important;
+                    }
+                    </style>
+                    <div style="width: 100%; font-weight: 600; text-align: left; direction: ltr;">
+                        <div style="display: inline-block; vertical-align: top; font-size: 18px; line-height: 1.35; font-weight: 600; text-align: left; direction: ltr;">
+                            <div t-field="doc.partner_id" class="mb-0" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            <p t-if="doc.partner_id.vat" class="mb-0" style="margin: 4px 0 0 0; font-weight: 600;">
+                                <t t-if="doc.company_id.account_fiscal_country_id.vat_label" t-out="doc.company_id.account_fiscal_country_id.vat_label"/>
+                                <t t-else="">Tax ID</t>:
+                                <span t-field="doc.partner_id.vat"/>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template> -->
+
+<template id="custom_sale_report_customer_address_rtl_ltr_fixed"
+          inherit_id="sale.report_saleorder_document"
+          priority="100">
+
+    <xpath expr="//t[@t-set='address']" position="replace">
+
+        <t t-set="partner_lang" t-value="doc.partner_id.lang or ''"/>
+        <t t-set="is_arabic_partner" t-value="partner_lang[:2] == 'ar'"/>
+
+        <t t-set="address">
+            
+            <style type="text/css">
+                
+                div.address.row {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    clear: both !important;
+                    overflow: visible !important;
+                }
+
+                div.address.row > div[name="address"] {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    flex: none !important;
+                    float: none !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    overflow: visible !important;
+                }
+
+                .customer_address_ar,
+                .customer_address_en {
+                    display: block !important;
+                    page-break-inside: avoid !important;
+                    overflow: visible !important;
+                    color: #000000 !important;
+                }
+
+                .customer_address_ar,
+                .customer_address_ar * {
+                    direction: rtl !important;
+                    text-align: right !important;
+                }
+
+                .customer_address_en,
+                .customer_address_en * {
+                    direction: ltr !important;
+                    text-align: left !important;
+                }
+
+                 .o_snail_mail .address {
+                        padding-top: 0px !important;
+                    }
+            </style>
+
+            <t t-if="is_arabic_partner">
+                <div class="customer_address_ar"
+                     dir="rtl"
+                     style="width: 42%; margin-left: auto; margin-right: 0; text-align: right; direction: rtl; font-size: 15px; line-height: 1.35; font-weight: 600;">
+
+                    <div t-field="doc.partner_id"
+                         class="mb-0"
+                         t-options="{'widget': 'contact', 'fields': ['address', 'name'], 'no_marker': True}"/>
+
+                    <p t-if="doc.partner_id.vat"
+                       class="mb-0"
+                       style="margin: 4px 0 0 0; font-weight: 600;">
+                        <t t-if="doc.company_id.account_fiscal_country_id.vat_label"
+                           t-out="doc.company_id.account_fiscal_country_id.vat_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="doc.partner_id.vat"/>
+                    </p>
+                </div>
+            </t>
+
+            <t t-else="">
+                <div class="customer_address_en"
+                     dir="ltr"
+                     style="width: 42%; margin-left: 0; margin-right: auto; text-align: left; direction: ltr; font-size: 15px; line-height: 1.35; font-weight: 600;">
+
+                    <div t-field="doc.partner_id"
+                         class="mb-0"
+                         t-options="{'widget': 'contact', 'fields': ['address', 'name'], 'no_marker': True}"/>
+
+                    <p t-if="doc.partner_id.vat"
+                       class="mb-0"
+                       style="margin: 4px 0 0 0; font-weight: 600;">
+                        <t t-if="doc.company_id.account_fiscal_country_id.vat_label"
+                           t-out="doc.company_id.account_fiscal_country_id.vat_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="doc.partner_id.vat"/>
+                    </p>
+                </div>
+            </t>
+        </t>
+
+    </xpath>
+</template>
+
+    <!-- document_title -->
+    <template id="custom_external_layout_striped_body_title_shape" inherit_id="web.external_layout_striped" priority="60">
+    <xpath expr="//h2[@t-out='layout_document_title']" position="attributes">
+        <attribute name="t-att-style">
+            (
+                o and (
+                    o._name == 'sale.order'
+                    or (
+                        o._name == 'account.move'
+                        and o.move_type in ('out_invoice', 'out_refund')
+                    )
+                )
+            )
+            and
+            'display: table; margin: 18px auto 28px auto; min-width: 30%; max-width: 80%; padding: 13px 20px; border: 1px solid #1e5397; border-radius: 20px; color: #1e5397; background: transparent; font-size: 20px; font-weight: 600; text-align: center; direction: rtl;'
+            or
+            'margin: 0; padding: 0;'
+        </attribute>
+    </xpath>
+</template>
+
+
+
+    <!-- informatin box -->
+    <template id="custom_sale_report_information_box" inherit_id="sale.report_saleorder_document" priority="90">
+        <xpath expr="//div[@id='informations']" position="before">
+            <style type="text/css">
+            #informations {
+                background-color: rgba(231, 233, 237, 0.5);
+                border-radius: 18px !important;
+                padding: 16px 22px !important;
+                box-sizing: border-box !important;
+                display: table !important;
+                width: 100% !important;
+                table-layout: fixed !important;
+                margin-top: 10px !important;
+                margin-bottom: 24px !important;
+                border: 0 !important;
+            }
+
+            #informations > div {
+                display: table-cell !important;
+                float: none !important;
+                width: auto !important;
+                max-width: none !important;
+                text-align: center !important;
+                vertical-align: top !important;
+                padding: 4px 10px !important;
+                border: 0 !important;
+                background-color: transparent !important;
+                box-sizing: border-box !important;
+            }
+
+            #informations strong {
+                display: block !important;
+                color: #1e5397 !important;
+                font-size: 18px !important;
+                font-weight: 600 !important;
+                margin-bottom: 4px !important;
+                text-align: center !important;
+            }
+
+            #informations > div > div {
+                color: #111827a6 !important;
+                font-size: 20px !important;
+                font-weight: 400 !important;
+                text-align: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            </style>
+        </xpath>
+
+
+        <xpath expr="//div[@id='informations']" position="attributes">
+            <attribute name="style">
+            border-radius: 18px !important;
+            padding: 16px 22px !important;
+            box-sizing: border-box !important;
+            display: table !important;
+            width: 100% !important;
+            table-layout: fixed !important;
+            margin-top: 10px !important;
+            margin-bottom: 24px !important;
+            border: 0 !important;
+            </attribute>
+        </xpath>
+
+    </template>
+
+    <!-- sale body -->
+    <template id="custom_sale_main_table_colors_radius_only" inherit_id="sale.report_saleorder_document" priority="100">
+        <xpath expr="//table[hasclass('o_main_table')]" position="before">
+            <style type="text/css">
+            .o_main_table {
+                border-radius: 18px !important;
+                border-collapse: separate !important;
+                border-spacing: 0 !important;
+                overflow: hidden !important;
+            }
+            .o_main_table thead th {
+                color: #1e5397 !important;
+                font-weight: 200 !important;
+                white-space: nowrap !important;
+            }
+            .o_main_table thead th span {
+                color: #1e5397 !important;
+                font-weight: 200 !important;
+            }
+            #total {
+                padding-top: 10px;
+            }    
+            .o_total_table {
+                background-color: #e7e9ed;
+                border-radius: 18px !important;
+                border-collapse: separate !important;
+                border-spacing: 0 !important;
+                overflow: hidden !important;
+                margin-top: 2px !important;
+            }
+            .o_total_table td {
+                background-color: #e7e9ed;
+            }
+            .o_total_table tr.o_total td,
+            .o_total_table tr.o_total strong {
+                color: #1e5397 !important;
+                font-weight: 600 !important;
+            }
+            </style>
+        </xpath>
+
+
+
+        <!-- <xpath expr="//table[hasclass('o_total_table')]" position="attributes">
+        <attribute name="style">
+            background-color: #e7e9ed;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            border-radius: 18px !important;
+            overflow: hidden !important;
+            margin-top: 2px !important;
+        </attribute>
+    </xpath> -->
+        <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
+            <attribute name="style">
+            border-radius: 18px !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            overflow: hidden !important;
+            </attribute>
+        </xpath>
+        <!-- <xpath expr="//div[@id='total']" position="attributes">
+            <attribute name="style">
+            margin-top: 5px !important;
+            </attribute>
+        </xpath> -->
+        <xpath expr="//table[hasclass('o_total_table')]" position="attributes">
+            <attribute name="style">
+            border-radius: 18px !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            overflow: hidden !important;
+                                                                                                            <!-- margin: 10px 10px 0 10px;     -->
+            </attribute>
+        </xpath>
+    </template>
+    <!-- Custom Sale Total Row Blue Style -->
+    <template id="custom_sale_total_row_blue_style" inherit_id="sale.document_tax_totals" priority="110">
+        <xpath expr="//tr[hasclass('o_total')]" position="attributes">
+            <attribute name="style">
+            color: #1e5397;
+            </attribute>
+        </xpath>
+        <xpath expr="//tr[hasclass('o_total')]/td" position="attributes">
+            <attribute name="style">
+            color: #1e5397;
+            </attribute>
+        </xpath>
+        <xpath expr="//tr[hasclass('o_total')]//strong" position="attributes">
+            <attribute name="style">
+            color: #1e5397;
+            </attribute>
+        </xpath>
+    </template>
+    <!--  -->
+
+    <template id="sijil_external_layout_full_width_reset" inherit_id="web.external_layout_striped" priority="40">
+
+        <xpath expr="//div[contains(@t-attf-class, 'header')]" position="before">
+            <style type="text/css">
+            .header {
+                width: 100% !important;
+                max-width: none !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                box-sizing: border-box !important;
+            }
+            </style>
+        </xpath>
+
+    </template>
+
+    <template id="sijil_external_layout_footer" inherit_id="web.external_layout_striped" priority="40">
+        <xpath expr="//div[hasclass('o_footer_content')]" position="before">
+            <style type="text/css">
+            .border-top{
+            border: none !important;
+            }
+            </style>
+            <div style="display: block;border-bottom: 1px solid #6c98c9;margin: 18px 50px 0 50px;padding: 0;border-left: 0;border-right: 0;box-sizing: border-box;"></div>
+        </xpath>
+    </template>
+
+
+
+
+    <!-- invoice body -->
+
+<!--  address-->
+    <!-- <template id="custom_invoice_dynamic_address_content">
+        <t t-set="partner_lang" t-value="o.partner_id.lang or ''"/>
+        <t t-set="is_arabic_partner" t-value="partner_lang.startswith('ar')"/>
+        <style type="text/css">
+        .o_snail_mail .address {
+            padding-top: 0px !important;
+        }
+        </style>
+        <t t-if="is_arabic_partner">
+            <style type="text/css">
+            .address.row.mb-4 {
+                display: block !important;
+                width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: right !important;
+                direction: rtl !important;
+            }
+            .address.row.mb-4 > div[name="address"] {
+                display: block !important;
+                width: 42% !important;
+                max-width: 42% !important;
+                margin-left: auto !important;
+                margin-right: 0 !important;
+                padding: 0 !important;
+                text-align: right !important;
+                direction: rtl !important;
+                font-size: 18px !important;
+                line-height: 1.35 !important;
+                font-weight: 600 !important;
+                box-sizing: border-box !important;
+            }
+            .address.row.mb-4 > div[name="address"] address,
+            .address.row.mb-4 > div[name="address"] .o_portal_address,
+            .address.row.mb-4 > div[name="address"] .o_portal_address div,
+            .address.row.mb-4 > div[name="address"] .o_portal_address span {
+                text-align: right !important;
+                direction: rtl !important;
+                font-weight: 600 !important;
+            }
+            </style>
+            <div style="width:100%; font-weight:600; text-align:right; direction:rtl;">
+                <div style="display:inline-block; vertical-align:top; font-size:18px; line-height:1.35; font-weight:600; text-align:right; direction:rtl;">
+                    <div t-field="o.partner_id" class="mb-0" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                    <p t-if="o.partner_id.vat" class="mb-0" style="margin:4px 0 0 0; font-weight:600;">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="o.partner_id.vat"/>
+                    </p>
+                </div>
+            </div>
+        </t>
+        <t t-else="">
+            <style type="text/css">
+            .address.row.mb-4 {
+                display: block !important;
+                width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+                direction: ltr !important;
+            }
+            .address.row.mb-4 > div[name="address"] {
+                display: block !important;
+                width: 42% !important;
+                max-width: 42% !important;
+                margin-left: 0 !important;
+                margin-right: auto !important;
+                padding: 0 !important;
+                text-align: left !important;
+                direction: ltr !important;
+                font-size: 18px !important;
+                line-height: 1.35 !important;
+                font-weight: 600 !important;
+                box-sizing: border-box !important;
+            }
+            .address.row.mb-4 > div[name="address"] address,
+            .address.row.mb-4 > div[name="address"] .o_portal_address,
+            .address.row.mb-4 > div[name="address"] .o_portal_address div,
+            .address.row.mb-4 > div[name="address"] .o_portal_address span {
+                text-align: left !important;
+                direction: ltr !important;
+                font-weight: 600 !important;
+            }
+            </style>
+            <div style="width:100%; font-weight:600; text-align:left; direction:ltr;">
+                <div style="display:inline-block; vertical-align:top; font-size:18px; line-height:1.35; font-weight:600; text-align:left; direction:ltr;">
+                    <div t-field="o.partner_id" class="mb-0" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                    <p t-if="o.partner_id.vat" class="mb-0" style="margin:4px 0 0 0; font-weight:600;">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="o.partner_id.vat"/>
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template> -->
+    
+<template id="custom_invoice_dynamic_address_content">
+
+    <t t-set="partner_lang" t-value="o.partner_id.lang or ''"/>
+    <t t-set="is_arabic_partner" t-value="partner_lang.startswith('ar')"/>
+
+    <style type="text/css">
+        .o_snail_mail .address {
+            padding-top: 0px !important;
+        }
+
+        .address.row,
+        .address.row.mb-4 {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            clear: both !important;
+            overflow: visible !important;
+        }
+
+        .address.row > div[name="address"],
+        .address.row.mb-4 > div[name="address"] {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: none !important;
+            float: none !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            overflow: visible !important;
+        }
+
+        .custom_dynamic_address_wrapper {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            clear: both !important;
+            overflow: visible !important;
+            page-break-inside: avoid !important;
+        }
+
+        .custom_dynamic_address_box {
+            display: inline-block !important;
+            width: 42% !important;
+            max-width: 42% !important;
+            vertical-align: top !important;
+            font-size: 18px !important;
+            line-height: 1.35 !important;
+            font-weight: 600 !important;
+            box-sizing: border-box !important;
+            color: #000000 !important;
+            overflow: visible !important;
+        }
+
+        .custom_dynamic_address_ar,
+        .custom_dynamic_address_ar * {
+            direction: rtl !important;
+            text-align: right !important;
+            font-weight: 600 !important;
+        }
+
+        .custom_dynamic_address_en,
+        .custom_dynamic_address_en * {
+            direction: ltr !important;
+            text-align: left !important;
+            font-weight: 600 !important;
+        }
+    </style>
+
+    <!-- Arabic Customer: address on right -->
+    <t t-if="is_arabic_partner">
+
+        <style type="text/css">
+            .address.row,
+            .address.row.mb-4 {
+                direction: rtl !important;
+                text-align: right !important;
+            }
+        </style>
+
+        <div class="custom_dynamic_address_wrapper custom_dynamic_address_ar"
+             dir="rtl"
+             style="width:100%; text-align:right; direction:rtl;">
+
+            <div class="custom_dynamic_address_box"
+                 style="margin-left:0; margin-right:0; text-align:right; direction:rtl;">
+
+                <div t-field="o.partner_id"
+                     class="mb-0"
+                     t-options="{'widget': 'contact', 'fields': ['address', 'name'], 'no_marker': True}"/>
+
+                <p t-if="o.partner_id.vat"
+                   class="mb-0"
+                   style="margin:4px 0 0 0; font-weight:600;">
+                    <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                       t-out="o.company_id.account_fiscal_country_id.vat_label"/>
+                    <t t-else="">Tax ID</t>:
+                    <span t-field="o.partner_id.vat"/>
+                </p>
+
+            </div>
+        </div>
+
+    </t>
+
+    <!-- English Customer: address on left -->
+    <t t-else="">
+
+        <style type="text/css">
+            .address.row,
+            .address.row.mb-4 {
+                direction: ltr !important;
+                text-align: left !important;
+            }
+        </style>
+
+        <div class="custom_dynamic_address_wrapper custom_dynamic_address_en"
+             dir="ltr"
+             style="width:100%; text-align:left; direction:ltr;">
+
+            <div class="custom_dynamic_address_box"
+                 style="margin-left:0; margin-right:0; text-align:left; direction:ltr;">
+
+                <div t-field="o.partner_id"
+                     class="mb-0"
+                     t-options="{'widget': 'contact', 'fields': ['address', 'name'], 'no_marker': True}"/>
+
+                <p t-if="o.partner_id.vat"
+                   class="mb-0"
+                   style="margin:4px 0 0 0; font-weight:600;">
+                    <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                       t-out="o.company_id.account_fiscal_country_id.vat_label"/>
+                    <t t-else="">Tax ID</t>:
+                    <span t-field="o.partner_id.vat"/>
+                </p>
+
+            </div>
+        </div>
+
+    </t>
+
+</template>
+
+
+    
+    <!-- Apply to all invoice address branches -->
+    <template id="custom_invoice_report_customer_address_by_language" inherit_id="account.report_invoice_document" priority="95">
+        <!-- Case 1: shipping address different -->
+        <xpath expr="//div[@name='address_not_same_as_shipping']/t[@t-set='address']" position="replace">
+            <t t-set="address">
+                <t t-call="zofirm_contract.custom_invoice_dynamic_address_content"/>
+            </t>
+        </xpath>
+        <!-- Case 2: shipping address same as invoice address -->
+        <xpath expr="//div[@name='address_same_as_shipping']/t[@t-set='address']" position="replace">
+            <t t-set="address">
+                <t t-call="zofirm_contract.custom_invoice_dynamic_address_content"/>
+            </t>
+        </xpath>
+        <!-- Case 3: no shipping address -->
+        <xpath expr="//div[@name='no_shipping']/t[@t-set='address']" position="replace">
+            <t t-set="address">
+                <t t-call="zofirm_contract.custom_invoice_dynamic_address_content"/>
+            </t>
+        </xpath>
+    </template>
+
+
+
+    <!-- Information Box -->
+    <template id="custom_invoice_report_information_box" inherit_id="account.report_invoice_document" priority="90">
+        <xpath expr="//div[@id='informations']" position="before">
+            <style type="text/css">
+            #informations {
+                background-color: rgba(231, 233, 237, 0.5);
+                border-radius: 18px !important;
+                padding: 16px 22px !important;
+                box-sizing: border-box !important;
+                display: table !important;
+                width: 100% !important;
+                table-layout: fixed !important;
+                margin-top: 10px !important;
+                margin-bottom: 24px !important;
+                border: 0 !important;
+            }
+
+            #informations > div {
+                display: table-cell !important;
+                float: none !important;
+                width: auto !important;
+                max-width: none !important;
+                text-align: center !important;
+                vertical-align: top !important;
+                padding: 4px 10px !important;
+                border: 0 !important;
+                background-color: transparent !important;
+                box-sizing: border-box !important;
+            }
+
+            #informations strong {
+                display: block !important;
+                color: #1e5397 !important;
+                font-size: 18px !important;
+                font-weight: 600 !important;
+                margin-bottom: 4px !important;
+                text-align: center !important;
+            }
+
+            #informations strong br {
+                display: none !important;
+            }
+
+            #informations > div > div {
+                color: #111827a6 !important;
+                font-size: 20px !important;
+                font-weight: 400 !important;
+                text-align: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            </style>
+        </xpath>
+
+
+        <xpath expr="//div[@id='informations']" position="attributes">
+            <attribute name="style">
+            border-radius: 18px !important;
+            padding: 16px 22px !important;
+            box-sizing: border-box !important;
+            display: table !important;
+            width: 100% !important;
+            table-layout: fixed !important;
+            margin-top: 10px !important;
+            margin-bottom: 24px !important;
+            border: 0 !important;
+            </attribute>
+        </xpath>
+
+    </template>
+    <!-- main table -->
+    <template id="custom_invoice_main_table_colors_radius_only" inherit_id="account.report_invoice_document" priority="100">
+        <xpath expr="//table[hasclass('o_main_table')]" position="before">
+            <style type="text/css">
+            .o_main_table {
+                border-radius: 18px !important;
+                border-collapse: separate !important;
+                border-spacing: 0 !important;
+                overflow: hidden !important;
+            }
+            .o_main_table thead th {
+                color: #1e5397 !important;
+                font-weight: 200 !important;
+            }
+            .o_main_table thead th span {
+                color: #1e5397 !important;
+                font-weight: 200 !important;
+            }
+            .o_total_table tr.o_total td,
+            .o_total_table tr.o_total strong {
+                color: #1e5397 !important;
+                font-weight: 600 !important;
+            }
+                
+            .o_total_table tbody{
+                border-radius: 18px !important;
+                }
+            </style>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
+            <attribute name="style">
+            border-radius: 18px !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            overflow: hidden !important;
+            width: 100% !important;
+            padding: 10px !important;
+            </attribute>
+        </xpath>
+    </template>
+    <!-- total table -->
+    <template id="custom_invoice_total_table_radius_only" inherit_id="account.report_invoice_document" priority="140">
+        <xpath expr="//table[hasclass('o_total_table')]" position="before">
+            <style type="text/css">
+            #right-elements .o_total_table {
+                background-color: rgba(231, 233, 237, 0.5);
+                border-collapse: separate !important;
+                border-spacing: 0 !important;
+                border-radius: 18px !important;
+                overflow: hidden !important;
+                margin-top: 2px !important;
+            }
+
+            #right-elements .o_total_table td {
+                background-color: rgba(231, 233, 237, 0.5);
+                padding: 10px 12px !important;
+                border: 0 !important;
+            }
+
+            #right-elements .o_total_table tr:first-child td:first-child {
+                border-top-left-radius: 18px !important;
+            }
+
+            #right-elements .o_total_table tr:first-child td:last-child {
+                border-top-right-radius: 18px !important;
+            }
+
+            #right-elements .o_total_table tr:last-child td:first-child {
+                border-bottom-left-radius: 18px !important;
+            }
+
+            #right-elements .o_total_table tr:last-child td:last-child {
+                border-bottom-right-radius: 18px !important;
+            }
+
+            #right-elements .o_total_table tr.o_total td,
+            #right-elements .o_total_table tr.o_total strong {
+                color: #1e5397 !important;
+                font-weight: 600 !important;
+            }
+            </style>
+        </xpath>
+
+        <xpath expr="//table[hasclass('o_total_table')]" position="attributes">
+            <attribute name="style">
+            background-color: rgba(231, 233, 237, 0.5);
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            border-radius: 18px !important;
+            overflow: hidden !important;
+            margin-top: 2px !important;
+            </attribute>
+        </xpath>
+
+    </template>
+
+</odoo>

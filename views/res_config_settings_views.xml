@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_sijil_email" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sijil.email</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form" position="inside">
+                <app data-string="Sijil Email" string="Sijil Email" name="sijil_email" groups="base.group_system">
+                    <block title="Default Emails for Quotations and Contracts" name="sijil_email_defaults" help="Per-company defaults for outgoing quotation (Send by Email) and contract-signature emails. Leave blank to keep Odoo's default behaviour.">
+                        <setting id="sijil_sales_email_from_setting" string="Default FROM" help="Used as the FROM address on outgoing quotation and contract-signature emails for the active company.">
+                            <field name="sijil_sales_email_from" placeholder="Sijil Sales &lt;sales@sijilacc.com&gt;"/>
+                        </setting>
+                        <setting id="sijil_sales_email_cc_setting" string="Default CC" help="Comma-separated addresses added as CC on quotation and contract-signature emails.">
+                            <field name="sijil_sales_email_cc" placeholder="info@sijilacc.com"/>
+                        </setting>
+                        <setting id="sijil_sales_mail_server_id_setting" string="Outgoing Mail Server" help="Pin a specific SMTP server for these emails. Leave blank to let Odoo pick by from_filter / priority.">
+                            <field name="sijil_sales_mail_server_id"/>
+                        </setting>
+
+                        <setting id="sijil_contract_approval_user_ids_setting" string="Contract Approval" help="Select users who can receive and approve all contract approval requests for the active company.">
+                            <field name="sijil_contract_approval_user_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" domain="[('share', '=', False)]"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

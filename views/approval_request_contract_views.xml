@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_approval_request_form_zofirm_contract_signature" model="ir.ui.view">
+        <field name="name">approval.request.form.zofirm.contract.signature</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <button name="action_zofirm_open_sign_template_editor" type="object" string="Open Full Contract" class="btn-secondary" invisible="not zofirm_sign_template_id"/>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <group string="Contract Links" invisible="not zofirm_contract_id">
+                    <field name="zofirm_contract_id" readonly="1"/>
+                    <!-- <field name="zofirm_sign_template_id" readonly="1" invisible="not zofirm_sign_template_id"/> -->
+                    <!-- <field name="zofirm_contract_pdf_attachment_id" readonly="1" invisible="not zofirm_contract_pdf_attachment_id"/> -->
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

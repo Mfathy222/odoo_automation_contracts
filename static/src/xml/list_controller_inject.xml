@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-inherit="web.ListView.Buttons" t-inherit-mode="extension" owl="1">
+    <xpath expr="." position="inside">
+      <t t-if="this and this.showOneAuditBtn">
+        <t t-component="this.OneAuditButton"/>
+      </t>
+    </xpath>
+  </t>
+</templates>

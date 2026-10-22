@@ -1,0 +1,53 @@
+<odoo>
+  <record id="action_one_audit" model="ir.actions.act_window">
+    <field name="name">One Audit</field >
+    <field name="res_model">zofirm.one.audit</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="view_one_audit_list" model="ir.ui.view">
+    <field name="name">zofirm.one.audit.list</field>
+    <field name="model">zofirm.one.audit</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="sequence" string="التسلسل"/>
+        <field name="customer_name" string="اسم العميل"/>
+        <field name="customer_code" string="رمز العميل"/>
+        <field name="period_end" string="نهاية الفترة"/>
+        <field name="contract_no" string="رقم العقد"/>
+        <field name="fees_amount" string="الأجور"/>
+        <field name="vat_amount" string="مجموع الضريبة"/>
+        <field name="contract_template" string="نماذج العقد"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_one_audit_form" model="ir.ui.view">
+    <field name="name">zofirm.one.audit.form</field>
+    <field name="model">zofirm.one.audit</field>
+    <field name="arch" type="xml">
+      <form string="One Audit">
+        <sheet>
+          <group>
+            <group>
+              <field name="sequence"/>
+              <field name="customer_name"/>
+              <field name="customer_code"/>
+              <field name="period_end"/>
+            </group>
+            <group>
+              <field name="contract_no"/>
+              <field name="fees_amount"/>
+              <field name="vat_amount"/>
+              <field name="contract_template"/>
+            </group>
+          </group>
+
+          <group string="PDF">
+            <field name="attachment_ids" widget="many2many_binary"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

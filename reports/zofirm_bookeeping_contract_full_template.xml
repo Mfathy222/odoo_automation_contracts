@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="zofirm_bookeeping_contract_full_template" name="Bookeeping contract">
+    <main class="page o_report_layout">
+
+      <t t-set="q" t-value="(o._name == 'sale.order' and o) or (('quotation_id' in o._fields and o.quotation_id) or ('order_id' in o._fields and o.order_id) or False)"/>
+      <t t-set="partner" t-value="q and q.partner_id or False"/>
+      <t t-set="partner_lang" t-value="(partner and partner.lang) or 'ar_001'"/>
+      <t t-set="fmt_date" t-value="lambda d: (d and hasattr(d, 'strftime') and d.strftime('%Y-%m-%d')) or ''"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@emran-alhaddad/saudi-riyal-font/index.css" />
+      <link href="https://db.onlinewebfonts.com/c/353b79b2ea9db02690b55e55fb094e08?family=Bold" rel="stylesheet"/>
+      <style>
+      @import url('https://fonts.cdnfonts.com/css/sakkal-majalla-2');
+  
+      .contract-page {
+        direction: rtl;
+        text-align: right;
+        font-family: 'Sakkal Majalla', sans-serif !important;
+        font-size: 18px;
+        line-height: 1.9;
+      }
+      .title {
+        text-align: center;
+        color: #0000 !important;
+        font-size: 30px;
+        font-weight: 800;
+        margin: 0 0 10px 0;
+      }
+      .section-title {
+        margin: 18px 0 6px 0;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .para {
+        margin: 6px 0;
+      }
+      .bullets {
+        margin: 6px 0 10px 0;
+        padding-right: 22px;
+      }
+      .bullets li {
+        margin: 4px 0;
+      }
+      .doc-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .doc-table td, .doc-table th {
+        padding: 0px 10px;
+        vertical-align: top;
+      }
+      .fees-table th {
+        background: #f3f5f7;
+        text-align: center;
+        font-weight: 800;
+      }
+      .sign-table td {
+        height: 60px;
+      }
+
+
+    .sec-title{
+      direction: rtl;
+      text-align: right;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 10px 0 8px 0;
+    }
+    ul.bullets{
+      direction: rtl;
+      text-align: right;
+      margin: 0 0 10px 0;
+      padding: 0 18px 0 0;
+      list-style-type: disc;
+      list-style-position: inside;
+    }
+    ul.bullets li{
+      margin: 4px 0;
+      line-height: 1.9;
+    }
+    /* عنوان section داخل نفس UL لكن بدون bullet */
+    ul.bullets li.bullet-section{
+      list-style: none;
+      margin-top: 10px;
+      font-weight: 100;
+      font-size: 16px;
+    }
+
+
+    .sow-line-symbol {
+      display: inline-block;
+      margin-left: 6px;
+      font-family: "DejaVu Sans", sans-serif;
+      font-weight: 100;
+    }
+
+    .sow-line-name {
+        display: inline;
+    }
+
+    .contract-section-title {
+        direction: rtl;
+        text-align: right;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1.6;
+        margin: 14px 0 6px 0;
+        page-break-after: avoid;
+    }
+
+    .contract-paragraph {
+        direction: rtl;
+        text-align: right;
+        font avoid;
+    }
+
+    .contract-paragraph {
+        direction: rtl;
+        text-align: right;
+        font-size: 20px;
+        line-height: 1.75;
+        margin: 0 22px 8px 0;
+        padding: 0;
+        font-weight: normal;
+        hyphens: none !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        white-space: normal !important;
+        border: 0 !important;
+    }
+    .contract-paragraph1 {
+        direction: rtl;
+        text-align: right;
+        font-size: 20px;
+        line-height: 1.75;
+        margin: 0 48px 8px 0;
+        padding: 0;
+        font-weight: normal;
+        hyphens: none !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        white-space: normal !important;
+        border: 0 !important;
+    }
+
+    .contract-bullet-line {
+        direction: rtl;
+        text-align: right;
+        font-size: 20px;
+        line-height: 1.75;
+        margin: 0 0 6px 0;
+        padding: 0;
+        font-weight: normal;
+    }
+
+    .contract-bullet-symbol {
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+        vertical-align: baseline;
+    }
+
+    .audit-responsibility-title {
+    direction: rtl;
+    text-align: right;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 18px 0 6px 0;
+    page-break-after: avoid;
+    }
+
+    .audit-responsibility-intro {
+        direction: rtl;
+        text-align: right;
+        font-size: 19px;
+        line-height: 1.75;
+        margin: 0 22px 6px 0;
+        padding: 0;
+        font-weight: normal;
+    }
+
+    .audit-bullet-table {
+      border-collapse: collapse;
+      border: 0 !important;
+      direction: rtl;
+      width: 95%;
+      margin: 0 22px 4px 0;
+    }
+
+    .audit-bullet-table td {
+        border: 0 !important;
+    }
+
+    .audit-bullet-symbol {
+        width: 22px;
+        min-width: 22px;
+        text-align: center !important;
+        vertical-align: top !important;
+        font-size: 18px !important;
+        line-height: 1.75 !important;
+        padding-top: 5px !important;
+        border: 0 !important;
+    }
+
+    .audit-bullet-text {
+        vertical-align: top !important;
+        text-align: right;
+        font-size: 19px;
+        line-height: 1.75;
+        font-weight: normal;
+        padding-right: 4px !important;
+        hyphens: none !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        white-space: normal !important;
+        border: 0 !important;
+    }
+    
+    .time-section {
+        direction: rtl !important;
+        text-align: right !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .time-section .section-title {
+        direction: rtl !important;
+        text-align: right !important;
+        margin: 18px 0 8px 0 !important;
+        padding: 0 !important;
+    }
+
+    .time-section .para {
+        direction: rtl !important;
+        text-align: right !important;
+
+        font-size: 18px !important;
+        line-height: 1.9 !important;
+
+        margin: 6px 0 10px 0 !important;
+        padding: 0 !important;
+
+        text-indent: 0 !important;
+        white-space: normal !important;
+    }
+
+
+    .contract-paragraph,
+.contract-paragraph1,
+.audit-bullet-text,
+.para,
+.ar-js-justify {
+    font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
+    direction: rtl !important;
+
+    /* fallback فقط في حالة عدم تنفيذ JavaScript */
+    text-align: right !important;
+    text-align-last: right !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+    text-kashida-space: 0% !important;
+
+    hyphens: none !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+}
+
+.ar-auto-justify {
+    display: block !important;
+    width: 100% !important;
+    direction: rtl !important;
+    text-align: justify !important;
+    text-align-last: right !important;
+    text-kashida-space: 0% !important;
+}
+
+.ar-auto-justify .ar-word {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    direction: rtl !important;
+    unicode-bidi: isolate !important;
+}
+
+.amount-paragraph {
+    direction: rtl !important;
+    text-align: right !important;
+    text-align-last: right !important;
+    unicode-bidi: plaintext !important;
+}
+
+.amount-paragraph .icon-saudi_riyal {
+    display: inline-block !important;
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    margin: 0 2px !important;
+}
+      </style>
+
+      <div class="contract-page">
+        <h2 class="title text-dark">خطاب ارتباط</h2>
+        <table class="doc-table parties-table" style="border: none !important;">
+          <tbody style="border: none !important;">
+
+            <t t-set="p" t-value="o.partner_id"/>
+            <!-- الطرف الأول: العميل -->
+            <t t-set="c" t-value="o.company_id"/>
+            <!-- الطرف الثاني: شركتك -->
+            <t t-set="lang" t-value="'ar_001'"/>
+
+            <tr style="border: none !important;">
+              <td style="border: none !important;">
+    تم في
+                                <!-- <span t-esc="o.start_hijiry_date or '…'"/> -->
+                <t t-set="hijri_raw" t-value="(o.start_hijiry_date or '').replace('-', '/').strip()"/>
+                <t t-set="hijri_parts" t-value="[p.strip() for p in hijri_raw.split('/') if p.strip()]"/>
+
+                <t t-if="len(hijri_parts) == 3">
+                  <t t-set="hdd" t-value="hijri_parts[2] if len(hijri_parts[0]) == 4 else hijri_parts[0]"/>
+                  <t t-set="hmm" t-value="hijri_parts[1]"/>
+                  <t t-set="hyy" t-value="hijri_parts[0] if len(hijri_parts[0]) == 4 else hijri_parts[2]"/>
+                  <t t-esc="hdd"/>
+                /
+                  <t t-esc="hmm"/>
+                /
+                  <t t-esc="hyy"/>
+                هـ
+                </t>
+                <t t-elif="hijri_raw">
+                  <t t-esc="hijri_raw"/>
+                هـ
+                </t>
+                <t t-else="">
+                </t>
+الموافق
+                <t t-set="months_ar" t-value="['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']"/>
+
+                <t t-if="o.start_date">
+                  <t t-set="d" t-value="o.start_date"/>
+                  <span t-esc="str(d.day) + ' ' + months_ar[d.month-1] + ' ' + str(d.year)"/>
+                </t>
+                <t t-else="">…</t>
+
+    م، إبرام هذه الاتفاقية بين كل من:
+              </td>
+            </tr>
+
+            <tr style="border: none !important;">
+              <td style="border: none !important;">
+    الطرف الأول:
+                <span t-esc="(p.commercial_company_name or p.name) or '…'"/>
+    ، السجل التجاري رقم موحد:
+       "                <span t-esc="p.l10n_sa_edi_additional_identification_number  or '…'"/>
+"
+    ، ويقع عنوانها:
+                <span t-esc="(p.street or '') + ('، ' + p.city if p.city else '') + ('، ' + p.country_id.name if p.country_id else '')"/>
+    ، المملكة العربية السعودية
+                <t t-if="p.phone or ('mobile' in p._fields and p.mobile)">
+    ت:                  <span dir="ltr" t-esc="p.phone or (('mobile' in p._fields and p.mobile) or '…')"/>
+                </t>
+                <t t-if="p.email">
+    بريد إلكتروني:                  <span t-esc="p.email or '…'"/>
+                </t>
+                <br/>
+    ويمثلها في هذه العقد السيد / السيدة :
+                <span t-esc="(p.authorized_person and p.authorized_person.name) or '…'"/>
+    بصفته رئيس مجلس الادارة والمفوض بالتوقيع.
+                <br/>
+    [يشار إليه فيما بعد بـ: “                <span t-esc="(p.commercial_company_name or p.name) or '…'"/>
+” أو “الطرف الأول”]
+              </td>
+            </tr>
+            <tr style="border: none !important;">
+              <td style="border: none !important;">الطرف الثاني: شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون شركة مهنية ذات مسؤولية محدودة، السجل التجاري رقم موحد: "7017503215"، ويقع عنوانها: طريق الدائري الشمالي، حي الوادي، الرياض 13313، الدور الثاني مكتب 179، المملكة العربية السعودية، ت: 920011579،<br/>
+ بريد إلكتروني: info@zofirm.com<br/>
+ ويمثلها في هذه الاتفاقية الاستاذ/ محمد عبد الرحمن الزامل بصفته المدير العام والمفوض بالتوقيع.            <br/>
+[يشار إليه فيما بعد بـ " شركة الزامل محاسبون قانونيون ومستشارون" أو "الطرف الثاني"]</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="para">
+      <strong>تمهيد:</strong>
+    </p>
+    <div>
+حيث إن الطرف الأول يرغب في الاستعانة بجهة مهنية متخصصة لتقديم خدمات مسك الحسابات والخدمات المحاسبية والضريبية ذات الصلة،
+وحيث إن الطرف الثاني مكتب مهني مرخص ومتخصص في تقديم خدمات المحاسبة ومسك الدفاتر والاستشارات المالية، ويمتلك الكفاءة الفنية والخبرة العملية اللازمة، ويضم فريق عمل مؤهل يلتزم بتطبيق الأنظمة والتعليمات والمعايير المهنية المعتمدة في المملكة العربية السعودية،
+    </div>
+    <h4 class="section-title">المادة (1): التمهيد جزء من العقد:</h4>
+    <div style=" margin: 0px; ">
+    يُعد التمهيد المتقدم جزءاً لا يتجزأ من أحكام هذا الخطاب، وفي حال بطلان أي بند، يقع البطلان على البند ذاته دون أن يمتد إلى الخطاب بأكمله.
+    </div>
+
+    <h4 class="section-title">المادة (2): نطاق العمل:</h4>
+    <p class="para">يقدم الطرف الثاني خدماته المالية والمحاسبية المتكاملة من خلال فريق عمل متخصص، مع الالتزام بأعلى معايير الجودة والمهنية، وذلك لضمان إدارة دقيقة للعمليات المالية والالتزامات النظامية للعميل. تُنفذ الخدمات وفق المعايير المهنية للمحاسبة والمالية المعتمدة في المملكة العربية السعودية (SOCPA)، وتشمل جميع الجوانب المتعلقة بمسك الحسابات وإعداد الإقرارات الضريبية والزكوية.</p>
+
+    <ul class="bullets">
+      <!-- Product rows داخل SOW -->
+      <t t-set="product_items" t-value=" q and q.sow_item_ids.filtered( lambda item: item.item_kind == 'product' ).sorted( key=lambda item: item.display_order ) or []"/>
+      <t t-set="product_no" t-value="0"/>
+      <t t-foreach="product_items" t-as="product_item">
+        <t t-set="product_no" t-value="product_no + 1"/>
+        <!-- ===============================================
+             اسم المنتج وبيانات الفترة
+             =============================================== -->
+        <li class="bullet-section">
+          <span class="bullet-section-title">
+            <span t-esc="product_no"/>
+            <span>. </span>
+            <t t-set="product_tmpl" t-value="product_item.product_tmpl_id or (product_item.sale_order_line_id and product_item.sale_order_line_id.product_id and product_item.sale_order_line_id.product_id.product_tmpl_id)"/>
+            <span t-esc="product_tmpl.with_context(lang=partner_lang).name if product_tmpl else (product_item.product_display_name or '')"/>
+            <!-- Period Start / Period End -->
+            <t t-if=" product_item.fees_period_start and product_item.fees_period_end ">
+              <span> للفترة من </span>
+              <span t-esc="product_item.sale_order_line_id._format_fees_date_ar( product_item.fees_period_start)"/>
+              <span> حتى </span>
+              <span t-esc=" product_item.sale_order_line_id._format_fees_date_ar( product_item.fees_period_end )"/>
+            </t>
+            <t t-if="product_item.financial_quarter_ids">
+              <span> الربع </span>
+              <span t-esc="product_item.sale_order_line_id.with_context(lang=partner_lang)._get_financial_quarter_display()"/>
+            </t>
+            <!-- Years -->
+            <t t-if="product_item.financial_year_ids">
+              <span> لعام </span>
+              <span t-esc=" product_item.sale_order_line_id._get_financial_years_display() "/>
+            </t>
+            <!-- Payment Duration -->
+            <t t-if="product_item.payment_duration_id">
+              <span> - </span>
+              <span t-esc="product_item.payment_duration_id.with_context(lang=partner_lang).name"/>
+            </t>
+          </span>
+          <!-- ===============================================
+                 Lines المحددة التابعة لهذا المنتج
+                 =============================================== -->
+          <t t-set="selected_lines" t-value=" q.sow_item_ids.filtered( lambda item: item.sale_order_line_id == product_item.sale_order_line_id and item.item_kind == 'line' and item.selected ).sorted( key=lambda item: item.display_order ) "/>
+          <ul t-if="selected_lines" class="bullets">
+            <t t-foreach="selected_lines" t-as="line_item">
+              <li class="bullet-section">
+                <!-- اسم الـLine -->
+                <span class="bullet-section-title">
+                  <span class="sow-line-symbol">❖</span>
+                  <span class="sow-line-name" t-esc="line_item.sow_line_id.with_context(lang=partner_lang).name"/>
+                </span>
+                <!-- =======================================
+                             Sublines المحددة التابعة للـLine
+                             ======================================= -->
+                <t t-set="selected_sublines" t-value=" q.sow_item_ids.filtered( lambda item: item.sale_order_line_id == product_item.sale_order_line_id and item.sow_line_id == line_item.sow_line_id and item.item_kind == 'subline' and item.selected ).sorted( key=lambda item: item.display_order ) "/>
+                <ul t-if="selected_sublines" class="bullets">
+                  <t t-foreach="selected_sublines" t-as="subline_item">
+                    <li>
+                      <span t-esc="subline_item.sow_subline_id.with_context(lang=partner_lang).name"/>
+                    </li>
+                  </t>
+                </ul>
+              </li>
+            </t>
+          </ul>
+        </li>
+      </t>
+    </ul>
+
+
+    <div class="contract-section-title">
+المادة (3): المعلومات المقدمة والمسؤولية عنها:
+    </div>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">1.</td>
+          <td class="audit-bullet-text">
+يلتزم الطرف الأول بتقديم كافة المعلومات والبيانات والمستندات اللازمة للطرف الثاني لإتمام عمليات مسك الحسابات وإعداد القوائم المالية وإقرارات ضريبة القيمة المضافة والزكاة، كما يُقر بصحتها ويتحمل المسؤولية الكاملة في حال ثبوت خلاف ذلك.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">2.</td>
+          <td class="audit-bullet-text">
+لا يكون الطرف الثاني مسؤولاً عن أي خطأ أو نقص ناتج عن معلومات أو مستندات خاطئة أو غير دقيقة أو غير مكتملة يقدمها الطرف الأول، ويظل التزام الطرف الثاني مقتصرًا على تسجيل البيانات وإعداد القوائم المالية والإقرارات وفق المعايير المهنية.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">3.</td>
+          <td class="audit-bullet-text">
+يلتزم الطرف الثاني بتنفيذ خدماته المحاسبية وفق المعايير المهنية للمحاسبة والمراجعة المعتمدة في المملكة (SOCPA / IFRS)، ويشمل ذلك تسجيل القيود المحاسبية، إعداد ميزان المراجعة، والتقارير الدورية.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">4.</td>
+          <td class="audit-bullet-text">
+تقتصر مسؤولية الطرف الثاني على إبداء المشورة وتنفيذ العمل المحاسبي وفق المستندات المقدمة من الطرف الأول، ويقتصر تعويض الضرر، في حده الأقصى، على قيمة أتعاب الخدمات المنفذة . 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+<div style="page-break-after: avoid;">
+    <h4 class="section-title">المادة (4): بذل العناية والمحافظة على السرية:</h4>
+
+    <div>
+يلتزم الطرف الثاني ببذل العناية والجهد المعتبرين عرفاً لتنفيذ العمل المطلوب من الطرف الأول، كما يلتزم الطرفان بالمحافظة على سرية المعلومات المتعلقة بالعقد.
+يحافظ الطرفان على اتخاذ جميع الخطوات اللازمة لحماية سرية المعلومات من الوقوع في المجال العام أو في حيازة أشخاص غير مصرح لهم. كما يلتزم الطرف الثاني بدرجة عالية من العناية المطلوبة بموجب القانون أو الأنظمة المهنية واللوائح، وآداب وسلوك المهنة.
+يجوز لنا الحصول على معلومات حساسة بشأن أعمالكم أو شؤونكم خلال تقديم الخدمات ("معلومات سرية"). سنحتفظ بسرية هذه المعلومات ولن نقوم بالإفصاح عنها خارج نطاق فريق العمل المعني إلا بإذن منكم أو كما يسمح به هذا البند.
+نلتزم بمعايير السرية المنصوص عليها في نظامنا الداخلي، ونمتثل للقيود المفروضة علينا من قبل أي سلطة في المملكة العربية السعودية والتي يتعين علينا الالتزام بمتطلباتها. كما نلتزم بأي متطلبات قانونية تفرض علينا في المملكة العربية السعودية فيما يتعلق بالإفصاح عن المعلومات السرية.
+يجوز لنا مشاركة المعلومات المتعلقة بكم، بما في ذلك المعلومات السرية، مع:
+الأشخاص الآخرين في شركة الزامل محاسبون قانونيون ومستشارون، و/أو
+الأطراف الأخرى التي تسهل إدارة أعمالنا أو تدعم بنيتنا الأساسية، وذلك في الحالات التالية:
+أ. القيام بإجراءات قبول العميل والارتباط (بما في ذلك، ولا ينحصر، في تحديد تضارب المصالح المحتمل أو الالتزام بمتطلبات الاستقلالية).
+ب. لأغراض تقييم المخاطر الداخلية.
+ج. لدعم الحفاظ على الجودة والمعايير المهنية عند تقديم الخدمات (على سبيل المثال: مشاركة الممارسات المهنية، إدارات السياسات، المشاركة في تدابير ضمان الجودة، أو إنشاء قواعد بيانات المعرفة أو تحديثها).
+سنظل مسؤولين عن الحفاظ على سرية المعلومات حتى إذا تمت مشاركتها مع الأشخاص الآخرين في شركة الزامل محاسبون قانونيون ومستشارون أو تم الوصول إليها من قبل أطراف أخرى.
+قد نقوم بإزالة أو الترتيب لإزالة الأسماء وأي معرفات من المعلومات السرية لاستخدامها كبيانات مجهولة المصدر لأغراض مشروعة، حسب تقديرنا.
+لا تنطبق هذه المادة في الحالات التي تصبح فيها المعلومات السرية متاحة للجميع. كما لا تمنع هذه المادة إفصاحنا عن المعلومات السرية لجهات التأمين المهنية القائمة على تعويضنا أو لمستشارينا.
+
+    </div>
+</div>
+    <div class="commeistions-section" style="page-break-inside: avoid;">
+      <h4 class="section-title">المادة (5): الاتعاب:</h4>
+      <p class="para">إن أتعابنا المهنية، التي سيتم تحصيلها خلال مراحل العمل، تعتمد على المدة الزمنية المطلوبة لتنفيذ المهام الموكلة إلى فريق العمل. تبلغ أتعابنا المقدرة للخدمات المتفق عليها، ويتم سدادها وفقاً لما يلي أدناه:</p>
+
+      <t t-if="q.bookkeeping_fees">
+        <div class="para amount-paragraph" data-no-auto-justify="1" dir="rtl" style="direction: rtl; text-align: right;">
+          <t t-raw="q.bookkeeping_fees"/>
+        </div>
+      </t>
+    </div>
+    <!--========================================================  -->
+    <p class="para">
+يحق للطرف الثاني مراجعة أسعار الخدمات المقدمة في حال زيادة أعمال الطرف الأول، على أن يتم ذلك بالاتفاق المسبق بين الطرفين .
+    </p>
+
+
+
+    <table class="doc-table bank-table" style="border: 1px solid #111; text-align: center; page-break-inside: avoid;">
+      <tr style="border: 1px solid #111;">
+        <td style="border: 1px solid #111;">الحساب البنكي</td>
+        <td style="border: 1px solid #111;">شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون</td>
+      </tr>
+      <tr style="border: 1px solid #111;">
+        <td style="border: 1px solid #111;">اسم البنك</td>
+        <td style="border: 1px solid #111;">مصرف الانماء</td>
+      </tr>
+      <tr style="border: 1px solid #111;">
+        <td style="border: 1px solid #111;">رقم الحساب</td>
+        <td style="border: 1px solid #111;">68205642065000</td>
+      </tr>
+      <tr style="border: 1px solid #111;">
+        <td style="border: 1px solid #111;">رقم الايبان</td>
+        <td style="border: 1px solid #111;">0305000068205642065000 SA</td>
+      </tr>
+    </table>
+
+    <div class="time-section">
+
+      <h4 class="section-title">المادة (6): الوقت</h4>
+
+      <t t-if="o.start_date">
+        <p class="">يبدأ سريان هذا العقد من تاريخ
+          <t t-set="months_ar" t-value="['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']"/>
+          <t t-set="d" t-value="o.start_date"/>
+          <span t-esc="str(d.day) + ' ' + months_ar[d.month-1] + ' ' + str(d.year)"/>
+          <t t-if="o.end_date"> ولمدة لينتهي في تاريخ
+            <t t-set="d" t-value="o.end_date"/>
+            <span t-esc="str(d.day) + ' ' + months_ar[d.month-1] + ' ' + str(d.year)"/>
+          </t>
+        </p>
+      </t>
+ستتم المناقشة والاتفاق معكم على الجدول الزمني وفقاً لمتطلباتكم وتوقعاتكم. وسوف نحتاج من الإدارة إعداد الجداول اللازمة والمعلومات الأخرى المطلوبة للقيام بالأعمال.
+وفي حال عدم وجود أي أمور جوهرية، سنكون قادرين على تسليم أعمالنا خلال الفترة الزمنية المتفق عليها. سنقوم بإعلامكم، في حينه، بأي ظروف قد تحول دون التزامنا بالجدول الزمني المتفق عليه معكم، لتتمكنوا من اتخاذ الإجراءات اللازمة.
+في حال أدى التأخير في توفير المعلومات إلى تطلب وقت أو مصروفات إضافية لتقديم الخدمات، فإننا نحتفظ بحقنا في زيادة أتعابنا لتغطية الوقت والمصروفات الإضافية التي تحملناها.
+يحق للطرفين طلب إنهاء الاتفاقية بموجب خطاب رسمي موجه للطرف الآخر قبل الإنهاء بـ 30 يوماً، على أن ذلك لا يلغي الحق في المطالبة بالمبالغ غير المسددة عن الأعمال المنجزة جزئياً قبل إنهاء التعاقد.
+
+     
+    </div>
+
+
+    <h4 class="section-title">المادة (7): استخدام البريد الالكتروني</h4>
+    <p class="para">يُعد هذا الخطاب تفويضاً من الطرف الأول باستخدام البريد الإلكتروني وأي وسائل اتصال إلكترونية أخرى لنقل واستلام المعلومات، بما في ذلك المعلومات السرية، بين شركة الزامل محاسبون قانونيون ومستشارون والاستشاريين الخارجيين أو أي جهات أخرى تتعلق بشركة الزامل محاسبون قانونيون ومستشارون.</p>
+    <p class="para">يدرك الطرف الأول أن البريد الإلكتروني يسري عبر شبكة الإنترنت العامة، التي تُعد وسيلة غير مأمونة للاتصال، مما يعني أن سرية المعلومات المنقولة قد تكون عرضة للاختراق دون ارتكاب أي خطأ من قبل شركة الزامل محاسبون قانونيون ومستشارون. ويقتصر التواصل بين طرفي العقد عبر البريد الإلكتروني المبين في معلومات الطرفين، وأي وسيلة أخرى لا تُعتبر تواصلاً رسمياً</p>
+
+    <div class="contract-section-title">
+    المادة (8): احكام عامة:
+    </div>
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">1-</td>
+          <td class="audit-bullet-text">
+	يتضمن هذا العقد كامل ما اتفق عليه الطرفان من شروط وأحكام، ولا يجوز التعديل أو التغيير فيه إلا بموافقة كتابية مسبقة من الطرفين. يُعتبر هذا العقد نهائياً وملزماً لطرفيه، ولا يجوز العدول عنه أو الطعن فيه لأي سبب من الأسباب.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">2-</td>
+          <td class="audit-bullet-text">
+يُفسر هذا العقد وكافة الأمور المتصلة به وفقاً للقوانين المعمول بها في المملكة العربية السعودية.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">3-</td>
+          <td class="audit-bullet-text">
+لكي يتسنى لنا تأدية الخدمات، يتعين عليكم تقديم المعلومات والمساعدة بشكل فوري، وتمكيننا من الاطلاع على الوثائق والمستندات التي في حوزتكم أو عهدتكم أو تحت تصرفكم، وكذلك مستندات الموظفين الذين هم تحت سيطرتكم متى ما كان ذلك مطلوباً. يجب عليكم بذل أفضل الجهود لتقديم هذه الأمور عند عدم وجودها في حوزتكم أو عهدتكم أو تحت تصرفكم. كما يجب عليكم إبلاغنا عن أي معلومات أو تطورات تتنامى إلى علمكم وقد يكون لها تأثير على الخدمة المقدمة. بالإضافة إلى ذلك، يتعين عليكم تقديم المعلومات استجابة لاستفساراتنا (إن وجدت).
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">4-</td>
+          <td class="audit-bullet-text">
+يؤكد الطرف الأول ويضمن ويتعهد، وبالقدر الذي يكون فيه التصريح متوقعاً، أنه في تاريخ التعاقد هذا، المنشأة ملتزمة بشكل كامل بكافة الأنظمة والقوانين واجبة التطبيق المتعلقة بمكافحة الفساد ومكافحة الرشوة ("أنظمة مكافحة الفساد")، ولم تقم بمخالفتها. كما يوافق الطرف الأول ويتعهد بعدم مخالفتها لقوانين مكافحة الفساد سواء بصورة مباشرة أو غير مباشرة من خلال أي من مالكيها، مديريها الأساسيين، مديريها التنفيذيين، الشركاء، الوكلاء، مقاولي الباطن، الموظفين، أو الممثلين المفوضين.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">5-</td>
+          <td class="audit-bullet-text">
+لا يُعد أي من الطرفين مخالفاً لالتزاماته التعاقدية أو تقع عليه أي مسؤولية تجاه الطرف الآخر إذا كان غير قادر على الالتزام بعقد الخدمات نتيجة لأي سبب خارج عن سيطرته المعقولة. في حال حدوث مثل هذه الظروف، يجب على الطرف المتأثر إخطار الطرف الآخر في أقرب فرصة ممكنة. يكون للطرف الآخر خيار تعليق أو إنهاء عقد الخدمات بموجب إخطار يُسلم ويصبح نافذاً فور تسليمه.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+    <h4 class="section-title">المادة (9): تسوية النزاعات:</h4>
+    <p class="para">أي نزاع ينشأ بين الطرفين بشأن انعقاد، أو تنفيذ، أو فسخ، أو صحة، أو بطلان هذا العقد، أو أي أمور تتفرع عنه أو ترتبط به، ويتعذر تسويته بالطرق الودية خلال ثلاثين يوماً من تاريخ الإخطار بالنزاع؛ يتم إنهاؤه عن طريق اللجوء إلى المحكمة المختصة في مدينة الرياض.</p>
+
+
+
+    <div style="margin:18px 0 6px 0; font-weight:bold;">
+         المادة (10): فريق العمل وإدارة تقديم الخدمات
+    </div>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">1.</td>
+          <td class="audit-bullet-text">
+                يلتزم الطرف الثاني بتخصيص فريق عمل مهني متكامل، يضم عددًا كافيًا من الكفاءات المؤهلة وذوي الخبرة المناسبة، بما يتناسب مع طبيعة ونطاق الخدمات المهنية المتفق عليها بين الطرفين.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">2.</td>
+          <td class="audit-bullet-text">
+                يتولى الشريك المسؤول أو المدير التنفيذي، بمساندة مدير الارتباط أو مدير المشروع، الإشراف على تنفيذ الخدمات، ومتابعة فريق العمل، والتنسيق والتواصل مع ممثلي الطرف الأول، وتقديم الإيضاحات والتقارير المتعلقة بسير الأعمال ونتائجها.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">3.</td>
+          <td class="audit-bullet-text">
+                يلتزم الطرف الثاني بتنفيذ الخدمات وفقًا لنطاق العمل والجداول الزمنية والمخرجات المتفق عليها، وبذل العناية المهنية اللازمة، وتطبيق مستويات مناسبة من الإشراف والمراجعة وضبط الجودة.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+      <tbody style="border: 0 !important;">
+
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">4.</td>
+          <td class="audit-bullet-text">
+في حال غياب أو استبدال أي عضو رئيسي من فريق العمل، يلتزم الطرف الثاني بتوفير بديل مؤهل، وتنفيذ عملية تسليم واستلام مناسبة تضمن استمرارية الأعمال، مع التزام جميع أعضاء الفريق بالمحافظة على سرية معلومات الطرف الأول وعدم الإفصاح عنها إلا لأغراض تنفيذ الخدمات.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <table class="audit-bullet-table"> -->
+    <table class="contract-paragraph">
+
+      <tbody style="border: 0 !important;">
+        <tr style="border: 0 !important;">
+          <td class="audit-bullet-symbol">5.</td>
+          <td class="audit-bullet-text">
+                لا يترتب على تقديم أعضاء فريق العمل للخدمات نشوء أي علاقة عمل أو تبعية وظيفية بينهم وبين الطرف الأول، ويظل الطرف الثاني مسؤولًا عن إدارتهم والإشراف عليهم والوفاء بجميع الالتزامات المتعلقة بهم.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <h4 class="section-title">المادة (11)حقوق الملكية الفكرية</h4>
+    <p class="para">جميع حقوق الملكية الفكرية المتعلقة بالخدمات المحاسبية محل هذا الخطاب أو غيره والمقدمة من الطرف الثاني تظل مملوكة له، و لا يجوز للطرف الأول نسخ أو توزيع أي مواد أو نتائج أو تقارير أو غير ذلك مما يتعلق بهذه الخدمات، إلا بموافقة خطية مسبقة من مقدم الخدمة (الطرف الثاني).</p>
+    
+     <h4 class="section-title">
+     المادة (12) سريان وتجديد خطاب الارتباط
+</h4>
+ <p class="para">
+يكون خطاب الارتباط ساريًا من تاريخ سريانه، ويتجدد تلقائيًا ما لم يُخطر أحد الطرفين الطرف الآخر كتابةً بعدم رغبته في التجديد قبل انتهاء مدته.
+ </p>
+    
+    
+    <h4 class="section-title">المادة (13)أعمال آخرى غير متفق عليها</h4>
+    <p class="para">
+      اتفق الطرفان فيما بينهما البعض في حالة وجود أي أعمال أو خدمات إضافية غير مدرجة في هذا الخطاب ولم يتم الاتفاق عليها، وتم طلبها من قبل الطرف الأول ، يتم الاتفاق عليها من خلال خطاب ارتباط جديدواتفاق جديد . ولا يتم تنفيذ أي أعمال خارج نطاق هذاالخطاب إلا بعد توقيع الطرفين على خطاب ارتباط منفصل يتضمن الشروط والأتعاب الخاصة بتلك الأعمال.
+    </p>
+    <div class="signatures-section" style="page-break-inside: avoid;">
+      <!-- <h2 class="title text-dark">
+        حرر هذا الخطاب من نسختين، بيد كل طرف نسخة للعمل بموجبها عند الاقتضاء مكون من  13 بنداً.
+      </h2> -->
+      <table class="doc-table sign-table " style="text-align: center; border: none !important; page-break-inside: avoid;">
+        <tbody style="border: none;">
+          <tr style="border: none !important;">
+            <td style="border: none !important;">الطرف الأول:</td>
+            <td style="border: none !important;">الطرف الثاني:</td>
+          </tr>
+          <tr style="border: none !important;">
+           <td style="border: none !important;">
+           شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون              
+           <br/>
+ ويمثلها: محمد عبد الرحمن الزامل
+ </td>
+            <td style="border: none !important;">            
+              <span t-esc="(p.commercial_company_name or p.name) or '…'"/>
+              <br/>
+ويمثلها:            
+  <span t-esc="(p.authorized_person and p.authorized_person.name) or '...........................'"/>
+            </td>
+            <!-- <td style="border: none !important;">شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون              <br/>
+ ويمثلها: محمد عبد الرحمن الزامل
+ </td> -->
+          </tr>
+          <tr style="border: none !important;">
+            <td style="border: none !important;">التوقيع: (..............................)</td>
+            <td style="border: none !important;">التوقيع:(..............................)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+  <script type="text/javascript">
+    <![CDATA[
+(function () {
+    function hasClass(node, className) {
+        return node.className && (" " + node.className + " ").indexOf(" " + className + " ") >= 0;
+    }
+
+    function hasAnyClass(node, classNames) {
+        for (var i = 0; i < classNames.length; i++) {
+            if (hasClass(node, classNames[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function getTextLength(node) {
+        return (node.textContent || "").replace(/\s+/g, " ").replace(/ـ/g, "").trim().length;
+    }
+
+    function shouldSkipElement(node) {
+        if (!node || node.nodeType !== 1) {
+            return true;
+        }
+
+        if (hasClass(node, "ar-auto-justify") || node.getAttribute("data-no-auto-justify") === "1") {
+            return true;
+        }
+
+        var tag = node.tagName.toLowerCase();
+        if (
+            tag === "script" || tag === "style" || tag === "img" || tag === "svg" ||
+            tag === "table" || tag === "thead" || tag === "tbody" || tag === "tr" ||
+            tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "h5" || tag === "h6"
+        ) {
+            return true;
+        }
+
+        if (hasAnyClass(node, [
+            "title",
+            "section-title",
+            "contract-section-title",
+            "audit-responsibility-title",
+            "audit-bullet-symbol",
+            "signatures-section",
+            "sign-table",
+            "bank-table",
+            "doc-table"
+        ])) {
+            return true;
+        }
+
+        var styleText = (node.getAttribute("style") || "").replace(/\s+/g, "").toLowerCase();
+        if (styleText.indexOf("text-align:left") >= 0 || styleText.indexOf("text-align:center") >= 0) {
+            return true;
+        }
+
+        if (node.closest && node.closest(".signatures-section, .sign-table, .bank-table")) {
+            return true;
+        }
+
+        /* لا نطبق على النصوص القصيرة جداً إلا لو كانت من كلاس معروف */
+        if (
+            !hasAnyClass(node, ["contract-paragraph", "contract-paragraph1", "audit-bullet-text", "para", "ar-js-justify"]) &&
+            getTextLength(node) < 80
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function wrapTextNode(textNode) {
+        var text = textNode.nodeValue;
+
+        if (!text || !text.replace(/\s+/g, "")) {
+            return;
+        }
+
+        /* إزالة أي كشيدة موجودة فعليًا في النص */
+        text = text.replace(/ـ/g, "");
+
+        var parts = text.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+
+        for (var i = 0; i < parts.length; i++) {
+            var part = parts[i];
+
+            if (!part) {
+                continue;
+            }
+
+            if (/^\s+$/.test(part)) {
+                frag.appendChild(document.createTextNode(part));
+            } else {
+                var span = document.createElement("span");
+                span.className = "ar-word";
+                span.appendChild(document.createTextNode(part));
+                frag.appendChild(span);
+            }
+        }
+
+        textNode.parentNode.replaceChild(frag, textNode);
+    }
+
+    function walk(node) {
+        if (node.nodeType === 3) {
+            wrapTextNode(node);
+            return;
+        }
+
+        if (node.nodeType !== 1) {
+            return;
+        }
+
+        var tag = node.tagName.toLowerCase();
+
+        if (
+            tag === "script" || tag === "style" || tag === "img" || tag === "svg" ||
+            tag === "br" || tag === "table" || tag === "thead" || tag === "tbody" || tag === "tr" ||
+            tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "h5" || tag === "h6" ||
+            hasClass(node, "ar-word") || hasClass(node, "icon-saudi_riyal")
+        ) {
+            return;
+        }
+
+        var children = [];
+        for (var i = 0; i < node.childNodes.length; i++) {
+            children.push(node.childNodes[i]);
+        }
+
+        for (var j = 0; j < children.length; j++) {
+            walk(children[j]);
+        }
+    }
+
+    function runArabicJustifyFix() {
+        var selector = [
+            ".contract-paragraph",
+            ".contract-paragraph1",
+            ".audit-bullet-text",
+            ".para",
+            ".ar-js-justify",
+            ".time-section",
+            ".contract-page > div",
+            ".contract-body > div"
+        ].join(", ");
+
+        var elements = document.querySelectorAll(selector);
+
+        for (var i = 0; i < elements.length; i++) {
+            if (shouldSkipElement(elements[i])) {
+                continue;
+            }
+
+            elements[i].className += " ar-auto-justify";
+            walk(elements[i]);
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", runArabicJustifyFix);
+    } else {
+        runArabicJustifyFix();
+    }
+})();
+]]>
+  </script>
+</main>
+</template>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+

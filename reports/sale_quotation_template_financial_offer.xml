@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="zofirm_cover_image_attachment" model="ir.attachment">
+        <field name="name">Quotation Cover</field>
+        <field name="type">binary</field>
+        <field name="mimetype">image/png</field>
+        <field name="datas" type="base64" file="zofirm_contract/static/img/price_cover.png"/>
+        <field name="public" eval="True"/>
+    </record>
+
+    <record id="zofirm_cover_image_attachment_en" model="ir.attachment">
+        <field name="name">Quotation Cover EN</field>
+        <field name="type">binary</field>
+        <field name="mimetype">image/png</field>
+        <field name="datas" type="base64" file="zofirm_contract/static/img/price_cover_en.png"/>
+        <field name="public" eval="True"/>
+    </record>
+
+    <record id="zofirm_qut_back_attachment" model="ir.attachment">
+        <field name="name">qut-back.png</field>
+        <field name="type">binary</field>
+        <field name="mimetype">image/png</field>
+        <field name="datas" type="base64" file="zofirm_contract/static/img/qut-back.png"/>
+        <field name="public" eval="True"/>
+    </record>
+
+    <!-- Background image for 4400 quotation last page -->
+    <record id="zofirm_qut_4400_attachment" model="ir.attachment">
+        <field name="name">qut-4400.png</field>
+        <field name="type">binary</field>
+        <field name="mimetype">image/png</field>
+        <field name="datas" type="base64" file="zofirm_contract/static/img/qut-4400.png"/>
+        <field name="public" eval="True"/>
+    </record>
+
+        <record id="zofirm_qut_4400_attachment_en" model="ir.attachment">
+        <field name="name">qut-4400-en.png</field>
+        <field name="type">binary</field>
+        <field name="mimetype">image/png</field>
+        <field name="datas" type="base64" file="zofirm_contract/static/img/qut-4400-en.png"/>
+        <field name="public" eval="True"/>
+    </record>
+
+    <template id="sale_layout_no_header_footer" name="Sale Layout (No Header/Footer)">
+        <t t-call="web.basic_layout">
+            <t t-set="company" t-value="company_id or (o and o.company_id) or company"/>
+            <t t-out="0"/>
+        </t>
+    </template>
+
+    <record id="paperformat_saleorder_custom_landscape" model="report.paperformat">
+        <field name="name">Sale Quotation - Custom Landscape</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_width">289</field>
+        <field name="page_height">500</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <template id="sale_quotation_template_financial_offer_body" name="Financial Offer Body">
+        <t t-set="report_lang" t-value="(doc.partner_id.lang or env.lang or 'en_US')"/>
+        <t t-set="is_english" t-value="report_lang.lower().startswith('en')"/>
+        <t t-set="report_dir" t-value="'ltr' if is_english else 'rtl'"/>
+        <t t-set="o" t-value="doc.with_context(lang=report_lang)"/>
+
+        <t t-set="cover_att" t-value="env.ref('zofirm_contract.zofirm_cover_image_attachment_en' if is_english else 'zofirm_contract.zofirm_cover_image_attachment').sudo()"/>
+        <t t-set="cover_b64" t-value="(cover_att.datas or b'').decode().replace('\n','').replace('\r','')"/>
+        <t t-set="cover_mime" t-value="cover_att.mimetype or 'image/png'"/>
+
+        <t t-set="qut_back_att" t-value="env.ref('zofirm_contract.zofirm_qut_back_attachment').sudo()"/>
+        <t t-set="qut_back_b64" t-value="(qut_back_att.datas or b'').decode().replace('\n','').replace('\r','')"/>
+        <t t-set="qut_back_mime" t-value="qut_back_att.mimetype or 'image/png'"/>
+
+        <t t-set="financial_lines" t-value="o._get_order_lines_to_report()"/>
+        <t t-set="product_line_count" t-value="len(financial_lines.filtered(lambda line: not line.display_type and line.product_template_id))"/>
+        <t t-set="lines_per_page" t-value="5"/>
+        <t t-set="line_count" t-value="len(financial_lines)"/>
+        <t t-set="financial_page_count" t-value="((line_count + lines_per_page - 1) // lines_per_page) or 1"/>
+        <t t-set="last_financial_page_start" t-value="(financial_page_count - 1) * lines_per_page"/>
+        <t t-set="last_financial_page_lines" t-value="financial_lines[last_financial_page_start:last_financial_page_start + lines_per_page]"/>
+        <t t-set="financial_note_pages" t-value="o._get_financial_note_pages(last_financial_page_lines)"/>
+        <t t-set="has_note_continuation" t-value="len(financial_note_pages) &gt; 1"/>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/arabic-webfonts@1.5.0/ge-ss-two/stylesheet.css"/>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@emran-alhaddad/saudi-riyal-font/index.css" />
+
+        <style type="text/css">
+
+            @font-face {
+                font-family: 'GE SS Two' ,sans-serif !important;
+                src: url('https://jsdelivr.net') format('woff2');
+                font-weight: 300;
+                font-style: normal;
+                }
+
+            html,
+            body {
+                height: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .page,
+            .cover-page,
+            .fin-offer-page {
+                direction: rtl;
+                text-align: right;
+                font-family: "GE SS Two", sans-serif !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page.cover-page,
+            .page.fin-offer-page {
+                width: 100% !important;
+                height: 1280px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            /* الصفحة الأولى: الغلاف */
+            .cover-page {
+                position: relative;
+                background: #1d8ae7;
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+
+            .cover-img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100% !important;
+                height: 1280px !important;
+                display: block;
+                z-index: 0;
+            }
+
+            .cover-company {
+                position: relative;
+                z-index: 2;
+                right: 1258px;
+                top: 165mm;
+                font-size: 55px;
+                color: #ffffff;
+                direction: rtl;
+                unicode-bidi: plaintext;
+                max-width: 722px;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            /* كل صفحة من صفحات العرض المالي */
+            .fin-offer-page {
+                position: relative;
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+
+            /* آخر صفحة لا تنشئ صفحة فارغة بعدها */
+            .fin-offer-page.fin-last-page {
+                page-break-after: auto !important;
+                break-after: auto !important;
+            }
+
+            /* تتكرر داخل كل صفحة مالية */
+            .fin-background {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100% !important;
+                height: 1280px !important;
+                display: block;
+                z-index: 0;
+            }
+
+            .fin-content {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                height: 1280px;
+                <!-- padding: 60mm 55mm 25mm 55mm; -->
+                padding: 60mm 55mm 0 55mm;
+                box-sizing: border-box;
+                page-break-after: auto !important;
+            }
+
+            .fin-title {
+                text-align: center;
+                font-size: 60px;
+                line-height: 1.2;
+                margin: 0 0 14px 0;
+                color: #ffffff;
+                font-weight: bold;
+                margin-bottom: 50px;
+
+            }
+
+            .fin-page-number {
+                text-align: center;
+                color: #ffffff;
+                font-size: 22px;
+                margin-bottom: 50px;
+            }
+
+            .fin-main-table {
+                width: 100%;
+                table-layout: fixed;
+                border-collapse: collapse;
+                margin-top: 10px;
+                border: none !important;
+            }
+
+            .fin-main-table thead {
+                display: table-header-group;
+                border: none !important;
+            }
+
+            .fin-main-table tr {
+                page-break-inside: avoid !important;
+                border: none !important;
+            }
+
+            .fin-main-table th {
+                background: #1a98f1;
+                color: #ffffff;
+                padding: 20px;
+                font-size: 40px;
+                font-weight: bold;
+                border: none !important;
+            }
+
+            .fin-main-table td {
+                font-size: 35px;
+                vertical-align: middle;
+                border: none !important;
+                height: 22mm;
+            }
+
+            .fin-desc {
+                text-align: right;
+                padding-right: 30px;
+                white-space: normal;
+                line-height: 1.45;
+                overflow-wrap: break-word;
+                color: #ffffff;
+                border: none !important;
+            }
+
+            .fin-val {
+                text-align: center;
+                white-space: nowrap;
+                color: #ffffff;
+                border: none !important;
+            }
+
+            .fin-sub {
+                text-align: center;
+                white-space: nowrap;
+                color: #ffffff;
+                border: none !important;
+            }
+
+            /* Section row, similar to Odoo order lines */
+            .fin-section-row td {
+                height: 14mm !important;
+                padding: 12px 30px !important;
+                font-size: 35px;
+                color: #ffffff !important;
+                border: none !important;
+            }
+
+            /* مسافة بين كل Product والـProduct التالي */
+            .fin-product-row + .fin-product-row > td {
+                padding-top: 21px !important;
+            }
+            
+            .fin-section-name {
+                text-align: right !important;
+                white-space: normal !important;
+                line-height: 1.35 !important;
+            }
+
+            .fin-section-total {
+                text-align: center !important;
+                direction: ltr !important;
+            }
+
+            /* Note row, similar to Odoo order lines */
+            .fin-note-row td {
+                height: auto !important;
+                padding: 10px 30px !important;
+                color: #ffffff !important;
+                font-size: 35px !important;
+                line-height: 1.4 !important;
+                border: none !important;
+            }
+
+            .fin-free {
+                font-weight: bold !important;
+            }
+
+            .fin-sep {
+                border-top: 4px solid #ffffff;
+                margin: 22px 0 22px 0;
+            }
+
+        .fin-bottom {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            border: none !important;
+        }
+
+        /* محاذاة خلية النوت وخلية الإجمالي من الأعلى */
+        .fin-bottom > tbody > tr > td {
+            vertical-align: top !important;
+            border: none !important;
+            padding-top: 0 !important;
+        }
+
+        .fin-terms {
+            width: 60%;
+            vertical-align: top !important;
+            color: #ffffff;
+            font-size: 28px;
+            border: none !important;
+            padding: 0 30px 0 20px !important;
+            box-sizing: border-box;
+        }
+
+        .fin-note {
+            display: block;
+            width: 95%;
+            margin: 0 !important;
+            color: #ffffff;
+            line-height: 1.45;
+            max-height: 325px !important;
+        }
+
+        .fin-totals {
+            width: 40%;
+            vertical-align: top !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+
+        .totals-box {
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-collapse: collapse;
+            border: none !important;
+        }
+
+
+            .vat-head {
+                background: #1a98f1;
+                color: #ffffff;
+                font-size: 40px;
+                border: none !important;
+            }
+
+            .vat-head td {
+                padding: 18px 22px 18px 18px;
+                border: none !important;
+            }
+
+            .vat-val {
+                font-size: 40px;
+                text-align: left;
+                white-space: nowrap;
+            }
+
+            .total-label {
+                font-size: 40px;
+                padding-top: 10px;
+                padding-right: 20px;
+                border: none !important;
+                color: #ffffff;
+                border: none !important;
+            }
+
+            .total-val {
+                font-size: 40px;
+                text-align: left;
+                padding-top: 10px;
+                padding-left: 18px;
+                white-space: nowrap;
+                border: none !important;
+                color: #ffffff;
+            }
+
+            .icon-saudi_riyal {
+                font-size: 45px;
+                color: #ffffff;
+            }
+
+            .fin-no-vat-note {
+                width: 100%;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 18px 10px;
+                background: transparent !important;
+                color: #ffffff !important;
+                font-size: 34px;
+                font-weight: bold;
+                line-height: 1.4;
+                text-align: left !important;
+                direction: rtl;
+                border: none !important;
+            }
+
+            .report-en .fin-no-vat-note {
+                direction: ltr !important;
+                text-align: right !important;
+            }
+
+            /* English layout overrides - Arabic layout above remains unchanged */
+            .report-en {
+                direction: ltr !important;
+                text-align: left !important;
+                font-family: Arial, Tahoma, sans-serif !important;
+            }
+
+            .report-en .cover-company {
+                direction: ltr !important;
+                text-align: center !important;
+                position: relative;
+                z-index: 2;
+                right: -153px !important;
+                top: 165mm;
+                font-size: 55px;
+                color: #ffffff;
+                unicode-bidi: plaintext;
+                max-width: 722px;
+                font-weight: bold;
+            }
+
+            .report-en .fin-service-head {
+                text-align: left !important;
+                padding-left: 200px !important;
+                padding-right: 20px !important;
+            }
+
+            .report-en .fin-desc,
+            .report-en .fin-section-name,
+            .report-en .fin-note-row td,
+            .report-en .fin-terms {
+                direction: ltr !important;
+                text-align: left !important;
+            }
+
+            .report-en .fin-desc {
+                padding-left: 30px !important;
+                padding-right: 0 !important;
+            }
+
+            .report-en .total-label {
+                text-align: left !important;
+                padding-left: 20px !important;
+                padding-right: 0 !important;
+            }
+
+            .report-en .vat-val,
+            .report-en .total-val {
+                direction: ltr !important;
+                text-align: right !important;
+                padding-right: 20px !important;
+            }
+
+        </style>
+        <div t-attf-class="page cover-page #{'report-en' if is_english else 'report-ar'}" t-att-dir="report_dir">
+            <img class="cover-img" t-attf-src="data:#{cover_mime};base64,#{cover_b64}" alt="Cover"/>
+            <div class="cover-company">
+                <t t-esc="o.partner_id.name or ''"/>
+            </div>
+        </div>
+        <t t-foreach="range(financial_page_count)" t-as="financial_page_index">
+            <t t-set="page_start" t-value="financial_page_index * lines_per_page"/>
+            <t t-set="page_lines" t-value="financial_lines[page_start:page_start + lines_per_page]"/>
+            <t t-set="is_last_financial_page" t-value="financial_page_index == financial_page_count - 1"/>
+            <t t-set="is_last_document_page" t-value="is_last_financial_page and not has_note_continuation"/>
+
+            <div t-attf-class="page fin-offer-page #{'fin-last-page' if is_last_document_page else ''} #{'report-en' if is_english else 'report-ar'}" t-att-dir="report_dir">
+                <img class="fin-background" t-attf-src="data:#{qut_back_mime};base64,#{qut_back_b64}" alt="Quotation Background"/>
+
+                <div class="fin-content">
+                    <div class="fin-title"><t t-if="is_english">Financial Offer</t><t t-else="">العرض المالي</t></div>
+                    <table class="fin-main-table">
+                        <thead style="border: none !important;">
+                            <tr style="border: none !important;">
+                                <th class="fin-service-head" style="width:60%; padding-right: 200px; border: none !important;"><t t-if="is_english">Services</t><t t-else="">الخدمة</t></th>
+                                <th style="width:20%; text-align: center;"><t t-if="is_english">Price</t><t t-else="">السعر</t></th>
+                                <t t-if="show_sub_totals">
+                                    <th style="width:20%;" class="fin-sub"><t t-if="is_english">Total</t><t t-else="">الاجمالى</t></th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody style="border: none !important;">
+                            <t t-foreach="page_lines" t-as="line">
+
+                                <t t-if="line.display_type in ('line_section', 'line_subsection')">
+                                    <t t-set="section_subtotal" t-value="line._get_section_totals('price_subtotal')"/>
+
+                                    <tr t-attf-class="fin-section-row {{ 'fin-subsection-row' if line.display_type == 'line_subsection' else '' }}">
+                                        <td colspan="2" class="fin-section-name">
+                                            <span t-esc="line.with_context(lang=report_lang).name"/>
+                                        </td>
+
+                                        <td t-if="show_sub_totals" class="fin-section-total">
+                                            <t t-if="(section_subtotal or 0.0) == 0.0">
+                                                <span class="fin-free"><t t-if="is_english">Free</t><t t-else="">مجاناً</t></span>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="'{:,.0f}'.format(section_subtotal or 0.0)"/>
+                                                <span class="icon-saudi_riyal"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <t t-elif="line.display_type == 'line_note'">
+                                    <tr class="fin-note-row">
+                                        <td t-att-colspan="3 if show_sub_totals else 2">
+                                            <span t-esc="line.with_context(lang=report_lang).name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <t t-else="">
+                                    <tr class="fin-product-row" style="border: none !important;">
+                                        <td class="fin-desc">
+                                            <t t-esc="line.product_template_id.with_context(lang=report_lang).name"/>
+                                            <br/>
+                                            <t t-if="line.financial_quarter_ids">
+                                                <span t-if="is_english">For 
+                                                <span t-esc="line.with_context(lang=report_lang)._get_financial_quarter_display()"/>
+                                                quarter 
+                                                </span>
+                                                <span t-else=""> 
+                                                عن الربع <span t-esc="line.with_context(lang=report_lang)._get_financial_quarter_display()"/>
+                                                </span>                                               
+                                            </t>
+
+                                            <t t-if="line.financial_year_ids">
+                                                <span t-if="is_english">For the financial year </span><span t-else="">عن السنة المالية لعام </span>
+                                                <span t-esc="line.with_context(lang=report_lang)._get_financial_years_display()"/>
+                                                <br/>
+                                            </t>
+
+                                            <t t-if="line.fees_period_start and line.fees_period_end">
+                                                <t t-if="is_english">From </t><t t-else="">من </t>
+                                                <t t-esc="line.fees_period_start.strftime('%d %B %Y') if is_english else line._format_fees_date_ar(line.fees_period_start)"/>
+                                                <t t-if="is_english"> to </t><t t-else=""> حتى </t>
+                                                <t t-esc="line.fees_period_end.strftime('%d %B %Y') if is_english else line._format_fees_date_ar(line.fees_period_end)"/>
+                                            </t>
+
+                                        </td>
+
+                                        <td class="fin-val">
+                                            <t t-if="(line.price_unit or 0.0) == 0.0">
+                                                <span class="fin-free"><t t-if="is_english">Free</t><t t-else="">مجاناً</t></span>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="'{:,.0f}'.format(line.price_unit or 0.0)"/>
+                                                <span class="icon-saudi_riyal"/>
+                                            </t>
+                                            <t t-if="is_english">
+                                                <t t-if="line.payment_duration_id">   
+                                                    <t t-if="is_english"></t>
+                                                    /
+                                                    <span t-esc="line.payment_duration_id.with_context(lang=report_lang).name"/>                                        
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-if="line.payment_duration_id">
+                                                    (
+                                                    <t>تدفع </t>
+                                                    <span t-esc="line.payment_duration_id.with_context(lang=report_lang).name"/>
+                                                    )
+                                                </t>
+                                            </t>                                         
+                                        </td>
+
+                                        <td t-if="show_sub_totals" class="fin-sub">
+                                            <t t-if="(line.price_subtotal or 0.0) == 0.0">
+                                                <span class="fin-free"><t t-if="is_english">Free</t><t t-else="">مجاناً</t></span>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="'{:,.0f}'.format(line.price_subtotal or 0.0)"/>
+                                                <span class="icon-saudi_riyal"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <t t-if="is_last_financial_page">
+                        <div class="fin-sep"/>
+                        <table class="fin-bottom">
+                            <tbody style="border: none !important;">
+                                <tr style="border: none !important;">
+                                    <td class="fin-terms" style="vertical-align: top !important;  font-family: 'Cairo', 'Arial', sans-serif; font-size: 30px;">
+                                        <div class="fin-note">
+                                            <t t-out="financial_note_pages[0]"/>
+                                        </div>
+                                    </td>
+                                    <td t-if="show_totals" class="fin-totals" style="vertical-align: top !important;">
+                                        <table class="totals-box">
+                                            <tbody style="border: none !important;">
+                                                <tr t-if="show_untaxed_amount and product_line_count &gt; 1" style=" color: #ffffff; font-size: 40px; border: none !important;">
+                                                    <td style="border: none !important; padding: 18px 22px 18px 18px;">
+                                                        <t t-if="is_english">Untaxed Amount</t><t t-else="">الإجمالي قبل الضريبة</t>
+                                                    </td>
+                                                    <td class="vat-val" style="border: none !important; padding: 18px 22px 18px 18px;">
+                                                        <t t-if="is_english">
+                                                            <span t-esc="'{:,.0f}'.format(o.amount_untaxed or 0.0)"/>
+                                                            <span class="icon-saudi_riyal"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="icon-saudi_riyal"/>
+                                                            <span t-esc="'{:,.0f}'.format(o.amount_untaxed or 0.0)"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr class="vat-head">
+                                                    <td style="border: none !important;">
+                                                        <t t-if="is_english">VAT</t><t t-else="">القيمة المضافة</t>
+                                                    </td>
+                                                    <td class="vat-val" style="border: none !important;">
+                                                        <t t-if="is_english">
+                                                        <span t-esc="'{:,.0f}'.format( o.amount_tax or 0.0 )"/>
+                                                        <span class="icon-saudi_riyal"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                        <span class="icon-saudi_riyal"/>
+                                                        <span t-esc="'{:,.0f}'.format( o.amount_tax or 0.0 )"/>
+                                                        </t>                                                      
+                                                    </td>
+                                                </tr>
+                                                <tr style="border: none !important;">
+                                                    <td class="total-label">
+                                                        <t t-if="is_english">Total</t><t t-else="">المجموع</t>
+                                                    </td>
+                                                    <td class="total-val">
+                                                        <t t-if="is_english">
+                                                            <span t-esc="'{:,.0f}'.format( o.amount_total or 0.0 )"/>
+                                                            <span class="icon-saudi_riyal"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="icon-saudi_riyal"/>
+                                                            <span t-esc="'{:,.0f}'.format( o.amount_total or 0.0 )"/>
+                                                        </t>      
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                    <td t-if="show_without_total_note" class="fin-totals" style="vertical-align: top !important;">
+                                        <div class="fin-no-vat-note">
+                                            <t t-if="is_english">All prices are exclusive VAT</t>
+                                            <t t-else="">الأسعار بدون ضريبة القيمة المضافة</t>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+            </div>
+        </t>
+
+        <t t-if="has_note_continuation">
+            <t t-foreach="range(1, len(financial_note_pages))" t-as="financial_note_page_index">
+                <t t-set="financial_note_page" t-value="financial_note_pages[financial_note_page_index]"/>
+                <t t-set="is_last_note_page" t-value="financial_note_page_index == len(financial_note_pages) - 1"/>
+                <div t-attf-class="page fin-offer-page #{'fin-last-page' if is_last_note_page else ''} #{'report-en' if is_english else 'report-ar'}" t-att-dir="report_dir">
+                    <img class="fin-background" t-attf-src="data:#{qut_back_mime};base64,#{qut_back_b64}" alt="Quotation Background"/>
+
+                    <div class="fin-content">
+                        <table class="fin-bottom">
+                            <tbody style="border: none !important;">
+                                <tr style="border: none !important;">
+                                    <td class="fin-terms" style="vertical-align: top !important;  font-family: 'Cairo', 'Arial', sans-serif; font-size: 30px; margin: 10px 20px 0 0 !important;">
+                                        <div class="">
+                                            <t t-out="financial_note_page"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    <!-- =========================================================
+     4400 QUOTATION - LAST PAGE ========================================================= -->
+    <template id="sale_quotation_4400_scope_page" name="4400 Quotation Scope Page">
+        <t t-set="report_lang" t-value="(doc.partner_id.lang or env.lang or 'en_US')"/>
+        <t t-set="is_english" t-value="report_lang.lower().startswith('en')"/>
+        <t t-set="report_dir" t-value="'ltr' if is_english else 'rtl'"/>
+        <t t-set="o" t-value="doc.with_context(lang=report_lang)"/>
+        <t t-set="qut_4400_att" t-value="env.ref('zofirm_contract.zofirm_qut_4400_attachment_en' if is_english else 'zofirm_contract.zofirm_qut_4400_attachment').sudo()"/>
+        <t t-set="qut_4400_b64" t-value="(qut_4400_att.datas or b'').decode().replace('\n','').replace('\r','')"/>
+        <t t-set="qut_4400_mime" t-value="qut_4400_att.mimetype or 'image/png'"/>
+        <style type="text/css">
+
+            @font-face {
+                font-family: 'GE SS Two',Tasans-serif!important;
+                src: url('https://jsdelivr.net') format('woff2');
+                font-weight: 300;
+                font-style: normal;
+                }
+
+        .qut-4400-page {
+            position: relative;
+            width: 100% !important;
+            height: 1280px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+            overflow: hidden !important;
+            direction: rtl;
+            page-break-before: always !important;
+            break-before: page !important;
+            page-break-after: auto !important;
+            break-after: auto !important;
+            font-family:"GE SS Two",Tasans-serif !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .qut-4400-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100% !important;
+            height: 1280px !important;
+            display: block;
+            z-index: 0;
+        }
+
+        /*
+        =====================================================
+        النص القادم من work_scope_qut
+
+        يبدأ تحت السطر الموجود بالفعل داخل
+        مربع "الأفكار الموجزة"
+
+        بدون تغطية السطر الأصلي الموجود في الصورة.
+        =====================================================
+        */
+        .qut-4400-work-scope {
+            position: absolute;
+            z-index: 2;
+            top: 78%;
+            right: 3.4%;
+            width: 96%;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0 0 0 29px !important;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            direction: rtl;
+            text-align: right !important;
+            font-family:"GE SS Two",Tasans-serif !important;
+        }
+
+        .qut-4400-work-scope-line {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0 0 6px 0;
+            padding: 0;
+            background: transparent;
+            direction: rtl;
+            text-align: right !important;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            font-family: "GE SS Two", Tasans-serif !important;
+            font-size: 30px !important;
+            line-height: 1.45;
+        }
+        
+        .qut-4400-work-scope-bullett {
+            display: inline;
+            margin-left: 8px;
+            font-size: 32px !important;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            direction: rtl;
+        }
+
+        .qut-4400-work-scope-bullet {
+            display: inline;
+            margin-left: 8px;
+            font-size: 25px !important;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            font-weight: bold !important;
+        }
+
+        .qut-4400-work-scope-text {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-right: 22px;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: normal;
+            direction: rtl;
+            text-align: right !important;
+        }
+
+        /*
+         * Dynamic bullet line:
+         * the bullet stays fixed on the right and wrapped text starts/continues
+         * from the same text edge, so a long sentence remains visually aligned.
+         */
+        .qut-4400-work-scope-dynamic-line {
+            position: relative;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0 0 6px 0;
+            padding: 0;
+            background: transparent;
+            direction: rtl;
+            text-align: right !important;
+            color: rgba(255, 255, 255, 0.86) !important;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+            font-family: "GE SS Two", sans-serif !important;
+            font-size: 30px !important;
+            line-height: 1.45;
+        }
+
+        .qut-4400-work-scope-dynamic-line .qut-4400-work-scope-bullet {
+            position: absolute;
+            top: 6px;
+            right: 0;
+            width: 28px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.45;
+        }
+
+        .qut-4400-page.report-en,
+        .qut-4400-page.report-en .qut-4400-work-scope,
+        .qut-4400-page.report-en .qut-4400-work-scope-line,
+        .qut-4400-page.report-en .qut-4400-work-scope-dynamic-line,
+        .qut-4400-page.report-en .qut-4400-work-scope-text {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .qut-4400-page.report-en .qut-4400-work-scope {
+            right: auto !important;
+            left: 3.4% !important;
+            padding: 0 29px 0 0 !important;
+        }
+
+        .qut-4400-page.report-en .qut-4400-work-scope-text {
+            padding-right: 0 !important;
+            padding-left: 22px !important;
+        }
+
+        .qut-4400-page.report-en .qut-4400-work-scope-dynamic-line .qut-4400-work-scope-bullet {
+            right: auto !important;
+            left: 0 !important;
+        }
+
+        </style>
+
+<div t-attf-class="page qut-4400-page #{'report-en' if is_english else 'report-ar'}" t-att-dir="report_dir">
+    <img class="qut-4400-background" t-attf-src="data:#{qut_4400_mime};base64,#{qut_4400_b64}" alt="4400 Quotation Scope" />
+
+<t t-if="o.work_scope_qut">
+    <div class="qut-4400-work-scope">
+        <div class="qut-4400-work-scope-line">
+        </div>
+
+        <t t-set="scope_lines" t-value="[line.strip() for line in o.work_scope_qut.splitlines() if line.strip()]"/>
+
+        <!-- First line according to customer language -->
+        <div class="qut-4400-work-scope-dynamic-line">
+            <span class="qut-4400-work-scope-bullet">•</span>
+            <span class="qut-4400-work-scope-text">
+                <t t-if="is_english">
+                    <t t-esc="o.work_scope_qut_en or scope_lines[0]"/>
+                </t>
+                <t t-else="">
+                    <t t-esc="scope_lines[0]"/>
+                </t>
+            </span>
+        </div>
+
+        <!-- Remaining lines -->
+        <t t-foreach="scope_lines[1:]" t-as="scope_line">
+            <div class="qut-4400-work-scope-dynamic-line">
+                <span class="qut-4400-work-scope-bullet">•</span>
+                <span class="qut-4400-work-scope-text">
+                    <t t-esc="scope_line"/>
+                </span>
+            </div>
+        </t>
+
+    </div>
+</t>
+    </div>
+    </template>
+
+
+    <template id="sale_report_financial_offer_nohf" name="Financial Offer Wrapper No Header/Footer">
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="show_untaxed_amount" t-value="False"/>
+        <t t-set="show_totals" t-value="True"/>
+        <t t-set="show_without_total_note" t-value="False"/>
+        <t t-call="web.basic_layout">
+            <t t-call="zofirm_contract.sale_quotation_template_financial_offer_body"/>
+        </t>
+    </template>
+
+    <template id="sale_report_financial_offer_raw" name="Financial Offer Sale Order Report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_id"/>
+                <t t-set="show_untaxed_amount" t-value="True"/>
+                <t t-set="show_totals" t-value="True"/>
+                <t t-set="show_without_total_note" t-value="False"/>
+                <t t-call="web.basic_layout">
+                    <t t-call="zofirm_contract.sale_quotation_template_financial_offer_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="sale_report_financial_offer_without_total_raw" name="Financial Offer Without Total">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_id"/>
+                <t t-set="show_untaxed_amount" t-value="False"/>
+                <t t-set="show_totals" t-value="False"/>
+                <t t-set="show_without_total_note" t-value="True"/>
+                <t t-call="web.basic_layout">
+                    <t t-call="zofirm_contract.sale_quotation_template_financial_offer_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="sale_report_financial_offer_with_total_amount_raw" name="Financial Offer With amount">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_id"/>
+                <t t-set="show_untaxed_amount" t-value="False"/>
+                <t t-set="show_sub_totals" t-value="True"/>
+                <t t-set="show_totals" t-value="True"/>
+                <t t-set="show_without_total_note" t-value="False"/>
+                <t t-call="web.basic_layout">
+                    <t t-call="zofirm_contract.sale_quotation_template_financial_offer_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- =========================================================
+     4400 QUOTATION FULL REPORT ========================================================= -->
+    <template id="sale_report_financial_offer_4400_raw" name="4400 Quotation Financial Offer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_id"/>
+                <t t-set="show_untaxed_amount" t-value="False"/>
+                <t t-set="show_totals" t-value="True"/>
+                <t t-set="show_without_total_note" t-value="False"/>
+                <t t-call="web.basic_layout">
+                    <t t-call="zofirm_contract.sale_quotation_template_financial_offer_body"/>
+                    <t t-call="zofirm_contract.sale_quotation_4400_scope_page"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_saleorder_financial_offer" model="ir.actions.report">
+        <field name="name">Financial Offer</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zofirm_contract.sale_report_financial_offer_raw</field>
+        <field name="report_file">zofirm_contract.sale_report_financial_offer_raw</field>
+        <field name="print_report_name">(object.partner_id.lang and object.partner_id.lang.startswith('en') and 'Quotation - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')) or 'عرض سعر - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')</field>
+        <field name="paperformat_id" ref="zofirm_contract.paperformat_saleorder_custom_landscape"/>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <record id="action_report_saleorder_financial_offer_without_total" model="ir.actions.report">
+        <field name="name">Qut-without-total</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zofirm_contract.sale_report_financial_offer_without_total_raw</field>
+        <field name="report_file">zofirm_contract.sale_report_financial_offer_without_total_raw</field>
+        <field name="print_report_name">(object.partner_id.lang and object.partner_id.lang.startswith('en') and 'Quotation - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')) or 'عرض سعر - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <record id="action_report_saleorder_financial_offer_with_total_amount" model="ir.actions.report">
+        <field name="name">Qut-with-total-amount</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zofirm_contract.sale_report_financial_offer_with_total_amount_raw</field>
+        <field name="report_file">zofirm_contract.sale_report_financial_offer_with_total_amount_raw</field>
+        <field name="print_report_name">(object.partner_id.lang and object.partner_id.lang.startswith('en') and 'Quotation - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')) or 'عرض سعر - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')</field>
+        <field name="paperformat_id" ref="zofirm_contract.paperformat_saleorder_custom_landscape"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+
+
+    <!-- =========================================================
+     4400 QUT REPORT ACTION ========================================================= -->
+    <record id="action_report_saleorder_financial_offer_4400" model="ir.actions.report">
+        <field name="name">4400 Qut</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zofirm_contract.sale_report_financial_offer_4400_raw</field>
+        <field name="report_file">zofirm_contract.sale_report_financial_offer_4400_raw</field>
+        <field name="print_report_name">(object.partner_id.lang and object.partner_id.lang.startswith('en') and 'Quotation - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')) or 'عرض سعر - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')</field>
+        <field name="paperformat_id" ref="zofirm_contract.paperformat_saleorder_custom_landscape"/>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+
+
+
+    <!-- Standard Odoo Print button filename -->
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+    <field name="print_report_name">(object.state in ('draft', 'sent') and ((object.partner_id.lang and object.partner_id.lang.startswith('en') and 'Quotation - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')) or 'عرض سعر - %s - %s' % (object.name or 'Quotation', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer'))) or 'Order - %s - %s' % (object.name or 'Order', object.partner_id.commercial_company_name or object.partner_id.name or 'Customer')</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="zofirm_contract.OneAuditButton" owl="1">
+    <t t-if="state.visible">
+      <button type="button" class="btn btn-primary o_one_audit_btn" t-on-click="openOneAudit" invisible="is_sijil_company">
+        One Audit
+        <span class="badge text-bg-light ms-2" t-esc="state.oneAuditCount"/>
+      </button>
+    </t>
+  </t>
+</templates>

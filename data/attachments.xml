@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="att_elzamil_sign" model="ir.attachment">
+      <field name="name">Elzamil_sign</field>
+      <field name="type">binary</field>
+      <field name="mimetype">image/png</field>
+      <field name="datas" type="base64" file="zofirm_contract/static/img/Elzamil_sign.png"/>
+    </record>
+
+    <record id="att_elzamil_seal" model="ir.attachment">
+      <field name="name">Elzamil_seal</field>
+      <field name="type">binary</field>
+      <field name="mimetype">image/png</field>
+      <field name="datas" type="base64" file="zofirm_contract/static/img/Elzamil_seal.png"/>
+    </record>
+
+    <record id="att_Untitllled" model="ir.attachment">
+      <field name="name">Elzamil_Untitllled</field>
+      <field name="type">binary</field>
+      <field name="mimetype">image/png</field>
+      <field name="datas" type="base64" file="zofirm_contract/static/img/Untitllled.png"/>
+    </record>
+
+  </data>
+</odoo>

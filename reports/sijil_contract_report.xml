@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="sijil_report_contract_document" name="Sijil Contract Document">
+    <xpath expr="//div[@t-field='company.report_header']" position="replace">
+      <div class="header my_rtl_header" style="width:100%; margin:0; border:none !important;">
+        <div style="display: block;height: 35px;background: #1e5397;margin: 0 -30px 20px -30px;padding: 0;border: 0;box-sizing: border-box;"></div>
+        <div style="display:inline-block; width:65%; vertical-align:top; border:none !important; padding-left: 15px;">
+          <div style="line-height:1.3; font-size:13px; margin:0;">SIJIL Accounting For Information Technology</div>
+          <div style="line-height:1.3; font-size:13px; margin:0;">Northen Ring Branch, Al Wadi Dist</div>
+          <div style="line-height:1.3; font-size:13px; margin:0;">Riyadh, Saudi Arabia</div>
+          <div style="line-height:1.3; font-size:13px; margin:0;">VAT:311966638900003</div>
+          <div style="line-height:1.3; font-size:13px; margin:0;">CRN:1010192254</div>
+        </div>
+        <div style="display:inline-block; width:32%; vertical-align:top; margin:0;  border:none !important; text-align: right; ">
+          <t t-set="company" t-value="doc and doc.company_id or (docs and docs[0] and docs[0].company_id) or company"/>
+          <t t-set="sijilacc_logo_att" t-value="env.ref('zofirm_contract.zofirm_sijilacc_logo_attachment').sudo()"/>
+          <img style="max-width:90px; margin:0; padding:0; border:none !important;" t-att-src="image_data_uri(sijilacc_logo_att.datas)" alt="Sijilacc Logo"/>
+        </div>
+        <div style="clear:both; border-bottom:1px solid #1e5397; height:1px; margin: 18px 50px 0 50px;"></div>
+      </div>
+    </xpath>
+
+    <t t-call="zofirm_contract.external_layout_rtl">
+      <t t-set="o" t-value="doc or (docs and docs[0])"/>
+
+      <t t-if="o and 'contract_type' in o._fields and o.contract_type == 'sijil_maintenance_contract'">
+        <t t-call="zofirm_contract.sijil_mintanance_contract"/>
+      </t>
+
+      <t t-else="">
+        <t t-call="zofirm_contract.sijil_contract_full_template"/>
+      </t>
+    </t>
+  </template>
+
+  <record id="action_report_contract" model="ir.actions.report">
+    <field name="name">Sijil Contract</field>
+    <field name="model">zofirm.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">zofirm_contract.sijil_report_contract_document</field>
+    <field name="report_file">zofirm_contract.sijil_report_contract_document</field>
+
+    <field name="print_report_name">object.contract_name or ("عقد %s" % (object.partner_id.name or ""))</field>
+  </record>
+
+  <record id="action_report_sijil_maintenance_contract" model="ir.actions.report">
+    <field name="name">Sijil Maintenance Contract</field>
+    <field name="model">zofirm.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">zofirm_contract.sijil_report_contract_document</field>
+    <field name="report_file">zofirm_contract.sijil_report_contract_document</field>
+    <field name="print_report_name">object.contract_name or ("عقد صيانة %s" % (object.partner_id.name or ""))</field>
+  </record>
+
+  <record id="zofirm_sijilacc_logo_attachment" model="ir.attachment">
+    <field name="name">sijilacc_logo.png</field>
+    <field name="type">binary</field>
+    <field name="mimetype">image/png</field>
+    <field name="datas" type="base64" file="zofirm_contract/static/img/sijilacc_logo.png"/>
+  </record>
+
+
+  <!-- Paperformat -->
+  <record id="paperformat_Sijilacc_contract" model="report.paperformat">
+    <field name="name">Sijilacc_contract</field>
+    <field name="default" eval="False"/>
+    <field name="format">custom</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">40</field>
+    <field name="margin_bottom">32</field>
+    <field name="margin_left">0</field>
+    <field name="margin_right">0</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">40</field>
+    <field name="dpi">90</field>
+  </record>
+
+  <record id="zofirm_contract.action_report_contract" model="ir.actions.report">
+    <field name="paperformat_id" ref="zofirm_contract.paperformat_Sijilacc_contract"/>
+  </record>
+
+
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

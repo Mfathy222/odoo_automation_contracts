@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_sow_line_form" model="ir.ui.view">
+        <field name="name">product.sow.line.form</field>
+        <field name="model">product.sow.line</field>
+        <field name="priority">5</field>
+        <field name="arch" type="xml">
+            <form string="SOW Line" create="1" edit="1" delete="1">
+                <sheet>
+                    <group>
+                        <field name="product_tmpl_id" string="Product" readonly="1"/>
+                        <field name="name" string="Line" required="1" placeholder="Enter SOW line..."/>
+                    </group>
+                    <separator string="Sublines"/>
+                    <field name="subline_ids" nolabel="1" mode="list" context="{'default_sow_line_id': id}" options="{'no_open': True}">
+                        <list string="Sublines" editable="bottom" create="1" edit="1" delete="1" open_form_view="0">
+                            <control>
+                                <create string="Add a line"/>
+                            </control>
+                            <field name="sow_line_id" column_invisible="1" force_save="1"/>
+                            <field name="name" string="Subline" required="1" placeholder="Enter subline..."/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_template_form_view_sow" model="ir.ui.view">
+        <field name="name">product.template.form.sow</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="SOW" name="sow">
+                    <field name="sow_line_ids" nolabel="1" context="{'default_product_tmpl_id': id,'form_view_ref': 'zofirm_contract.view_product_sow_line_form'}">
+                        <list string="SOW Lines" editable="bottom" create="1" edit="1" delete="1" open_form_view="1">
+                            <control>
+                                <create string="Add Line"/>
+                            </control>
+                            <field name="name" string="Line" required="1"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_order_form_inherit_sow_selection" model="ir.ui.view">
+        <field name="name">
+            sale.order.form.sow.selection
+        </field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority">17</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="is_sijil_company" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//notebook/page[ .//field[@name='order_line'] ]" position="after">
+                <page string="SOW" name="sow_selection" invisible="is_sijil_company">
+                    <div class=" d-flex justify-content-between align-items-center mb-3">
+                        <button name="action_refresh_sow_items" type="object" string="Refresh SOW" icon="fa-refresh" class="btn-secondary"/>
+                    </div>
+                    <group>
+                        <field name="work_scope_qut" nolabel="1" placeholder="نطاق الأعمال الخاص بعرض سعر تقرير 4400" widget="text" style="min-width:120px; direction: rtl;" dir="rtl"/>
+                    </group>
+                    <group>
+                        <field name="work_scope" nolabel="1" placeholder="نطاق الأعمال الخاص بعقد 4400" widget="text" style="min-width:120px; direction: rtl;" dir="rtl"/>
+                    </group>
+                    <field name="sow_item_ids" nolabel="1">
+                        <list editable="bottom" create="0" delete="0" default_order="display_order" decoration-bf="item_kind in ('product', 'line')" decoration-muted="item_kind == 'subline'">
+                            <field name="display_order" column_invisible="1" force_save="1"/>
+                            <field name="item_key" column_invisible="1" force_save="1"/>
+                            <field name="item_kind" column_invisible="1" force_save="1"/>
+                            <field name="sale_order_line_id" column_invisible="1" force_save="1"/>
+                            <field name="product_tmpl_id" column_invisible="1" force_save="1"/>
+                            <field name="sow_line_id" column_invisible="1" force_save="1"/>
+                            <field name="sow_subline_id" column_invisible="1" force_save="1"/>
+                            <field name="product_display_name" string="Product" readonly="1" force_save="1"/>
+                            <field name="payment_duration_id" string="Payment Duration" readonly="1" invisible="item_kind != 'product'" options="{ 'no_create': True, 'no_create_edit': True  }"/>
+                            <field name="fees_period_start" string="Period Start" readonly="1" invisible="item_kind != 'product'"/>
+                            <field name="fees_period_end" string="Period End" readonly="1" invisible="item_kind != 'product'"/>
+                            <field name="financial_year_ids" string="Years" widget="many2many_tags" readonly="1" invisible="item_kind != 'product'" options="{ 'no_create': True, 'no_create_edit': True }"/>
+                            <field name="financial_quarter_ids" string="Quarter" widget="many2many_tags" readonly="1" invisible="item_kind != 'product'" options="{'no_create': True, 'no_create_edit': True }"/>
+                            <field name="display_label" string="Line / Subline" readonly="1" force_save="1"/>
+                            <field name="selected" string="Select" invisible="item_kind == 'product'" force_save="1"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

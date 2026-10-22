@@ -1,0 +1,23 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_project_schedule_line_user,Sale Order Project Schedule Line User,model_sale_order_project_schedule_line,base.group_user,1,1,1,1
+access_zofirm_contract_schedule_line_user,Zofirm Contract Schedule Line User,model_zofirm_contract_schedule_line,base.group_user,1,1,1,1
+access_zofirm_contract_manager,Zofirm Contract Manager,model_zofirm_contract,zofirm_contract.group_zofirm_contract_manager,1,1,1,1
+access_zofirm_contract_sijil_manager,Zofirm Contract Sijil Manager,model_zofirm_contract,zofirm_contract.group_sijil_contract_manager,1,1,1,1
+access_zofirm_contract_admin,Zofirm Contract Admin,model_zofirm_contract,base.group_system,1,1,1,1
+access_sale_order_fees_line_user,sale.order.fees.line user,model_sale_order_fees_line,base.group_user,1,1,1,1
+access_zofirm_contract_template_wizard,zofirm.contract.template.wizard,model_zofirm_contract_template_wizard,base.group_user,1,1,1,1
+access_zofirm_one_audit_user,zofirm.one.audit user,model_zofirm_one_audit,base.group_user,1,1,1,1
+access_sijil_contract_create_wizard_manager,sijil.contract.create.wizard manager,model_sijil_contract_create_wizard,zofirm_contract.group_sijil_contract_manager,1,1,1,1
+access_sijil_contract_create_wizard_line_manager,sijil.contract.create.wizard.line manager,model_sijil_contract_create_wizard_line,zofirm_contract.group_sijil_contract_manager,1,1,1,1
+access_sijil_contract_create_wizard_admin,sijil.contract.create.wizard admin,model_sijil_contract_create_wizard,base.group_system,1,1,1,1
+access_sijil_contract_create_wizard_line_admin,sijil.contract.create.wizard.line admin,model_sijil_contract_create_wizard_line,base.group_system,1,1,1,1
+access_sale_payment_duration_user,Payment Duration User,model_sale_payment_duration,base.group_user,1,0,0,0
+access_sale_payment_duration_manager,Payment Duration Manager,model_sale_payment_duration,sales_team.group_sale_manager,1,1,1,1
+access_sale_payment_duration_admin,Payment Duration Admin,model_sale_payment_duration,base.group_system,1,1,1,1
+access_sale_financial_year_user,Financial Year User,model_sale_financial_year,base.group_user,1,0,1,0
+access_sale_financial_year_manager,Financial Year Manager,model_sale_financial_year,sales_team.group_sale_manager,1,1,1,1
+access_sale_financial_year_admin,Financial Year Admin,model_sale_financial_year,base.group_system,1,1,1,1
+access_product_sow_line_user,product.sow.line user,model_product_sow_line,base.group_user,1,1,1,1
+access_product_sow_subline_user,product.sow.subline user,model_product_sow_subline,base.group_user,1,1,1,1
+access_sale_order_sow_item_salesman,sale.order.sow.item salesman,model_sale_order_sow_item,sales_team.group_sale_salesman,1,1,1,1
+access_sale_financial_quarter_user,sale.financial.quarter user,model_sale_financial_quarter,base.group_user,1,0,0,0

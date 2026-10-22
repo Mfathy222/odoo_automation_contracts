@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sale_order_form_product_language_fields" model="ir.ui.view">
+        <field name="name">
+            sale.order.form.product.language.fields
+        </field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="after">
+                <field name="zofirm_product_display_name" column_invisible="1"/>
+                <field name="zofirm_product_display_lang" column_invisible="1"/>
+                <field name="zofirm_product_display_template_id" column_invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_view_kanban_catalog_arabic_name" model="ir.ui.view">
+        <field name="name">
+            product.kanban.catalog.arabic.name
+        </field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_view_kanban_catalog"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-name='card']//div[field[@name='name']]" position="after">
+                <div t-if="record.catalog_secondary_name.value" class="mb-1" style="font-size: 14px;">
+                    <field name="catalog_secondary_name"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================================================
+     Product Form
+     Show opposite language below product name ========================================================== -->
+    <record id="product_template_form_alternate_language_name" model="ir.ui.view">
+        <field name="name">
+        product.template.form.alternate.language.name
+        </field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!-- اسم المنتج الرئيسي -->
+            <xpath expr="//div[contains(@class, 'oe_title')]/h1" position="after">
+                <div class="mt-1 mb-3 " invisible="not alternate_language_name">
+                    <field name="alternate_language_name" readonly="1" nolabel="1" class="oe_inline fs-1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================================================
+         Product Kanban
+         Show opposite language below product name
+    ========================================================== -->
+
+    <record id="product_template_kanban_alternate_language_name" model="ir.ui.view">
+        <field name="name">
+            product.template.kanban.alternate.language.name
+        </field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='d-flex mb-0 h5']" position="after">
+                <div class="text-right" invisible="not alternate_language_name">
+                    <field class="d-block fs-3 font-weight-bold"  name="alternate_language_name"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- =========================================================
+         Product List
+         Show opposite language beside product name
+    ========================================================== -->
+    <record id="product_template_list_alternate_language_name" model="ir.ui.view">
+        <field name="name">
+            product.template.list.alternate.language.name
+        </field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="alternate_language_name" string="Product Name 2" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

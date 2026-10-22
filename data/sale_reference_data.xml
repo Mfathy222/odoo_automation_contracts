@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Payment durations (seed of the former Selection values) -->
+    <record id="payment_duration_once" model="sale.payment.duration">
+        <field name="name">مره واحده</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="payment_duration_weekly" model="sale.payment.duration">
+        <field name="name">أسبوعي</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="payment_duration_monthly" model="sale.payment.duration">
+        <field name="name">شهري</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="payment_duration_quarterly" model="sale.payment.duration">
+        <field name="name">ربع سنوي</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="payment_duration_semiannual" model="sale.payment.duration">
+        <field name="name">نصف سنوي</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="payment_duration_annual" model="sale.payment.duration">
+        <field name="name">سنوي</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <!-- Financial years -->
+    <record id="financial_year_2022" model="sale.financial.year">
+        <field name="name">2022</field>
+    </record>
+    <record id="financial_year_2023" model="sale.financial.year">
+        <field name="name">2023</field>
+    </record>
+    <record id="financial_year_2024" model="sale.financial.year">
+        <field name="name">2024</field>
+    </record>
+    <record id="financial_year_2025" model="sale.financial.year">
+        <field name="name">2025</field>
+    </record>
+    <record id="financial_year_2026" model="sale.financial.year">
+        <field name="name">2026</field>
+    </record>
+    <record id="financial_year_2027" model="sale.financial.year">
+        <field name="name">2027</field>
+    </record>
+
+    <record id="sale_financial_quarter_first" model="sale.financial.quarter">
+    <field name="name">الأول</field>
+    <field name="code">first</field>
+    <field name="sequence">10</field>
+</record>
+
+<record id="sale_financial_quarter_second" model="sale.financial.quarter">
+    <field name="name">الثاني</field>
+    <field name="code">second</field>
+    <field name="sequence">20</field>
+</record>
+
+<record id="sale_financial_quarter_third" model="sale.financial.quarter">
+    <field name="name">الثالث</field>
+    <field name="code">third</field>
+    <field name="sequence">30</field>
+</record>
+
+<record id="sale_financial_quarter_fourth" model="sale.financial.quarter">
+    <field name="name">الرابع</field>
+    <field name="code">fourth</field>
+    <field name="sequence">40</field>
+</record>
+
+    
+</odoo>

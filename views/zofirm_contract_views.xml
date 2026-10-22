@@ -1,0 +1,179 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_zofirm_contract" model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">zofirm.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Create a contract linked to a Sales Quotation, with Start/End dates. Lines and totals are read from the quotation.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_contracts_root" name="Contracts" parent="sale.sale_menu_root" sequence="95" action="zofirm_contract.action_zofirm_contract" groups="zofirm_contract.group_zofirm_contract_manager,zofirm_contract.group_sijil_contract_manager,base.group_system"/>
+
+    <!-- list view -->
+    <record id="view_zofirm_contract_list" model="ir.ui.view">
+        <field name="name">zofirm.contract.list</field>
+        <field name="model">zofirm.contract</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="contract_name" string="Contract Name"/>
+                <field name="quotation_id"/>
+                <field name="partner_id"/>
+                <field name="pdf_template_id" context="{'zofirm_contract_name': name}" readonly="1"/>
+                <field name="start_date" column_invisible="context.get('company_id') == 2 or context.get('allowed_company_ids', [False])[0] == 2"/>
+                <field name="end_date" column_invisible="context.get('company_id') == 2 or context.get('allowed_company_ids', [False])[0] == 2"/>
+                <field name="end_date_number" string="1Audit" column_invisible="context.get('company_id') == 2 or context.get('allowed_company_ids', [False])[0] == 2" />
+                <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_zofirm_contract_form" model="ir.ui.view">
+        <field name="name">zofirm.contract.form</field>
+        <field name="model">zofirm.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contract">
+                <header>
+                    <button name="action_preview" type="object" string="Preview" class="oe_highlight"/>
+                    <button name="action_print_selected_template" string="Print Contract" type="object" class="btn-primary" />
+                    <button name="action_request_signature" type="object" string="Request a Signature" class="btn-primary" />
+                    <button name="action_send_to_sadq_wizard" type="object" string="Send To Sadq" class="btn-primary" />
+                </header>
+
+                <sheet>
+                    <field name="is_sijil_company" invisible="1"/>
+                    <field name="unsigned_template_count" invisible="1"/>
+                    <field name="signed_request_count" invisible="1"/>
+                    <field name="contract_type" invisible="1"/>
+                    <field name="is_audit_contract_template" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_partner_contracts" type="object" class="oe_stat_button" icon="fa-file-text-o" invisible="is_sijil_company">
+                            <field name="partner_contract_count" widget="statinfo" string="Contracts"/>
+                        </button>
+                        <button name="action_view_contract_signature_record" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="signed_request_count == 0">
+                            <field name="signed_request_count" widget="statinfo" string="Signature"/>
+                        </button>
+                        <button name="action_view_contract_templates" type="object" class="oe_stat_button" icon="fa-files-o" invisible="unsigned_template_count == 0">
+                            <field name="unsigned_template_count" widget="statinfo" string=" Sign Templates"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="quotation_id" options="{'no_create': True}" required="1"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="pdf_template_id" readonly="1"/>
+                            <field name="company_active_name" invisible="1"/>
+                            <field name="contract_type" invisible="1"/>
+                            <field name="signature" string="Signed"/>
+
+                        </group>
+                        <group>
+                            <field name="start_date" invisible="is_sijil_company"/>
+                            <field name="start_hijiry_date" invisible="is_sijil_company"/>
+                            <field name="end_date" invisible="is_sijil_company"/>
+                            <field name="end_date_number" string="1Audit" invisible="is_sijil_company"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" placeholder='e.g. "B2B", "VIP", "Consulting", ...' invisible="not is_sijil_company"/>
+                            <field name="show_description" string="Show Description" invisible="not is_sijil_company"/>
+                            <!-- <field name="show_Quarterly" string="Show Quarterly Financial" invisible="contract_type == 'zofirm_contract_full_template', is_sijil_company"/> -->
+                            <field name="show_Quarterly" string="Show Quarterly Financial" invisible="not is_audit_contract_template"/>
+
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Quotations">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="contract_type" invisible="1"/>
+
+                            <!-- للعقد العادي: اعرض كل سطور عرض السعر -->
+                            <field name="order_line_ids" readonly="1" invisible="contract_type == 'sijil_maintenance_contract'">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="product_uom_qty" string="Quantity"/>
+                                    <field name="product_uom_id" string="UoM"/>
+                                    <field name="price_unit"/>
+                                    <field name="tax_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                                    <field name="price_subtotal"/>
+                                </list>
+                            </field>
+
+                            <!-- لعقد الصيانة: اعرض السطور المختارة فقط -->
+                            <field name="selected_order_line_ids" readonly="1" invisible="contract_type != 'sijil_maintenance_contract'">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="product_uom_qty" string="Quantity"/>
+                                    <field name="product_uom_id" string="UoM"/>
+                                    <field name="price_unit"/>
+                                    <field name="tax_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                                    <field name="price_subtotal"/>
+                                </list>
+                            </field>
+
+                            <group invisible="contract_type == 'sijil_maintenance_contract'">
+                                <field name="amount_untaxed" readonly="1"/>
+                                <field name="amount_tax" readonly="1"/>
+                                <field name="amount_total" readonly="1"/>
+                            </group>
+
+                            <group invisible="contract_type != 'sijil_maintenance_contract'">
+                                <field name="selected_amount_untaxed" readonly="1"/>
+                                <field name="selected_amount_tax" readonly="1"/>
+                                <field name="selected_amount_total" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <!--bookeeping Fees بند الاتعاب  -->
+    <record id="sale_order_form_inherit_payment_terms_tab2" model="ir.ui.view">
+        <field name="name">sale.order.form.payment.terms.tab.per.product</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="bookeeping Fees" name="payment_terms_tab" invisible="is_sijil_company">
+                    <group>
+                        <field name="bookkeeping_fees" nolabel="1" placeholder="بند الاتعاب الخاص بعقد مسك دفاتر" widget="text" style="min-height:300px; min-width:1200px; direction: rtl;" dir="rtl"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- contract.template.wizard -->
+    <record id="view_zofirm_contract_template_wizard_form" model="ir.ui.view">
+        <field name="name">zofirm.contract.template.wizard.form</field>
+        <field name="model">zofirm.contract.template.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Contract Template">
+                <group>
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="template_type" widget="radio"/>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

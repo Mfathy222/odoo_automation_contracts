@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="paperformat_zofirm_contracts" model="report.paperformat">
+
+    <field name="name">Zofirm Contracts</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+
+    <field name="margin_top">30</field>
+    <!-- <field name="margin_top">50</field> -->
+    <field name="margin_bottom">32</field>
+    <field name="margin_left">5</field>
+    <field name="margin_right">5</field>
+
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">25</field>
+    <!-- <field name="header_spacing">45</field> -->
+    <field name="disable_shrinking" eval="False"/>
+    <field name="dpi">90</field>
+
+  </record>
+
+  <template id="zofirm_report_bookeeping_contract_document" name="Bookeeping Contract Document">
+    <t t-set="o" t-value="doc or (docs and docs[0])"/>
+    <t t-set="company" t-value="o.company_id or env.company"/>
+    <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]" position="replace">
+      <div class="header my_rtl_header" style="direction: rtl; text-align: center;">
+        <t t-set="att_Untitllled" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_Untitllled')], limit=1)"/>
+        <t t-set="Untitllled_b64" t-value="(att_Untitllled.datas  and att_Untitllled.datas.decode().replace('\n','').replace('\r','')) or ''"/>
+        <img class="o-inline-Untitllled" t-attf-src="data:#{att_Untitllled.mimetype or 'image/png'};base64,#{Untitllled_b64}" style="float:right; margin-right: -7px !important; max-width: 350px;"/>
+      </div>
+    </xpath>
+    <t t-call="zofirm_contract.external_layout_rtl">
+      <t t-call="zofirm_contract.zofirm_bookeeping_contract_full_template"/>
+    </t>
+  </template>
+
+  <template id="zofirm_report_4400_contract_document" name="4400 Contract Document">
+    <t t-set="o" t-value="doc or (docs and docs[0])"/>
+    <t t-set="company" t-value="o.company_id or env.company"/>
+    <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]" position="replace">
+      <div class="header my_rtl_header" style="direction: rtl; text-align: center;">
+        <t t-set="att_Untitllled" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_Untitllled')], limit=1)"/>
+        <t t-set="Untitllled_b64" t-value="(att_Untitllled.datas  and att_Untitllled.datas.decode().replace('\n','').replace('\r','')) or ''"/>
+        <img class="o-inline-Untitllled" t-attf-src="data:#{att_Untitllled.mimetype or 'image/png'};base64,#{Untitllled_b64}" style="float:right; margin-right: -7px !important; max-width: 350px;"/>
+      </div>
+    </xpath>
+    <t t-call="zofirm_contract.external_layout_rtl">
+      <t t-call="zofirm_contract.zofirm_4400_contract_full_template"/>
+    </t>
+  </template>
+
+  <template id="zofirm_report_contract_document" name="zofirm Contract Document">
+    <t t-set="o" t-value="doc or (docs and docs[0])"/>
+    <t t-set="company" t-value="o.company_id or env.company"/>
+    <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]" position="replace">
+      <div class="header my_rtl_header" style="direction: rtl; text-align: center;">
+        <t t-set="att_Untitllled" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_Untitllled')], limit=1)"/>
+        <t t-set="Untitllled_b64" t-value="(att_Untitllled.datas  and att_Untitllled.datas.decode().replace('\n','').replace('\r','')) or ''"/>
+        <img class="o-inline-Untitllled" t-attf-src="data:#{att_Untitllled.mimetype or 'image/png'};base64,#{Untitllled_b64}" style="float:right; margin-right: -7px !important; max-width: 350px;"/>
+      </div>
+    </xpath>
+    <t t-call="zofirm_contract.external_layout_rtl">
+      <t t-call="zofirm_contract.zofirm_contract_full_template"/>
+    </t>
+  </template>
+
+
+  <template id="external_layout_rtl" inherit_id="web.external_layout_standard" priority="50">
+
+    <xpath expr="//div[1]" position="before">
+      <t t-if="not o" t-set="o" t-value="company"/>
+    </xpath>
+
+    <xpath expr="//div[hasclass('o_footer_content')]" position="replace">
+      <!-- company.id != 2 -->
+      <t t-if="company.id != 2">
+        <div class="zofirm-footer">
+          <div id="zofirm_footer" style="direction:rtl; text-align:right; padding-top: 8px !important;">
+            <div class="line" style="color:#ABA7A7;font-size:11pt; border-top: 1px solid #111827 !important; padding-top: 8px !important;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+              </svg>
+              <span style="text-decoration:none !important; color:#ABA7A7 !important;">579 11 9200</span>
+            </div>
+            <div class="line" style="color:#ABA7A7;font-size:11pt;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+              </svg>
+              <a href="" style="text-decoration:none !important; color:#ABA7A7 !important;">info@zofirm.com</a>
+            </div>
+            <div class="line " style="color:#ABA7A7;font-size:11pt;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe2" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855q-.215.403-.395.872c.705.157 1.472.257 2.282.287zM4.249 3.539q.214-.577.481-1.078a7 7 0 0 1 .597-.933A7 7 0 0 0 3.051 3.05q.544.277 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9 9 0 0 1-1.565-.667A6.96 6.96 0 0 0 1.018 7.5zm1.4-2.741a12.3 12.3 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332M8.5 5.09V7.5h2.99a12.3 12.3 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.6 13.6 0 0 1 7.5 10.91V8.5zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741zm-3.282 3.696q.18.469.395.872c.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a7 7 0 0 1-.598-.933 9 9 0 0 1-.481-1.079 8.4 8.4 0 0 0-1.198.49 7 7 0 0 0 2.276 1.522zm-1.383-2.964A13.4 13.4 0 0 1 3.508 8.5h-2.49a6.96 6.96 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667m6.728 2.964a7 7 0 0 0 2.275-1.521 8.4 8.4 0 0 0-1.197-.49 9 9 0 0 1-.481 1.078 7 7 0 0 1-.597.933M8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855q.216-.403.395-.872A12.6 12.6 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.96 6.96 0 0 0 14.982 8.5h-2.49a13.4 13.4 0 0 1-.437 3.008M14.982 7.5a6.96 6.96 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008zM11.27 2.461q.266.502.482 1.078a8.4 8.4 0 0 0 1.196-.49 7 7 0 0 0-2.275-1.52c.218.283.418.597.597.932m-.488 1.343a8 8 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+              </svg>
+              <a href="" style="text-decoration:none !important; color:#ABA7A7 !important;">www.zofirm.com</a>
+            </div>
+            <div style="direction:rtl;text-align:right;width:100%;">
+              <div style="display:table;width:100%;">
+                <div style="display:table-row;">
+                  <div style="display:table-cell;width:14px;vertical-align:middle; color:#ABA7A7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                      <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                    </svg>
+                  </div>
+                  <div style="display:table-cell;vertical-align:middle;padding-right:6px;
+                        color:#ABA7A7;font-size:8.5pt;">
+                    <div>الطريق الدائري الشمالي، مخرج 6 مبنى سكوير 6 الدور الثاني مكتب 179، الرياض 13313.</div>
+                    <div>
+                شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون شركة مهنية ذات مسؤولية محدودة س.ت: 1010643236 برأس مال وقدرة 120,000 ريال سعودي.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </t>
+      <t t-else="">
+
+        <div id="sijil_footer" style="width: 100%;direction: rtl;text-align: right;padding: 25px 18px 0 0;box-sizing: border-box;">
+          <div style="display: table;width: 100%;direction: rtl;table-layout: fixed;">
+            <div style="display: table-row;">
+              <!-- الخط الأزرق كـ Div منفصل -->
+              <div style="display: table-cell;width: 12px;vertical-align: top;">
+                <div style="width: 9px;height: 108px;background-color: #1e5397;border-radius: 6px;margin: 0 auto;"></div>
+              </div>
+              <!-- محتوى الفوتر -->
+              <div style="display: table-cell;vertical-align: top;color: #1e5397;font-size: 13pt;line-height: 1.50;font-weight: 400;text-align: right;direction: rtl;padding-top: 5px; padding-right: 12px;">
+                <div style="direction: rtl; text-align: right; color: #1e5397; font-size:11pt; line-height: 1.50;">
+                    شركة سجل المحاسبة لتقنية المعلومات ذات مسؤولية محدودة (س.ت) 1010192254 برأس مال وقدره 10,000 ريال سعودي
+                </div>
+                <div style="direction: rtl; text-align: right; color: #1e5397; font-size:11pt; line-height: 1.50;">
+                    الطريق الدائري الشمالي، مخرج 6، مبنى سكوير 6، الدور الثاني، مكتب 177، الرياض 13313.
+                </div>
+                <div style="direction: ltr;text-align: right;color: #1e5397;line-height: 1.50;">
+                  <a href="" style="text-decoration: none !important;color: #1e5397 !important; font-size:11pt;">
+                        www.sijilacc.com
+                  </a>
+                </div>
+                <div style="direction: ltr;text-align: right;color: #1e5397;line-height: 1.50;">
+                  <a href="" style="text-decoration: none !important;color: #1e5397 !important; font-size:11pt;">
+                        info@sijilacc.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </t>
+    </xpath>
+
+  </template>
+
+  <record id="action_report_zofirm_contract" model="ir.actions.report">
+    <field name="paperformat_id" ref="zofirm_contract.paperformat_zofirm_contracts"/>
+    <field name="name">zofirm Contract</field>
+    <field name="model">zofirm.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">zofirm_contract.zofirm_report_contract_document</field>
+    <field name="report_file">zofirm_contract.zofirm_report_contract_document</field>
+    <field name="print_report_name">"عقد %s" % (object.partner_id.name or "")</field>
+  </record>
+
+  <record id="action_report_zofirm_bookeeping_contract" model="ir.actions.report">
+    <field name="paperformat_id" ref="zofirm_contract.paperformat_zofirm_contracts"/>
+    <field name="name">Bookeeping Contract</field>
+    <field name="model">zofirm.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">zofirm_contract.zofirm_report_bookeeping_contract_document</field>
+    <field name="report_file">zofirm_contract.zofirm_report_bookeeping_contract_document</field>
+    <field name="print_report_name">"عقد  - %s" % (object.partner_id.name or "")</field>
+  </record>
+
+  <record id="action_report_zofirm_4400_contract" model="ir.actions.report">
+    <field name="paperformat_id" ref="zofirm_contract.paperformat_zofirm_contracts"/>
+    <field name="name">4400 Contract</field>
+    <field name="model">zofirm.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">zofirm_contract.zofirm_report_4400_contract_document</field>
+    <field name="report_file">zofirm_contract.zofirm_report_4400_contract_document</field>
+    <field name="print_report_name">'4400 Contract - %s' % (object.partner_id.name or "")</field>
+  </record>
+</odoo>
+
+
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Authorized person field once -->
+    <record id="res_partner_form_add_authorized_person_after_vat" model="ir.ui.view">
+        <field name="name">res.partner.form.add.authorized.person.after.vat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//group//field[@name='category_id'][1]" position="after">
+                <newline/>
+                <!-- <field name="authorized_person" nolabel="0" string="Authorized person" domain="[('commercial_partner_id','=', commercial_partner_id), ('id','!=', id), ('is_company','=', False)]" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/> -->
+            <field name="authorized_person_domain_ids" invisible="1"/>
+
+<field name="authorized_person"
+       nolabel="0"
+       string="Authorized person"
+       domain="[('id', 'in', authorized_person_domain_ids)]"
+       options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form_zofirm_contract_button" model="ir.ui.view">
+        <field name="name">res.partner.form.zofirm.contract.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_zofirm_contracts" type="object" class="oe_stat_button" icon="fa-file-text-o" groups="zofirm_contract.group_zofirm_contract_manager,base.group_system">
+                    <field name="zofirm_contract_count" widget="statinfo" string="Zofirm Contracts"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form_sijil_contract_button" model="ir.ui.view">
+        <field name="name">res.partner.form.sijil.contract.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_sijil_contracts" type="object" class="oe_stat_button" icon="fa-file-text-o" groups="zofirm_contract.group_sijil_contract_manager,base.group_system">
+                    <field name="sijil_contract_count" widget="statinfo" string="Sijil Contracts"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
