@@ -5,375 +5,163 @@
       <style>
           @import url('https://fonts.cdnfonts.com/css/sakkal-majalla-2');
           .rtl { direction: rtl; text-align: right; font-family: 'Sakkal Majalla', sans-serif !important;}
-          .title { font-size: 18pt; font-weight: 500; margin: 0 0 10px 0; text-align:center; }
-          .sec   { font-size: 14pt; font-weight: 300; margin: 16px 0 6px 0; font-weight: bold; color: #1e5397;}
-          .ul    { margin: 0 0 8px 0; padding-right: 19px; }
+          .sec { font-size: 14pt; font-weight: bold; margin: 16px 0 6px 0; color: #1e5397;}
+          .ul { margin: 0 0 8px 0; padding-right: 19px; }
           .ul li { margin: 2px 0; font-size:20px; }
           .tbl { width:100%; margin: 6px 0 14px 0; text-align:center; border-style: hidden;}
           .th,td {border: 0px; border-style: hidden;}
           .sign { margin-top: 19px; font-size:20px;}
-          .header:not(.my_rtl_header),
-          .o_header:not(.my_rtl_header),
-          header:not(.my_rtl_header) { display:none !important; }
+          .header:not(.my_rtl_header), .o_header:not(.my_rtl_header), header:not(.my_rtl_header) { display:none !important; }
       </style>
       <t t-set="o" t-value="doc or (docs and docs[0])"/>
       <t t-set="is_contract" t-value="o and (o._name in ('sijil.contract','zofirm.contract'))"/>
       <t t-set="q" t-value="is_contract and o.quotation_id or o"/>
-
-      <!-- خطوط المنتجات: لو Contract استخدم order_line_ids / لو Sale Order استخدم order_line -->
       <t t-set="lines" t-value="(is_contract and o.order_line_ids) or (q and q._name == 'sale.order' and q.order_line) or []"/>
-
       <t t-set="dt" t-value="(o and (o.create_date or (q and q.date_order) or o.write_date))"/>
-      <t t-set="currency" t-value="q and q.currency_id or False"/>
-      <t t-set="amt_total" t-value="q and (q.amount_total or 0.0) or 0.0"/>
       <t t-set="anmt_total" t-value="q and (q.amount_untaxed or 0.0) or 0.0"/>
-      <div style=" margin-bottom:20px !important; margin-top:20px; padding: 0px 15px 0px 15px;">
-        <div class="title fw-bold ">
-        اتفاقية تنفيذ أنظمة ERP
-        </div>
-        <h5 class="muted"> 
-          تم في هذا اليوم
-          <span class="muted" t-esc="dt and dt.date() or '.....................................................................................'"/>
-،
-          إبرام هذه الاتفاقية بين كل من:
-        </h5>
-        <h5 class="muted">
-          <b style="color: #1e5397;">الطرف الأول:</b>
-          <t t-esc="o.partner_id.name or 'شركة ...................................'"/>
-،
-          سجل تجاري رقم وطني موحد (
- <t t-esc="('l10n_sa_edi_additional_identification_number' in o.partner_id._fields and o.partner_id.l10n_sa_edi_additional_identification_number) or '.................'"/>
-)،
-          وعنوانها
-          <t t-esc="o.partner_id.city or 'مدينة ..........'"/>
-،
-          البريد الإلكتروني
-          <!-- <t t-esc="o.partner_id.email or '........................'"/> -->
-          <t t-esc="(o.partner_id.commercial_partner_id.authorized_person and
-           o.partner_id.commercial_partner_id.authorized_person.email)
-           or '........................'"/>
-،
-          ويمثلها في هذه الاتفاقية الأستاذ/
-          <t t-esc="(o.partner_id.commercial_partner_id.authorized_person.name) or '........................'"/>
-          بصفته 
-    <t t-esc="(o.partner_id.commercial_partner_id.authorized_person.function) or '........................'"/>
-          والمفوض بالتوقيع بموجب عقد التأسيس
-          يشار إليه فيما بعد بـ "
-          <t t-esc="o.partner_id.name or '..........................'"/>
-" أو "الطرف الأول".
-        </h5>
-        <h5 class="muted">
-          <b style="color: #1e5397;">الطرف الثاني:</b>
-          شركة سجل المحاسبة لتقنية المعلومات (شخص واحد)،
-          سجل تجاري رقم (1010192254)،
-          عنوانها: 2930 الطريق الدائري الشمالي، حي الوادي، الرياض 6137، المملكة العربية السعودية،
-          البريد الإلكتروني info@sijilacc.com، ويمثلها في هذه الاتفاقية
-          الأستاذ/ عبدالرحمن مازن عبد الرحمن محمد الزامل
-          بصفته المدير العام والمفوض بالتوقيع بموجب عقد التأسيس.
-          يشار إليه فيما بعد بـ "شركة سجل المحاسبة" أو "الطرف الثاني".
-        </h5>
-        <div class="sec">
-        تمهيد:        
-        </div>
-        <h5 class="muted">
-        حيث إن الطرف الأول بحاجة إلى خدمات تقنية في مجال عمل الطرف الثاني، وحيث إن الطرف الثاني شركة مهنية متخصصة في خدمات تنفيذ الأنظمة ولها الخبرة الكافية لذلك، وقد وافق على تقديم هذه الخدمة؛ فقد تم التعاقد بينهما، وهما بكامل الأهلية المعتبرة شرعاً، وفقاً للشروط التالية:
-        </h5>
-        <div class="sec">المادة (1): التمهيد جزء من العقد</div>
-        <h5 class="muted">يُعد التمهيد المتقدم جزءاً لا يتجزأ من أحكام هذا العقد وتقرأ وتفسر جميع بنود العقد مع التمهيد،</h5>
-        <div class="sec">المادة (2): نطاق العمل</div>
-        <h5>
-          يقدم الطرف الثاني خدماته للطرف الأول، بمحتوى متكامل لتهيئة وتنفيذ أنظمة Odoo ERP والتدريب عليها
-          في نطاق عمل هذه الاتفاقية.
-        </h5>
-        <h5>
-          <li style=" font-size:20px;">خدمة تهيئة نظام ODOO ERP</li>
-        </h5>
 
-<t t-set="partner_lang" t-value="(o.partner_id.lang or 'en_US')"/>
-  <t t-if="lines">
-      <ul class="ul">
-          <t t-set="i" t-value="0"/>
-          <t t-foreach="lines" t-as="l">
-              <!-- Section -->
+      <div style="margin-bottom:20px !important; margin-top:20px; padding: 0px 15px 0px 15px;">
+        <div class="title fw-bold">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+        <h5 class="muted">..............................................................</h5>
+        <h5 class="muted">..............................................................</h5>
+
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+
+        <div class="sec">..............................................................</div>
+        <h5>..............................................................</h5>
+
+        <t t-if="lines">
+          <ul class="ul">
+            <t t-set="i" t-value="0"/>
+            <t t-foreach="lines" t-as="l">
               <t t-if="l.display_type == 'line_section'">
-                  <li style="list-style: none; padding-right:0; font-size:20px;">
-                      <b t-esc="q._get_contract_section_name(l) if q else l.name"/>
-                  </li>
+                <li style="list-style: none;"><b>..............................................................</b></li>
               </t>
-              <!-- Product / Service -->
               <t t-if="not l.display_type">
-                  <t t-set="i" t-value="i + 1"/>
-                  <li style="list-style: none; padding-right:0; font-size:20px;">
-                      <span t-esc="i"/>
-                      <span> ـ </span>
-                      <t t-if="l.product_template_id">
-                          <!-- اسم المنتج بلغة العميل -->
-                          <t t-set="product_tmpl" t-value="l.product_template_id.with_context(lang=partner_lang)"/>
-                          <span t-esc="product_tmpl.name"/>
-                          <br/>
-                          <!-- الوصف بلغة العميل إذا Show Description مفعّل -->
-                          <t t-if="o.show_description and product_tmpl.description_sale">
-                                <span style=" display: inline-block; position: relative; top: -4px; margin: 0 5px;">
-                                    _
-                                </span>
-                                <span t-esc="product_tmpl.description_sale" style="white-space: pre-line;"/>
-                          </t>
-                      </t>
-                      
-                      <!-- fallback -->
-                      <t t-else="">
-                          <span t-esc="l.name"/>
-                      </t>
-                  </li>
+                <t t-set="i" t-value="i + 1"/>
+                <li style="list-style: none;">..............................................................</li>
               </t>
-          </t>
-      </ul>
-  </t>
-        
-        <h5>ويشمل ذلك:</h5>
+            </t>
+          </ul>
+        </t>
+
+        <h5>..............................................................</h5>
         <ul class="ul" style="font-size:20px;">
-          <li style="font-size:20px;">إعداد النظام وضبط الإعدادات وفق احتياجات الطرف الأول.</li>
-          <li style="font-size:20px;">استيراد البيانات التاريخية.</li>
-          <li style="font-size:20px;">تقديم تدريب مبدئي على الاستخدام.</li>
-          <li style="font-size:20px;">ضمان التشغيل التجريبي قبل الإطلاق الرسمي.</li>
+          <li style="font-size:20px;">..............................................................</li>
+          <li style="font-size:20px;">..............................................................</li>
+          <li style="font-size:20px;">..............................................................</li>
+          <li style="font-size:20px;">..............................................................</li>
         </ul>
-        <br/>
-        <div class="sec">المادة (3): بذل العناية والمحافظة على السرية</div>
-        <h5 class="muted">
-          يلتزم الطرف الثاني ببذل العناية والجهد المعتبرين عرفاً لتنفيذ العمل المطلوب من الطرف الأول، كما يلتزم الطرفان بالمحافظة على
-          سرية المعلومات المتعلقة بالعقد. ويحافظ الطرفان على اتخاذ جميع الخطوات اللازمة لحماية سرية المعلومات من الوقوع في المجال العام
-          أو في حيازة أشخاص غير مصرح لهم. كما يلتزم الطرف الثاني بدرجة عالية من العناية المطلوبة بموجب القانون أو الأنظمة المهنية
-          واللوائح. وعند الحصول على معلومات حساسة بشأن أعمال الطرف الأول خلال تقديم الخدمات ("معلومات سرية")، يلتزم الطرف الثاني
-          بسرية هذه المعلومات وعدم الإفصاح عنها خارج نطاق فريق العمل المعني إلا بإذن كتابي من الطرف الأول. يجوز للطرف الثاني مشاركة
-          المعلومات المتعلقة بالطرف الأول، بما في ذلك المعلومات السرية، مع: الأشخاص الآخرين في شركة سجل المحاسبة لتقنية المعلومات،
-          و/أو الأطراف الأخرى التي تسهل إدارة أعمالنا أو تدعم بنيتنا الأساسية. وفي كل الأحوال فلا تنطبق هذه المادة في الحالات التي تصبح
-          فيها المعلومات السرية متاحة للجميع. كما لا تمنع هذه المادة إفصاحنا عن المعلومات السرية لجهات التأمين المهنية القائمة على
-          تعويضنا أو لمستشارينا.
-        </h5>
-        <br/>
-        <div class="sec">المادة (4): الأتعاب وخطة الدفعات</div>
-        <h5 class="muted">
-          اتفق الطرفان على أن تكون أتعاب الطرف الثاني بقيمة إجمالية قدرها
-          (
-          <t t-esc="'%.2f' % (anmt_total)"/>
- ريال سعودي)
-          بالإضافة إلى ضريبة القيمة المضافة بنسبة (15%) وقدرها
-          (
-          <t t-esc="'%.2f' % (anmt_total * 0.15)"/>
- ريال سعودي)،
-          ليكون المبلغ الإجمالي الشامل للضريبة هو
-          (
-          <t t-esc="'%.2f' % (anmt_total * 1.15)"/>
- ريال سعودي).
-          ويُعد استحقاق كل دفعة من الدفعات المحددة مرتبطاً حصراً بتسليم المخرج الخاص بالمرحلة المتفق عليها،
-          بغض النظر عن قبول أو رفض المخرج من قبل الطرف الأول، ما لم يثبت وجود إخلال جوهري بالمواصفات المحددة في نطاق العمل.
-        </h5>
 
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
 
-        <h5>تسدد الأتعاب على الدفعات التالية:</h5>
-        <!-- نقرأ الدفعات من الكوتيشن المرتبط بالعقد -->
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+
         <t t-set="fees_lines" t-value="q.fees_payment_line_ids"/>
-
-        <!-- لو فيه أي due_stage غير فاضي: نظهر العمود -->
         <t t-set="show_due_stage" t-value="fees_lines and any((l.due_stage for l in fees_lines))"/>
 
-        <table class="tbl" style=" border-style: hidden; font-size: 20px;">
-          <thead style="border:0!important; text-align: justify;">
-            <tr style="border:0!important; padding:10px 5px;">
-              <th style="border:0!important; color: black; font-size:20px;">الدفعة</th>
-              <th style="border:0!important; color: black; font-size:20px;">النسبة من القيمة الإجمالية</th>
-              <th style="border:0!important; color: black; font-size:20px;">المبلغ (ريال سعودي)</th>
-
-              <!--  الهيدر يظهر فقط لو فيه بيانات -->
-              <th t-if="show_due_stage" style="border:0!important; color: black; font-size:20px;">
-        مرحلة الاستحقاق
-              </th>
-
+        <table class="tbl" style="border-style: hidden; font-size: 20px;">
+          <thead style="border:0!important;">
+            <tr>
+              <th style="border:0!important; color:black; font-size:20px;">..............</th>
+              <th style="border:0!important; color:black; font-size:20px;">..............</th>
+              <th style="border:0!important; color:black; font-size:20px;">..............</th>
+              <th t-if="show_due_stage" style="border:0!important; color:black; font-size:20px;">..............</th>
             </tr>
           </thead>
-
-          <tbody style="border:0!important; text-align: justify;">
-
-            <!-- لو فيه دفعات مُدخَلة على الكوتيشن نستخدمها -->
+          <tbody style="border:0!important;">
             <t t-if="fees_lines">
-              <tr t-foreach="fees_lines" t-as="f" style="border:0!important; padding:10px 5px;">
-                <td style="border:0!important; font-size:20px; padding:10px 5px;">
-                  <t t-esc="f.name or ''"/>
-                </td>
-                <td style="border:0!important; font-size:20px; padding:10px 5px;">
-                  <t t-esc="str(int(f.percentage_total or 0)) + '%'"/>
-                </td>
-                <td style="border:0!important; font-size:20px; padding:10px 5px;">
-                  <t t-esc="'%.2f' % (f.amount or 0.0)"/>
-                </td>
-
-                <!--  الخانة تظهر فقط لو العمود ظاهر -->
-                <td t-if="show_due_stage" style="border:0!important; font-size:20px; padding:10px 5px;">
-                  <t t-esc="f.due_stage or ''"/>
-                </td>
+              <tr t-foreach="fees_lines" t-as="f" style="border:0!important;">
+                <td style="border:0!important; font-size:20px;">..............</td>
+                <td style="border:0!important; font-size:20px;">..............</td>
+                <td style="border:0!important; font-size:20px;">..............</td>
+                <td t-if="show_due_stage" style="border:0!important; font-size:20px;">..............</td>
               </tr>
-            </t>
-
-            <t t-else="">
-
             </t>
           </tbody>
         </table>
 
-        <br/>
-        <br/>
-        <h5>ويكون سداد هذه المبالغ مقصوراً على الحساب البنكي للطرف الثاني في مصرف الإنماء، وتفاصيله وفقاً لما يلي:</h5>
-        <table class="tbl narrow" style=" border-style: hidden;">
-          <tr style="border:0!important;">
-            <th style="border:0!important; font-size:20px; padding:10px 5px;">الحساب البنكي</th>
-            <td style="border:0!important; font-size:20px; padding:10px 5px;">شركة سجل المحاسبة لتقنية المعلومات</td>
-          </tr>
-          <tr style="border:0!important;">
-            <th style="border:0!important; font-size:20px; padding:10px 5px;">اسم البنك</th>
-            <td style="border:0!important; font-size:20px; padding:10px 5px;">مصرف الانماء</td>
-          </tr>
-          <tr style="border:0!important;">
-            <th style="border:0!important; font-size:20px;  padding:10px 5px;">رقم الحساب</th>
-            <td style="border:0!important; font-size:20px;  padding:10px 5px;">68204501427000</td>
-          </tr>
-          <tr style="border:0!important;">
-            <th style="border:0!important; font-size:20px; padding:10px 5px;">رقم الايبان</th>
-            <td style="border:0!important; font-size:20px; padding:10px 5px;">SA2805000068204501427000</td>
-          </tr>
+        <h5>..............................................................</h5>
+        <table class="tbl narrow" style="border-style: hidden;">
+          <tr><th style="border:0!important; font-size:20px;">..............</th><td style="border:0!important; font-size:20px;">..............................</td></tr>
+          <tr><th style="border:0!important; font-size:20px;">..............</th><td style="border:0!important; font-size:20px;">..............................</td></tr>
+          <tr><th style="border:0!important; font-size:20px;">..............</th><td style="border:0!important; font-size:20px;">..............................</td></tr>
+          <tr><th style="border:0!important; font-size:20px;">..............</th><td style="border:0!important; font-size:20px;">..............................</td></tr>
         </table>
-        <br/>
-        <div class="sec">المادة (5): مدة العقد وضمان الجودة</div>
-        <div class="muted">
-          <h5>
-            <b>مدة التعاقد والتنفيذ:
-            </b>
-            <br/>
 
-          تبدأ الاتفاقية من تاريخ توقيع العقد وتظل سارية المفعول لمدة ثلاثة (3) أشهر ونصف من ذلك التاريخ،
-          يتعهد الطرف الثاني خلالها بتنفيذ وتسليم الأعمال وفقًا للجدول الزمني المتفق عليه.
-          </h5>
-          <h5>
-            <b>الضمان الفني بعد التسليم:
-            </b>
-            <br/>
-بعد التسليم، يلتزم الطرف الثاني بتقديم دعم فني وضمان لمدة شهر واحد ما لم يذكر خلاف ذلك في العرض الفني
- ، تبدأ من تاريخ التسليم النهائي للمخرجات. ويشمل هذا الضمان إصلاح العيوب أو الأخطاء الفنية ضمن نطاق العمل المتفق عليه، بشرط ألا يكون سبب الخطأ سوء استخدام من الطرف الأول أو تدخلًا غير مصرّح به.
-          </h5>
-          <h5>
-            <b>الإنهاء المبكر والتسوية المالية:
-            </b>
-            <br/>
-        إذا قرر الطرف الأول إنهاء العقد قبل انتهاء مدته، يتم سداد تكلفة الأعمال التي تم إنجازها
-          بالفعل حتى تاريخ الإنهاء، وفقًا لنسبة الإنجاز الموثقة في تقرير مرحلي يقدمه الطرف الثاني ويُعتمد من الطرف الأول.
-          </h5>
-          <br/>
-        </div>
-        <div class="sec">المادة (6): آلية التغيير أو الإضافة على نطاق العمل</div>
-        <li style="font-size:22px;">أي تعديل أو إضافة يتم بطلب مكتوب من الطرف الأول، مع عرض فني ومالي من الطرف الثاني.</li>
-        <li style="font-size:22px;">لا يتم التنفيذ إلا بعد الموافقة الخطية من الطرفين.</li>
-        <li style="font-size:22px;">يمنع إلزام الطرف الثاني بأي أعمال إضافية لم يتم الاتفاق عليها كتابيًا.</li>
-        <br/>
-        <div class="sec">المادة (7): استخدام البريد الالكتروني</div>
-        <h5 class="muted">
-          يُعد هذا العقد تفويضاً من الطرف الأول باستخدام البريد الإلكتروني وأي وسائل اتصال إلكترونية أخرى لنقل واستلام المعلومات،
-          بما في ذلك المعلومات السرية، بين شركة سجل المحاسبة لتقنية المعلومات والاستشاريين الخارجيين أو أي جهات أخرى تتعلق بشركة
-          سجل المحاسبة لتقنية المعلومات. يدرك الطرف الأول أن البريد الإلكتروني يسري عبر شبكة الإنترنت العامة، التي تُعد وسيلة غير
-          مأمونة للاتصال، ولكن هي غاية ما يمكن استخدامه بين المتعاملين في الوضع الراهن، مما يعني أن سرية المعلومات المنقولة قد تكون
-          عرضة للاختراق دون ارتكاب أي خطأ من شركة سجل المحاسبة لتقنية المعلومات. ويقتصر التواصل بين طرفي العقد عبر البريد الإلكتروني
-          المبين في معلومات الطرفين، وأي وسيلة أخرى لا تُعتبر تواصلاً رسمياً.
-        </h5>
-        <br/>
-        <div class="sec">المادة (8): احكام عامة</div>
+        <div class="sec">..............................................................</div>
         <div class="muted">
-          <h5>1-
-          يتضمن هذا العقد كامل ما اتفق عليه الطرفان من شروط وأحكام، ولا يجوز التعديل أو التغيير فيه إلا بموافقة كتابية مسبقة من
-          الطرفين. يُعتبر هذا العقد نهائياً وملزماً لطرفيه، ولا يجوز العدول عنه أو الطعن فيه لأي سبب من الأسباب.
-          </h5>
-          <h5>2-
-        يُفسر هذا العقد وكافة الأمور المتصلة به وفقاً للقوانين المعمول بها في المملكة العربية السعودية.
-          </h5>
-          <h5>3-
-          لكي يتسنى للطرف الثاني تأدية
-          الخدمات، يتعين على الطرف الأول تقديم المعلومات والمساعدة بشكل فوري، وتمكين الطرف الثاني من الاطلاع على الوثائق والمستندات،
-          وكذلك مستندات الموظفين الذين هم تحت سيطرة الطرف الأول متى ما كان ذلك مطلوباً.
-          </h5>
-          <h5>4-
-          لا يُعد أي من الطرفين مخالفاً لالتزاماته التعاقدية أو تقع عليه أي مسؤولية تجاه الطرف الآخر إذا كان غير قادر على الالتزام بعقد
-          الخدمات نتيجة لأي سبب خارج عن سيطرته المعقولة. في حال حدوث مثل هذه الظروف، يجب على الطرف المتأثر إخطار الطرف الآخر في أقرب
-          فرصة ممكنة. يكون للطرف الآخر خيار تعليق أو إنهاء عقد الخدمات بموجب إخطار يُسلم ويصبح نافذاً فور تسليمه.
-          </h5>
-          <h5>5-
-          في حال بطلان أي شرط من شروط العقد فإن البطلان يقع في حدود الشرط ولا يشمل العقد.
-          </h5>
-          <h5> وسيلة التواصل المعتمدة بين الطرفين هي
-          العناوين البريدية الموضحة عند كل طرف في صدر هذا العقد، وتعد المراسلة من خلالها ملزمة للطرفين ومنتجة لجميع آثارها النظامية.
-          </h5>
+          <h5><b>..........................:</b><br/>..............................................................</h5>
+          <h5><b>..........................:</b><br/>..............................................................</h5>
+          <h5><b>..........................:</b><br/>..............................................................</h5>
         </div>
-        <br/>
-        <div class="sec">المادة (9): تسوية النزاعات</div>
-        <h5 class="muted">
-          أي نزاع ينشأ بين الطرفين بشأن انعقاد، أو تنفيذ، أو فسخ، أو صحة، أو بطلان هذا العقد، أو أي أمور تتفرع عنه أو ترتبط به، يتم
-          إنهاؤه عن طريق اللجوء إلى المحكمة المختصة في مدينة الرياض.
-        </h5>
-        <br/>
 
-        <t t-set="is_contract" t-value="o and (o._name in ('sijil.contract', 'zofirm.contract'))"/>
-        <t t-set="q" t-value="is_contract and o.quotation_id or o"/>
+        <div class="sec">..............................................................</div>
+        <li style="font-size:22px;">..............................................................</li>
+        <li style="font-size:22px;">..............................................................</li>
+        <li style="font-size:22px;">..............................................................</li>
+
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+
+        <div class="sec">..............................................................</div>
+        <div class="muted">
+          <h5>1- ..............................................................</h5>
+          <h5>2- ..............................................................</h5>
+          <h5>3- ..............................................................</h5>
+          <h5>4- ..............................................................</h5>
+          <h5>5- ..............................................................</h5>
+          <h5>..............................................................</h5>
+        </div>
+
+        <div class="sec">..............................................................</div>
+        <h5 class="muted">..............................................................</h5>
+
         <t t-set="schedule_lines" t-value="(is_contract and (o.contract_schedule_line_ids or (q and q.project_schedule_line_ids))) or (q and q.project_schedule_line_ids)"/>
         <t t-if="schedule_lines">
-          <h5 class="sec">المادة (10): الجدول الزمني للمشروع</h5>
-          <div style=" margin-right:50px;">
-            <table class="tbl" style="width:100%; border-collapse:collapse; border:none; border-style:hidden;">
-              <thead style="border:none; text-align:justify;">
-                <tr style="border:none;">
-                  <th style="border:none!important; font-size:20px; color:black; padding:10px 5px;">المرحلة</th>
-                  <th style="border:none!important; font-size:20px; color:black; padding:10px 5px;">الوصف</th>
-                  <th style="border:none!important; font-size:20px; color:black; padding:10px 5px;">المدة</th>
-                  <th style="border:none!important; font-size:20px; color:black; padding:10px 5px;">المخرجات</th>
+          <h5 class="sec">..............................................................</h5>
+          <div style="margin-right:50px;">
+            <table class="tbl" style="width:100%; border:none;">
+              <thead style="border:none;">
+                <tr>
+                  <th style="border:none!important; font-size:20px;">..............</th>
+                  <th style="border:none!important; font-size:20px;">..............</th>
+                  <th style="border:none!important; font-size:20px;">..............</th>
+                  <th style="border:none!important; font-size:20px;">..............</th>
                 </tr>
               </thead>
-              <tbody style="border:none; text-align:justify;">
+              <tbody style="border:none;">
                 <tr t-foreach="schedule_lines" t-as="s" style="border:none;">
-                  <td t-esc="s_index + 1" style="border:none!important; font-size:20px; padding:10px 5px;"/>
-                  <td t-esc="s.description or ''" style="border:none!important; font-size:20px; padding:10px 5px;"/>
-                  <td t-esc="s.duration_per_week or ''" style="border:none!important; font-size:20px; padding:10px 5px;"/>
-                  <td t-esc="s.outputs or ''" style="border:none!important; font-size:20px; padding:10px 5px;"/>
+                  <td t-esc="s_index + 1" style="border:none!important; font-size:20px;"/>
+                  <td style="border:none!important; font-size:20px;">..............................................................</td>
+                  <td style="border:none!important; font-size:20px;">..............</td>
+                  <td style="border:none!important; font-size:20px;">..............</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </t>
-        <br/>
-        <table class="tbl sign" style=" border-style: hidden;">
+
+        <table class="tbl sign" style="border-style: hidden;">
           <tr>
             <td style="width:50%; border:0!important;">
-              <b style="font-size:20px; color: #1e5397;">الطرف الأول:</b>
-              <br/>
-              <br/>
-              <t style="font-size:19px;" t-esc="o.partner_id.name or '………………………………'"/>
-              <br/>
-              <br/>
-              ويمثلها:
-              <t style="font-size:19px;" t-esc="(o.partner_id.commercial_partner_id.authorized_person and
-              o.partner_id.commercial_partner_id.authorized_person.name)
-              or '........................'"/>
-              <br/>
-              <br/>
-              التوقيع:
-              <span class="dots">.................................................</span>
+              <b style="font-size:20px; color:#1e5397;">...................</b><br/><br/>
+              ..............................................................<br/><br/>
+              ..............................................................<br/><br/>
+              ..............................................................
             </td>
-            <td style="width:50%; border:0!important; ">
-              <b style="font-size:20px; color: #1e5397;">الطرف الثاني:
-                <br/>
-                <br/>
-              </b> شركة سجل المحاسبة لتقنية المعلومات
-              <br/>
-              <br/>
-              ويمثلها: عبدالرحمن ﻣﺎزن ﻋﺑداﻟرﺣﻣن ﻣﺣﻣد اﻟزاﻣل
-              <br/>
-              <br/>
-              التوقيع:
-              <span class="dots">......................................................</span>
+            <td style="width:50%; border:0!important;">
+              <b style="font-size:20px; color:#1e5397;">...................</b><br/><br/>
+              ..............................................................<br/><br/>
+              ..............................................................<br/><br/>
+              ..............................................................
             </td>
           </tr>
         </table>
@@ -381,5 +169,3 @@
     </main>
   </template>
 </odoo>
-
-
