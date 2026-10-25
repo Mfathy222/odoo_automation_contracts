@@ -5,795 +5,143 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@emran-alhaddad/saudi-riyal-font/index.css" />
       <style>
           @import url('https://fonts.cdnfonts.com/css/sakkal-majalla-2');
-          .header:not(.my_rtl_header),
-          .o_header:not(.my_rtl_header),
-          header:not(.my_rtl_header) { display:none !important; }
-          .h3 { font-weight: normal !important; }
-          .tbody { border:0 !important; }
+          .header:not(.my_rtl_header), .o_header:not(.my_rtl_header), header:not(.my_rtl_header) { display:none !important; }
           .tbl { border-style: hidden;}
           .th,td {border: 0px; border-style: hidden;}
-          img.o-inline-stamp{
-            display:inline-block; height:64px; width:auto; line-height:0;
-            border:0; outline:0; max-width:none !important; vertical-align:middle;
-            -webkit-print-color-adjust: exact; image-rendering:auto;
+          .contract-body { direction: rtl; text-align: right;
+            font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
+            font-size: 20px; line-height: 1.75; color: #000000; }
+          .contract-section-title { direction: rtl; text-align: right; font-weight: bold;
+            font-size: 20px; line-height: 1.6; page-break-after: avoid; }
+          .contract-paragraph, .contract-paragraph1 {
+            direction: rtl; text-align: right; font-size: 20px; line-height: 1.75;
+            padding: 0; border: 0 !important;
           }
-          img.o-inline-seal{
-            display:inline-block; line-height:0;
-            border:0; outline:0; max-width:none !important; vertical-align:middle;
-          }
-
-    .contract-body {
-        direction: rtl;
-        text-align: right;
-        font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
-        font-size: 20px;
-        line-height: 1.75;
-        font-weight: normal;
-        color: #000000;
-    }
-
-    .contract-section-title {
-        direction: rtl;
-        text-align: right;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 1.6;
-        <!-- margin: 14px 0 6px 0; -->
-        page-break-after: avoid;
-    }
-
-
-    .contract-paragraph {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        <!-- margin: 0 22px 8px 0; -->
-        padding: 0;
-        font-weight: normal;
-        hyphens: none !important;
-        word-break: normal !important;
-        overflow-wrap: normal !important;
-        white-space: normal !important;
-    }
-    .contract-paragraph1 {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        margin: 0 48px 8px 0;
-        padding: 0;
-        font-weight: normal;
-        hyphens: none !important;
-        word-break: normal !important;
-        overflow-wrap: normal !important;
-        white-space: normal !important;
-    }
-
-    .contract-bullet-line {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        margin: 0 0 6px 0;
-        padding: 0;
-        font-weight: normal;
-    }
-
-    .contract-bullet-symbol {
-        display: inline-block;
-        width: 18px;
-        text-align: center;
-        vertical-align: baseline;
-    }
-
-    .audit-responsibility-title {
-    direction: rtl;
-    text-align: right;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 1.6;
-    margin: 18px 0 6px 0;
-    page-break-after: avoid;
-  }
-
-  .audit-responsibility-intro {
-      direction: rtl;
-      text-align: right;
-      font-size: 19px;
-      line-height: 1.75;
-      margin: 0 22px 6px 0;
-      padding: 0;
-      font-weight: normal;
-  }
-
-  .audit-bullet-table {
-    border-collapse: collapse;
-    border: 0 !important;
-    direction: rtl;
-    width: 95%;
-    margin: 0 22px 4px 0;
-    border: 0 !important;
-}
-
-.audit-bullet-table td {
-    border: 0 !important;
-}
-
-.audit-bullet-symbol {
-    width: 22px;
-    min-width: 22px;
-    text-align: center !important;
-    vertical-align: top !important;
-    font-size: 18px !important;
-    line-height: 1.75 !important;
-    padding-top: 5px !important;
-    border: 0 !important;
-}
-
-.audit-bullet-text {
-    vertical-align: top !important;
-    text-align: right;
-    font-size: 19px;
-    line-height: 1.75;
-    font-weight: normal;
-    padding-right: 4px !important;
-    hyphens: none !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    white-space: normal !important;
-}
-.contract-paragraph,
-.contract-paragraph1,
-.audit-bullet-text {
-    font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
-    direction: rtl !important;
-    border: 0 !important;
-
-    /* fallback لو JavaScript لم يعمل */
-    text-align: right !important;
-    text-align-last: right !important;
-
-    letter-spacing: 0 !important;
-    word-spacing: normal !important;
-    text-kashida-space: 0% !important;
-
-    hyphens: none !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    white-space: normal !important;
-}
-
-.ar-auto-justify {
-    direction: rtl !important;
-    text-align: justify !important;
-    text-align-last: right !important;
-}
-
-.ar-auto-justify .ar-word {
-    display: inline-block !important;
-    white-space: nowrap !important;
-    direction: rtl !important;
-    unicode-bidi: isolate !important;
-}
-
-.amount-paragraph {
-    direction: rtl !important;
-    text-align: right !important;
-    text-align-last: right !important;
-    unicode-bidi: plaintext !important;
-}
-
-.amount-paragraph .icon-saudi_riyal {
-    display: inline-block !important;
-    direction: ltr !important;
-    unicode-bidi: isolate !important;
-    margin: 0 2px !important;
-}
       </style>
       <t t-foreach="docs or (doc and [doc]) or []" t-as="o">
         <t t-set="q0" t-value="(o and (o._name in ('sijil.contract','zofirm.contract') and o.quotation_id)) or (o and o._name == 'sale.order' and o) or False"/>
         <t t-set="q" t-value="q0 and q0._name == 'sale.order' and q0 or False"/>
         <t t-set="partner" t-value="q and q.partner_id or False"/>
-        <t t-set="dt" t-value="(q and (q.date_order or q.create_date or q.write_date)) or False"/>
         <t t-set="contract_ref" t-value="(q and (q.name or q.client_order_ref)) or ''"/>
-        <!-- السنة المالية في شاشة العقد  -->
-        <t t-set="yy" t-value="(q and q.date_order and q.date_order.year)"/>
-        <t t-set="dd" t-value="(dt and dt.day) or ''"/>
-        <t t-set="mm" t-value="(dt and dt.month) or ''"/>
         <t t-set="fee_base" t-value="(q and q.amount_untaxed) or 0.0"/>
         <t t-set="vat_rate" t-value="0.15"/>
         <t t-set="vat_amount" t-value="fee_base * vat_rate"/>
         <t t-set="grand_total" t-value="fee_base + vat_amount"/>
-        <t t-set="cur_sym" t-value="(q and q.currency_id and (q.currency_id.name == 'SAR' or q.currency_id.symbol in ('ر.س','SAR','SR'))) and ' ر.س' or (q and q.currency_id and (' ' + (q.currency_id.symbol or q.currency_id.name)) or '')"/>
-        <!-- <t t-set="auth_person" t-value="o.partner_id.commercial_partner_id.authorized_person or False"/>
-        <t t-set="auth_title" t-value="(auth_person and (auth_person.function or auth_person.title)) or ''"/> -->
-        <!-- تاريخ بداية العقد بشكل آمن -->
-        <t t-set="contract_start_date" t-value="('start_date' in o._fields and o.start_date) or False"/>
-        <!-- الشخص المفوض -->
         <t t-set="auth_person" t-value="o.partner_id.commercial_partner_id.authorized_person or False"/>
-        <!-- الوظيفة بشكل آمن: اعتمد على function فقط -->
         <t t-set="auth_title" t-value="(auth_person and auth_person.function) or ''"/>
 
-        <div style="direction:rtl;line-height:1.5;font-size:20px; font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;">
+        <div style="direction:rtl;line-height:1.5;font-size:20px;font-family:'Sakkal Majalla',sans-serif !important;">
           <div style="margin:0 0 10px 0; text-align:left;">
-            <!-- <span t-if="o.start_date" t-esc="o.start_date.year"/> -->
-            <!-- <span t-if="contract_start_date" t-esc="contract_start_date.year"/> -->
-            <span t-if="o.end_date_number" t-esc="o.end_date_number"/>
-    /
-            <span t-att-style="'min-width:160px; vertical-align:baseline;'" t-esc="contract_ref"/>
-
-          </div>
-          <div style="margin:0 0 10px 0; font-weight:bold; text-align:center;">الموضوع: خطاب ارتباط
-          </div>
-          <div style="margin:0 0 10px 0; font-weight:bold;">لعناية / 
-            <span t-esc="(partner and partner.name) or ''"/>
-          </div>
-          <div style="margin:10px 0 14px 0; font-weight:bold;">خطاب الارتباط
+            <span t-if="o.end_date_number" t-esc="o.end_date_number"/> / 
+            <span t-esc="contract_ref"/>
           </div>
 
-          <!-- <div class="contract-paragraph" style="margin:0 0 14px 0;">يهدف هذا الخطاب الى تأكيد فهمنا لشروط وأهداف ارتباط (
-            <span t-esc="(partner and partner.name) or ''"/>
- (الرقم الموحد
-            <t t-set="unified_number" t-value="(partner and 'l10n_sa_edi_additional_identification_number' in partner._fields and partner.l10n_sa_edi_additional_identification_number)
-                or (partner and 'commercial_registry' in partner._fields and partner.commercial_registry)
-                or (q and 'l10n_sa_edi_additional_identification_number' in q._fields and q.l10n_sa_edi_additional_identification_number)
-                or '…'"/>
-                "            <span t-esc="unified_number"/>
-"
-                )
-   (الطرف الاول) بشركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون وطبيعة وحدود الخدمات التي سنقوم بتقديمها. ومن المقرر تنفيذ الارتباط وفقاً للمعيار الدولي للخدمات ذات العلاقة المعتمد في المملكة العربية السعودية المنطبق على ارتباطات الإجراءات المتفق عليها 4400، وسنشير الى ذلك في تقريرنا.
-</div> -->
-          <div class="contract-paragraph" style="margin:0 0 14px 0;">
-    يهدف هذا الخطاب الى تأكيد فهمنا لشروط وأهداف ارتباط (
-            <span t-esc="(partner and partner.name) or ''"/>
+          <div style="margin:0 0 10px 0; font-weight:bold; text-align:center;">..............................................................</div>
+          <div style="margin:0 0 10px 0; font-weight:bold;">..............................................................</div>
+          <div style="margin:10px 0 14px 0; font-weight:bold;">..............................................................</div>
 
-            <t t-set="identification_label" t-value="'الرقم الموحد' if partner and partner.is_company else 'رقم الهوية'"/>
+          <div class="contract-paragraph" style="margin:0 0 14px 0;">..............................................................</div>
 
-            <!-- <t t-set="identification_number" t-value="(q and 'l10n_sa_edi_additional_identification_number' in q._fields and q.l10n_sa_edi_additional_identification_number) or '…'"/> -->
+          <div class="contract-section-title">1) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <t t-set="identification_number" t-value="(partner and 'l10n_sa_edi_additional_identification_number' in partner._fields and partner.l10n_sa_edi_additional_identification_number)
-                or (partner and 'commercial_registry' in partner._fields and partner.commercial_registry)
-                or (q and 'l10n_sa_edi_additional_identification_number' in q._fields and q.l10n_sa_edi_additional_identification_number)
-                or '…'"/>
+          <div class="contract-section-title">2) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <span t-esc="identification_label"/>
-    "
-            <span t-esc="identification_number"/>
-    "
-    )
-    
-    (الطرف الاول) بشركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون وطبيعة وحدود الخدمات التي سنقوم بتقديمها. ومن المقرر تنفيذ الارتباط وفقاً للمعيار الدولي للخدمات ذات العلاقة المعتمد في المملكة العربية السعودية المنطبق على ارتباطات الإجراءات المتفق عليها 4400، وسنشير الى ذلك في تقريرنا.
-          </div>
-          <div class="contract-section-title">
-          1)  المعايير المهنية
+          <div class="contract-section-title">3) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          </div>
-          <div class="contract-paragraph">
-سوف تتم أعمالنا وفقًا لمبادئ النزاهة، والموضوعية، والكفاءة المهنية، وبذل العناية المطلوبة، والسرية، والسلوك المهني والمعايير التقنية وذلك طبقًا للمعيار الدولي للخدمات ذات العلاقة المعتمد في المملكة العربية السعودية المنطبق على ارتباطات الإجراءات المتفق عليها.
-          </div>
-          <div class="contract-section-title">
-          2)  نطاق العمل
-          </div>
-          <div class="contract-paragraph">
-          لقد طلبتم منا تنفيذ ارتباط إجراءات متفق عليها، يتضمن تقديم تقرير حول المكتشفات الناتجة عن عملنا وتنحصر مسؤوليتنا المهنية في 
-            <span t-if="q and 'work_scope' in q._fields and q.work_scope" t-esc="q.work_scope"/>
-           ، ويقتصر دورنا المهني في الاطلاع على المستندات النظامية والمقبولة المقدمة لنا من قبلكم والمتعلقة بالإجراءات المذكورة أعلاه. 
-          </div>
-          <div class="contract-paragraph">
-قد تطرأ تغييرات على الأوضاع خلال سير العمل، مما قد يستدعي تعديل تقريرنا أو الانسحاب من تنفيذ الارتباط. وفي مثل هذه الحالات، سيتم تزويدكم بالنتائج التي تم التوصل إليها أو بالأسباب التي دفعتنا إلى الانسحاب.
-          </div>
-          <!-- <div class="contract-paragraph">
-وينطوي ارتباط الإجراءات المتفق عليها الذي يتم تنفيذه بموجب معيار الخدمات ذات العلاقة (4400) (المحدث) على قيامنا بتنفيذ الإجراءات التي تم الاتفاق عليها معكم، وابلاغكم بالمكتشفات في تقرير الإجراءات المتفق عليها. والمكتشفات هي النتائج الواقعية للإجراءات المتفق عليها التي تم تنفيذها. وأنتم تقرون بأن الإجراءات المتفق عليها مناسبة للغرض من الارتباط. ونحن لا نقدم اية افادة بشأن مناسبة هذه الإجراءات. وسيتم تنفيذ هذا الارتباط على أساس ان <span t-esc="(partner and partner.name) or ''"/> هي المسؤولة عن الموضوع الذي ستنفذ عليه الإجراءات المتفق عليها. وهذا الارتباط لتنفيذ الإجراءات المتفق عليها لا يعد ارتباط تأكيد وبناءً عليه لا نبدي أي راي او استنتاج تأكيد.
-            </div> -->
+          <div class="contract-section-title">4) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">4.1/ ..............................................................</div>
+          <div class="contract-paragraph">4.2/ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph">4.3/ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
 
-          <div class="contract-paragraph">
-وينطوي ارتباط الإجراءات المتفق عليها الذي يتم تنفيذه بموجب معيار الخدمات ذات العلاقة (4400) (المحدث) على قيامنا بتنفيذ الإجراءات التي تم الاتفاق عليها معكم، وابلاغكم بالمكتشفات في تقرير الإجراءات المتفق عليها. والمكتشفات هي النتائج الواقعية للإجراءات المتفق عليها التي تم تنفيذها. وأنتم تقرون بأن الإجراءات المتفق عليها مناسبة للغرض من الارتباط. ونحن لا نقدم اية افادة بشأن مناسبة هذه الإجراءات.
- وسيتم تنفيذ هذا الارتباط على أساس أن مسؤولية الموضوع الذي ستُنفذ بشأنه الإجراءات المتفق عليها تقع على عاتق            <span t-esc="(partner and partner.name) or ''"/>
-وهذا الارتباط لتنفيذ الإجراءات المتفق عليها لا يعد ارتباط تأكيد وبناءً عليه لا نبدي أي راي او استنتاج تأكيد.
-          </div>
+          <div class="contract-section-title">5) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
+          <div class="contract-section-title">6) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
+          <div class="contract-section-title">7) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">1) ..............................................................</div>
+          <div class="contract-paragraph">2) ..............................................................</div>
+          <div class="contract-paragraph">3) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
+          <div class="contract-section-title">8) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph amount-paragraph" dir="rtl">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-
-          <div class="contract-section-title">
-3)  متطلبات ومحددات التقارير
-          </div>
-          <div class="contract-paragraph">
-إن تقرير الحقائق المكتشفة هي النسخة التي تحمل توقيع وختم الشركة ولن نتحمل مسؤولية أي أخطاء أو عدم صحة المعلومات الناتجة عن استحداث أي نسخ أخرى.  في حالة ما إذا تنامى إلى علمنا استخدام تقرير الحقائق المكتشفة بشكل مضلل، فإننا نحتفظ بالحق في طلب إزالة تقريرنا من هذه المستندات أو المعلومات المستحدثة.
-          </div>
-          <div class="contract-section-title">
-4)  مسؤوليات الإدارة
-          </div>
-          <div class="contract-paragraph">
-سيتم ارتباطنا على أساس أن (الادارة والمكلفين بالحوكمة، حسب مقتضى الحال) يقرون ويفهمون أنهم تحملون المسؤولية عما يلي:
-          </div>
-          <div class="contract-paragraph">
-4.1/ الرقابة الداخلية التي ترى (الإدارة) أنها ضرورية
-          </div>
-          <div class="contract-paragraph">
-4.2/ تمكيننا مما يلي:
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-             ▪
-            </span>
-  الوصول إلى جميع المعلومات التي تدرك الادارة أنها ذات صلة.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-        المعلومات الاضافية التي قد نطلبها من (الإدارة).
-          </div>
-
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-           
-الوصول غير المقيد إلى الأشخاص داخل المنشأة الذين نرى أنه من الضروري الجلوس معهم.
-          </div>
-          <div class="contract-paragraph">
-4.3/ التأكد من أن المعلومات المقدمة لنا:
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-        تم الحصول عليها من مصادر/قنوات مشروعة
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-           دقيقة وصحيحة وكاملة وتم الإفصاح عنها بشكل عادل.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-           
-لم تحذف منها أي معلومات جوهرية يجعلها غير صحيحة وغير دقيقة ومضللة، حيث إننا سنعتمد عليها في اجراءاتنا.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-           
-موثقة باللغة العربية.
-          </div>
-
-
-          <div class="contract-section-title">
-5)  أوراق العمل
-          </div>
-          <div class="contract-paragraph">
-تعد أوراق العمل الخاصة بهذه المهمة ملكية حصرية لـ شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون، لن يسمح بالحصول على أوراق العمل إلا في حالة ما طلب منا ذلك بموجب القانون أو متطلبات أي أنظمة أو بموجب المعايير المهنية المحددة.
-          </div>
-          <div class="contract-section-title">
-6)  استخدام البريد الالكتروني
-          </div>
-          <div class="contract-paragraph">
-يعد هذا الخطاب تفويضًا من الطرف الاول باستخدام البريد الالكتروني وأي وسائل اتصال الكترونية أخرى لنقل واستلام المعلومات بما في ذلك المعلومات السرية بين كل من شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون. والشركة وبين شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون والاستشاريين الخارجيين أو أي جهات أخرى تتعلق بـ شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون. تدرك الطرف الاول بأن البريد الالكتروني يسري من خلال شبكة الإنترنت العامة والتي تعد وسيلة غير مأمونة من وسائل الاتصال لذا فإن سرية المعلومات المنقولة من الممكن اختراقها دون ارتكاب أي خطأ من قبل شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون.  ولا يجب الوثوق في النصائح أو الآراء المنقولة عبر الوسائل الإلكترونية إلا إذا تم تأكيدها لاحقًا عبر الفاكس أو الخطابات الموقعة من قبل الشريك أو التوقيع المعتمد لـشركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون.
-          </div>
-          <div class="contract-section-title">
-7)  الإجراءات والتقارير المقدمة
-          </div>
-
-          <div class="contract-paragraph">
-          لقد اتفقنا على تنفيذ الاجراءات الاتية وتقديم تقرير لكم عن المكتشفات الناتجة عن عملنا:
-          </div>
-          <div class="contract-paragraph">
-      1) الاستفسار والملاحظة والاطلاع على المستندات الداعمة للتقرير.
-          </div>
-          <div class="contract-paragraph">
-      2)  <span t-if="q and 'work_scope' in q._fields and q.work_scope" t-esc="q.work_scope"/>
-          </div>
-          <!-- <div class="contract-paragraph">
-      3) والاطلاع على القروض المقدّمة للطرف ذي العلاقة خلال الفترة، ودراسة كل عملية من حيث سلامتها وتوافقها، والاطلاع على المستندات المؤيدة لكل عملية.
-            </div> -->
-          <div class="contract-paragraph">
-      3) إصدار تقرير متضمن الحقائق المكتشفة 4400.
-          </div>
-          <div class="contract-paragraph">
-      وبحسب النطاق المحدد في الفقرة الثانية الإجراءات التي تم تنفيذها هي فقط لمساعدتكم في (توثيق الحقائق المكتشفة فيما يخص الإجراءات المتفق على تنفيذها، في حدود المستندات النظامية والمقبولة والتقارير الداخلية المقدمة). ولا ينبغي استخدام تقاريرنا لأي غرض اخر، وهو فقط لإحاطتكم علماً بالمعلومات المطلوبة، ولن تشكل الإجراءات التي سننفذها مراجعة او فحصاً وفقاً لمعايير المراجعة او معايير ارتباطات الفحص المعتمدة في المملكة العربية السعودية، وبالتالي لن يتم ابداء أي تأكيد.
-          </div>
-          <div class="contract-paragraph">
-      إن تقاريرنا ستتمثل في تقرير الحقائق المكتشفة حيث يصف التقرير الغرض من الارتباط والإجراءات المتفق عليها بتفصيل كافٍ، والنتائج النهائية للحقائق المكتشفة، وذلك بناء على المعايير الفنية الدولية المعتمدة في المملكة العربية السعودية لتنفيذ إجراءات متفق عليها (4400) (المحدث) والذي يعد المعيار المعمول به لتنفيذ عمليات ارتباط ذات علاقة.
-          </div>
-          <div class="contract-section-title">
-8) الأتعاب
-          </div>
-          <div class="contract-paragraph ">
-إن أتعابنا المهنية والتي سيتم تحصيلها خلال مراحل العمل تعتمد على المدة المطلوبة التي سيتم خلالها تنفيذ تلك المهام المكلف بها فريق العمل بالإضافة إلى المصروفات النثرية الفعلية المتكبدة والتي ستكون مستحقة ويجب دفعها عند تقديمها.
-          </div>
-          <!-- <div class="contract-paragraph amount-paragraph" data-no-auto-justify="1"> -->
-          <div class="contract-paragraph amount-paragraph" dir="rtl">
-
-تبلغ أتعابنا المقدرة لتنفيذ الإجراءات المتفق عليها وفقًا لما تم الاتفاق عليه معكم مبلغ 
-            <t t-esc="o._format_amount_no_decimals(fee_base)"/>
-            <span class="icon-saudi_riyal"></span>
-              يضاف اليه 15% ضريبة القيمة المضافة مبلغ
-            <t t-esc="o._format_amount_no_decimals(vat_amount)"/>
-            <span class="icon-saudi_riyal"></span>
-               ليكون الاجمالي (شاملاً ضريبة القيمة المضافة) مبلغ  
-            <t t-esc="o._format_amount_no_decimals(grand_total)"/>
-            <span class="icon-saudi_riyal"></span>  
-    زائدًا المصروفات المستردة للسفر والاتصالات ونسخ المستندات وغيرها من المصروفات المتكبدة في العملية مع أي ضريبة قيمة مضافة مطبقة فيها.
-          </div>
-          <div class="contract-paragraph">
-دفعها بنسبة 50٪ عند البدء في عملنا الميداني الأولي (غير مستردة)، وبنسبة 50٪ (زائدًا المصروفات المستردة ان وجدت) عند تقديم المسودة النهائية ومرفقاتها للشركة.
-          </div>
-          <div class="contract-paragraph">
-المصروفات التي تم تكبدها بالضرورة عند ارتباطنا بهذه المهمة سيتم إصدار فاتورة بها بالتكلفة مع أي ضريبة قيمة مضافة مطبقة وستتكون من التكاليف المباشرة المتكبدة مثل السفر والتنقل وغير ذلك (والتي سيتم احتسابها بالتكلفة الفعلية بعد الاتفاق مع الطرف الاول)
-          </div>
-          <div class="contract-paragraph">
-إن الأتعاب المقدرة المذكورة أعلاه قد تم الاتفاق عليها وفقًا لما تم ذكره في خطاب الارتباط.  وفي حالة ما إذا تطلبت الظروف خلال عملية أداء هذه الخدمات تمديد الوقت أو المصروفات، وذلك في حالة عدم جاهزية الطرف الاول في الإعداد للعملية بما يؤثر على تقديم تقرير الحقائق المكتشفة في الوقت المحدد.  في هذه الحالة فإننا سنقوم بإعلامكم والاتفاق معكم على الأتعاب المهنية الإضافية. وإذا ما دعت الحاجة إلى ذلك، سيتم الاتفاق بشكل منفصل حول أتعاب أي مشورة محاسبية على حدة.
-          </div>
-
-          <table style="width:100%; border-collapse:collapse; border:0 !important; margin:6px 100px 14px 0; text-align:center; page-break-inside: avoid;">
+          <table style="width:100%; border-collapse:collapse; border:0 !important; text-align:center;">
             <tbody style="border:0 !important;">
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                الحساب البنكي
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                اسم البنك
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                البنك الأهلي السعودي
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                رقم الحساب
-                </th>
-                <td style="border:0 !important; padding:10px 0px; font-size:18px;">
-                23900000276709
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                رقم الايبان
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                SA6310000023900000276709
-                </td>
-              </tr>
+              <tr><th style="border:0 !important;">..............</th><td style="border:0 !important;">..............................</td></tr>
+              <tr><th style="border:0 !important;">..............</th><td style="border:0 !important;">..............................</td></tr>
+              <tr><th style="border:0 !important;">..............</th><td style="border:0 !important;">..............................</td></tr>
+              <tr><th style="border:0 !important;">..............</th><td style="border:0 !important;">..............................</td></tr>
             </tbody>
           </table>
 
+          <div class="contract-section-title">9) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <div class="contract-section-title">
-9)  سرية المعلومات
-          </div>
+          <div class="contract-section-title">10) ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
 
-          <div class="contract-paragraph">
-يجوز لنا أن نحصل على معلومات حساسة بشأن أعمالكم أو شئونكم خلال تقديم الخدمات ("معلومات سرية"). وسنحتفظ بسرية المعلومات ولن نقوم بالإفصاح عنها خارج نطاق فريق الارتباط مالم تسمحوا لنا بذلك أو يسمح به هذا البند. سوف نلتزم بمعايير السرية لنظامنا الداخلي وسوف نمتثل للقيود المتعلقة بالسرية المفروضة علينا من قبل أي سلطة أخرى في المملكة العربية السعودية والتي يتعين علينا أن نلتزم بمتطلباتها وأيضاً فيما يتعلق بأي التزامات تفرض علينا بموجب القوانين في المملكة العربية السعودية. يحق لنا أن نلتزم بأية متطلبات للقانون السعودي أو لنظامنا الداخلي أو لأي سلطة أخرى في المملكة العربية السعودية والتي يتعين علينا الالتزام بمتطلباتها فيما يتعلق بالإفصاح عن المعلومات السرية. المعلومات المتعلقة بكم والتي تتعلق بعلاقتنا معكم وبالخدمات المتضمنة للمعلومات السرية يجوز لنا أن نشاركها مع: (1) الأشخاص الآخرين في شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون ، و/أو (2) الأطراف الأخرى التي تسهل إدارة أعمالنا أو تدعم مقوماتنا الأساسية في كلا الحالتين من أجل: (أ) القيام بإجراءات قبول العميل والارتباط (بما في ذلك ولا ينحصر في تحديد تضارب المصالح المحتمل أو الالتزام بمتطلبات الاستقلالية، (ب) لأغراض تقييم المخاطر الداخلية، و (ج) لمساندة الحفاظ على الجودة والمعايير المهنية عند تقديم الخدمات (على سبيل المثال من خلال مشاركة الممارسة المهنية وإدارات السياسة، والمشاركة في تدابير ضمان الجودة أو إنشاء او الحفاظ على قواعد بيانات المعرفة). سنبقى مسئولين عن الاحتفاظ بالسرية إذا تمت مشاركة المعلومات السرية مع الأشخاص الآخرين في شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون أو تم الوصول إليها من قبل أطراف أخرى. قد نقوم بإزالة أو الترتيب لإزالة أسماء وأي معرفون من المعلومات السرية ومن ثم استخدام المعلومات مجهولة المصدر لأغراض مشروعة والتي تم اختيارها بناء على تقديرنا.  ولا تنطبق هذه المادة في الحالات التي تصبح فيها المعلومات السرية متوفرة للجميع. كما لا تمنع هذه المادة إفصاحنا عن المعلومات السرية لجهات التأمين المهنية القائمة على تعويضنا أو لمستشارينا.
-          </div>
-
-
-          <div class="contract-section-title">
-10)  أمور أخرى
-          </div>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	الطرف الاول تؤكد وتضمن وتتعهد (وبالقدر الذي يكون فيه التصريح متوقعًا) أنه في تاريخ خطاب الارتباط هذا، الطرف الاول ملتزمة بشكل كامل بكافة الأنظمة والقوانين واجبة التطبيق والتي تتعلق بمكافحة الفساد ومكافحة الرشوة ("أنظمة مكافحة الفساد") ولم تقم بمخالفتها وتوافق وتتعهد بعدم مخالفتها لقوانين مكافحة الفساد سواء بصورة مباشرة أو غير مباشرة من خلال أي من مالكيها، مدراءها الأساسيين، مدراءها التنفيذين، الشركاء، الوكلاء، مقاولي الباطن، الموظفين أو الممثلين المفوضين.                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	عندما يتعين على المكتب (شركة الزامل محاسبون قانونيون ومستشارون) تقديم معلومات تتعلق بالطرف الاول بموجب متطلبات تنظيمية، أو طلب أو من خلال أي شكل من الإجراءات النظامية، توافق الطرف الاول على تعويض المكتب (شركة الزامل محاسبون قانونيون ومستشارون) عن التكاليف التي تكبدتها والعاملين فيها والتي تتعلق بهذه المتطلبات أو الطلب أو الإجراءات النظامية، حيث إن إجراءات المكتب (شركة الزامل محاسبون قانونيون ومستشارون) لم تكن أيضًا تخضع لهذه المتطلبات أو الطلب أو الإجراءات النظامية.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	قد نقوم بتقديم استشارة خطية أو نؤكد إفادة شفهية بصورة خطية أو نقدم تقريراً كتابياً نهائياً أو نقدم عرضاً شفهياً. وقد نقدم إفادة أو تقارير أو عروض شفهية أو مسودات مبدئية عنها، إلا أنه في مثل هذه الحالات فإن الاعتبار سيكون لإفادتنا الخطية أو تقريرنا الخطي النهائي. يجب ألا تعتمدوا على أي مسودة أو إفادة مبدئية. وفي الحالة التي ترغبون فيها الاعتماد على إفادة شفهية أو عرض شفهي، فانه يتعين عليكم إبلاغنا بذلك وسوف نقدم التأكيد الخطي للإفادة المعنية.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	نحن غير ملزمين بتحديث أية إفادة أو تقرير أو خدمات مقدمة، سواء بصورة شفهية أو خطية فيما يتعلق بأحداث تقع بعد صدور تقريرنا النهائي أو الإفادة أو المنتج المعني بصورة نهائية.                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	يقتصر التعويض عن اي ضرر بقيمة الاتعاب المهنية المدفوعة، وسوف يتم تقديم الخدمات بكل عناية ومهارة مناسبة.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	لكي يتسنى لنا تأدية الخدمات، عليكم أن تقوموا بتقديم المعلومات والمساعدة على الفور وتمكيننا من الاطلاع على الوثائق والمستندات التي في حوزتكم أو عهدتكم أو تحت تصرفكم وعلى مستندات الموظفين الذين هم تحت سيطرتكم متى ما كان ذلك مطلوباً منا. يتعين عليكم بذل أفضل جهودكم لتقديم هذه الأمور عندما لا تكون في حوزتكم أو عهدتكم أو تحت تصرفكم. كما أنه عليكم أن تبلغونا عن أي معلومات أو تطورات تتنامى إلى علمكم والتي قد يكون لها تأثير على الخدمة المقدمة. كما يجب عليكم تقديم المعلومات استجابة لاستفساراتنا (إن وجدت).
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	يجوز لنا تلقى المعلومات منكم أو من أي مصادر أخرى أثناء تقديم الخدمات، والى أبعد مدى يسمح به القانون، فإننا لن نكون مسئولين لديكم عن أية خسارة أو ضرر يلحق بكم وينشأ عن الغش أو التدليس أو حجب معلومات تكون جوهرية أو متعلقة بالخدمات أو تكون مطلوبة من قبلنا، أو أي تقصير آخر يخص تلك المعلومات، سواء من جهتكم أو من جهة مصادر المعلومات الأخرى ما لم يكن ذلك الغش أو التدليس أو الحجب أو التقصير الآخر واضحاً لدينا دون استقصاء إضافي. 
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="contract-paragraph">
-            <!-- <table class="audit-bullet-table"> -->
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	لا يعد كل منا أو منكم مخالفاً لالتزاماتنا التعاقدية أو تترتب أي مسئولية عليه تجاه الطرف الآخر إذا كنا أو كنتم غير قادرين على الالتزام بعقد الخدمات نتيجة لأي سبب يكون خارج السيطرة المعقولة لنا أو لكم. في حال حدوث مثل تلك الظروف التي تؤثر على أي واحد منا، سيكون لزاماً على ذلك الطرف، في أقرب فرصة مناسبة، إخطار الطرف الآخر الذي سيكون له خيار تعليق أو إنهاء عقد الخدمات بموجب إخطار يكون له أثر فوري عند التسليم.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="contract-section-title">
-11)  الإنهاء
-          </div>
-          <div class="contract-paragraph">
-يستطيع كل منا إنهاء عقد الخدمات أو تعليق سريانه في أي وقت عن طريق تقديم إشعار خطي إلى الطرف الآخر قبل ثلاثين يوماً. لن يؤثر الإنهاء أو التعليق بموجب هذه المادة على أي حقوق قد تكون مترتبة لأي منا قبل الإنهاء أو التعليق، كما أن جميع المبالغ المستحقة لنا ستصبح متوجبة الدفع بصورة كاملة عند سريان الإنهاء أو التعليق.
-          </div>
-          <div class="contract-paragraph">
-إن أي مادة من مواد هذه الشروط العامة التي بحكم طبيعتها أو مضمونها أو لإنفاذ الغرض منها تظل قائمة حتى بعد انتهاء أو إنهاء عقد الخدمات، على سبيل المثال القيود على الاستخدام أو السرية أو شروط حماية المسئولية.
-          </div>
-          <div class="contract-paragraph">
-وتفضلوا بقبول فائق الاحترام،
-          </div>
-
-          <div class="contract-paragraph">
-       حرر بتاريخ: 
-          </div>
+          <div class="contract-section-title">11) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
           <div class="contract-paragraph" style="min-width:240px;">
-            <t t-set="hijri_raw" t-value="(o.start_hijiry_date or '').replace('-', '/').strip()"/>
-            <t t-set="hijri_parts" t-value="[p.strip() for p in hijri_raw.split('/') if p.strip()]"/>
-
-            <div>
-              <t t-if="len(hijri_parts) == 3">
-                <t t-set="hdd" t-value="hijri_parts[2] if len(hijri_parts[0]) == 4 else hijri_parts[0]"/>
-                <t t-set="hmm" t-value="hijri_parts[1]"/>
-                <t t-set="hyy" t-value="hijri_parts[0] if len(hijri_parts[0]) == 4 else hijri_parts[2]"/>
-                <t t-esc="hdd"/>
-      /
-                <t t-esc="hmm"/>
-      /
-                <t t-esc="hyy"/>
-      هـ
-              </t>
-              <t t-elif="hijri_raw">
-                <t t-esc="hijri_raw"/>
-      هـ
-              </t>
-            </div>
-
-            <!-- التاريخ الميلادي من o.start_date -->
-            <t t-set="gregorian_start_date" t-value="('start_date' in o._fields and o.start_date) or False"/>
-
-            <div>
-              <t t-if="gregorian_start_date">
-                <t t-esc="'%02d' % gregorian_start_date.day"/>
-      /
-                <t t-esc="'%02d' % gregorian_start_date.month"/>
-      /
-                <t t-esc="gregorian_start_date.year"/>
-      م
-              </t>
-            </div>
+            ......../......../........ هـ<br/>
+            ......../......../........ م
           </div>
 
           <br/>
-          <table style="width:100%; border-collapse:collapse; table-layout:fixed; border:0 !important; margin-right:150px; text-align:center; page-break-inside: avoid;">
+          <table style="width:100%; border-collapse:collapse; border:0 !important; text-align:center;">
             <tbody style="border:0 !important;">
-              <tr style="border:0 !important;">
-                <td style="width:30%; vertical-align:top; text-align:right; border:0 !important;">
-                  <div style="margin:0 0 8px 0;">
-                  عن / شركة محمد عبدالرحمن الزامل
-                  </div>
-                  <div style="margin:0 0 8px 0;">
-                  محاسبون قانونيون ومستشارون
-                  </div>
-                  <br/>
-                  <div style="margin:0 0 6px 0;">
-
-                    <t t-set="att_sign" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_sign')], limit=1)"/>
-                    <t t-set="att_seal" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_seal')], limit=1)"/>
-                    <t t-set="sign_b64" t-value="(att_sign.datas and att_sign.datas.decode().replace('\n','').replace('\r','')) or ''"/>
-                    <t t-set="seal_b64" t-value="(att_seal.datas  and att_seal.datas.decode().replace('\n','').replace('\r','')) or ''"/>
-                    التوقيع المعتمد:
-                    <span style="min-width:220px; vertical-align:baseline;">
-                    (.............................)
-                    </span>
-                  </div>
-                  <br/>
-                  <div style="margin:0 0 6px 0;">
-                  الاسم: محمد بن عبد الرحمن الزامل
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الوظيفة: شريك مؤسس
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  ترخيص رقم 837
-                  </div>
-
-                  <!-- <img groups="base.group_system" class="o-inline-seal" t-attf-src="data:#{att_seal.mimetype or 'image/png'};base64,#{seal_b64}"/> -->
+              <tr>
+                <td style="width:30%; border:0 !important;">
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................
                 </td>
-                <td style="width:50%; vertical-align:top; text-align:right; border:0 !important;">
-                  <div style="margin:0 0 6px 0;">
-                  الإقرار والقبول نيابة عن الطرف الاول 
-                  </div>
-                  <div class="contract-paragraph">
-                  أؤكد بأن الشروط الواردة في هذا الخطاب مقبولة لدينا    
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الاسم:
-                    <span style=" min-width:260px; vertical-align:baseline;" t-esc="(o.partner_id.commercial_partner_id.authorized_person and
-                        o.partner_id.commercial_partner_id.authorized_person.name)
-                        or '........................'"/>
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الصفة:
-                    <span style=" min-width:260px; vertical-align:baseline;" t-esc="auth_title or '........................'"/>
-                  </div>
-                  <div style="margin:12px 0 6px 0;">
-                  التوقيع :
-                    <span style=" min-width:220px; vertical-align:baseline;">
-                    (..............................)
-                    </span>
-                  </div>
+                <td style="width:50%; border:0 !important;">
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................
                 </td>
               </tr>
             </tbody>
           </table>
-
-
         </div>
       </t>
-      <script type="text/javascript">
-        <![CDATA[
-(function () {
-    function hasClass(node, className) {
-        return node.className && (" " + node.className + " ").indexOf(" " + className + " ") >= 0;
-    }
-
-    function wrapTextNode(textNode) {
-        var text = textNode.nodeValue;
-
-        if (!text || !text.replace(/\s+/g, "")) {
-            return;
-        }
-
-        /* إزالة أي كشيدة موجودة فعليًا في النص */
-        text = text.replace(/\u0640/g, "");
-
-        var parts = text.split(/(\s+)/);
-        var frag = document.createDocumentFragment();
-
-        for (var i = 0; i < parts.length; i++) {
-            var part = parts[i];
-
-            if (!part) {
-                continue;
-            }
-
-            if (/^\s+$/.test(part)) {
-                frag.appendChild(document.createTextNode(part));
-            } else {
-                var span = document.createElement("span");
-                span.className = "ar-word";
-                span.appendChild(document.createTextNode(part));
-                frag.appendChild(span);
-            }
-        }
-
-        textNode.parentNode.replaceChild(frag, textNode);
-    }
-
-    function walk(node) {
-        if (node.nodeType === 3) {
-            wrapTextNode(node);
-            return;
-        }
-
-        if (node.nodeType !== 1) {
-            return;
-        }
-
-        var tag = node.tagName.toLowerCase();
-
-        if (
-            tag === "script" ||
-            tag === "style" ||
-            tag === "img" ||
-            tag === "svg" ||
-            tag === "br" ||
-            hasClass(node, "ar-word") ||
-            hasClass(node, "icon-saudi_riyal")
-        ) {
-            return;
-        }
-
-        var children = [];
-        for (var i = 0; i < node.childNodes.length; i++) {
-            children.push(node.childNodes[i]);
-        }
-
-        for (var j = 0; j < children.length; j++) {
-            walk(children[j]);
-        }
-    }
-
-    function runArabicJustifyFix() {
-        var elements = document.querySelectorAll(
-            ".contract-paragraph, .contract-paragraph1, .audit-bullet-text"
-        );
-
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i].getAttribute("data-no-auto-justify") === "1") {
-                continue;
-            }
-
-            elements[i].className += " ar-auto-justify";
-            walk(elements[i]);
-        }
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runArabicJustifyFix);
-    } else {
-        runArabicJustifyFix();
-    }
-})();
-]]>
-      </script>
     </main>
   </template>
 </odoo>
-
-
-
-
-

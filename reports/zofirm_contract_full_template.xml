@@ -8,260 +8,29 @@
           .header:not(.my_rtl_header),
           .o_header:not(.my_rtl_header),
           header:not(.my_rtl_header) { display:none !important; }
-          .h3 { font-weghit: normal !important; }
-		      .tbody { border:0 !important; }
-		      .tbl { border-style: hidden;}
-          .th,td {border: 0px; border-style: hidden;}
-          img.o-inline-stamp{
-            display:inline-block; height:64px; width:auto; line-height:0;
-            border:0; outline:0; max-width:none !important; vertical-align:middle;
-            -webkit-print-color-adjust: exact; image-rendering:auto;
+          .contract-body {
+            direction: rtl; text-align: right;
+            font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
+            font-size: 20px; line-height: 1.75; color: #000000;
           }
-          img.o-inline-seal{
-            display:inline-block; line-height:0;
-            border:0; outline:0; max-width:none !important; vertical-align:middle;
+          .contract-section-title {
+            direction: rtl; text-align: right; font-weight: bold;
+            font-size: 20px; line-height: 1.6; margin: 14px 0 6px 0;
+            page-break-after: avoid;
           }
-<!-- 
-      .contract-b {
-            text-align: justify !important;
-            direction: rtl;
-        text-align: right;
-          } -->
-
-        .contract-body {
-        direction: rtl;
-        text-align: right;
-        font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
-        font-size: 20px;
-        line-height: 1.75;
-        font-weight: normal;
-        color: #000000;
-        <!-- text-align: justify !important; -->
-    }
-
-    .contract-section-title {
-        direction: rtl;
-        text-align: right;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 1.6;
-        margin: 14px 0 6px 0;
-        page-break-after: avoid;
-    }
-
-    .contract-paragraph {
-        direction: rtl;
-        text-align: right;
-        font avoid;
-    }
-
-    .contract-paragraph {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        margin: 0 22px 8px 0;
-        padding: 0;
-        font-weight: normal;
-        hyphens: none !important;
-        word-break: normal !important;
-        overflow-wrap: normal !important;
-        white-space: normal !important;
-    }
-    .contract-paragraph1 {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        margin: 0 48px 8px 0;
-        padding: 0;
-        font-weight: normal;
-        hyphens: none !important;
-        word-break: normal !important;
-        overflow-wrap: normal !important;
-        white-space: normal !important;
-    }
-
-    .contract-bullet-line {
-        direction: rtl;
-        text-align: right;
-        font-size: 20px;
-        line-height: 1.75;
-        margin: 0 0 6px 0;
-        padding: 0;
-        font-weight: normal;
-    }
-
-    .contract-bullet-symbol {
-        display: inline-block;
-        width: 18px;
-        text-align: center;
-        vertical-align: baseline;
-    }
-
-    .audit-responsibility-title {
-    direction: rtl;
-    text-align: right;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 1.6;
-    margin: 18px 0 6px 0;
-    page-break-after: avoid;
-  }
-
-  .audit-responsibility-intro {
-      direction: rtl;
-      text-align: right;
-      font-size: 19px;
-      line-height: 1.75;
-      margin: 0 22px 6px 0;
-      padding: 0;
-      font-weight: normal;
-  }
-                    
-  .audit-bullet-table {
-    <!-- border-collapse: collapse; -->
-    border: 0 !important;
-    direction: rtl;
-    width: 95%;
-    <!-- margin: 0 22px 4px 0; -->
-  }
-
-  .audit-bullet-table td {
-      border: 0 !important;
-  }
-
-  .audit-bullet-symbol {
-      width: 22px;
-      min-width: 22px;
-      text-align: center !important;
-      vertical-align: top !important;
-      font-size: 18px !important;
-      line-height: 1.75 !important;
-      padding-top: 5px !important;
-      border: 0 !important;
-  }
-
-  .audit-bullet-text {
-      vertical-align: top !important;
-      text-align: right;
-      font-size: 19px;
-      line-height: 1.75;
-      font-weight: normal;
-      padding-right: 4px !important;
-      hyphens: none !important;
-      word-break: normal !important;
-      overflow-wrap: normal !important;
-      white-space: normal !important;
-      border: 0 !important;
-  }
-
-  .contract-paragraph,
-.contract-paragraph1,
-.audit-bullet-text,
-.para,
-.ar-js-justify {
-    font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
-    direction: rtl !important;
-    border: 0 !important;
-    /* fallback فقط في حالة عدم تنفيذ JavaScript */
-    text-align: right !important;
-    text-align-last: right !important;
-
-    letter-spacing: 0 !important;
-    word-spacing: normal !important;
-    text-kashida-space: 0% !important;
-
-    hyphens: none !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    white-space: normal !important;
-}
-
-.ar-auto-justify {
-    display: block !important;
-    <!-- width: 100% !important; -->
-    direction: rtl !important;
-    text-align: justify !important;
-    text-align-last: right !important;
-    text-kashida-space: 0% !important;
-}
-
-.ar-auto-justify .ar-word {
-    display: inline-block !important;
-    white-space: nowrap !important;
-    direction: rtl !important;
-    unicode-bidi: isolate !important;
-}
-
-.amount-paragraph {
-    direction: rtl !important;
-    text-align: right !important;
-    text-align-last: right !important;
-    unicode-bidi: plaintext !important;
-}
-
-.amount-paragraph .icon-saudi_riyal {
-    display: inline-block !important;
-    direction: ltr !important;
-    unicode-bidi: isolate !important;
-    margin: 0 2px !important;
-}
-
-
-.fees-summary-table {
-    width: 90%;
-    margin: 8px auto 14px auto;
-    border-collapse: collapse !important;
-    direction: rtl !important;
-    font-family: 'Sakkal Majalla', 'Majalla', Tahoma, Arial, sans-serif !important;
-    font-size: 19px;
-    line-height: 1.7;
-    <!-- page-break-inside: avoid !important; -->
-}
-
-.fees-summary-table th,
-.fees-summary-table td {
-    border: 1px solid #000 !important;
-    padding: 3px 8px !important;
-    vertical-align: middle !important;
-}
-
-.fees-summary-table th {
-    text-align: center !important;
-    <!-- font-weight: bold !important; -->
-}
-
-.fees-service-cell {
-    text-align: right !important;
-    direction: rtl !important;
-}
-
-.fees-amount-cell {
-    text-align: center !important;
-    direction: ltr !important;
-    unicode-bidi: isolate !important;
-    white-space: nowrap !important;
-}
-
-.fees-total-label {
-    text-align: right !important;
-    <!-- font-weight: bold !important; -->
-}
-
-.money-inline {
-    display: inline-block !important;
-    direction: ltr !important;
-    unicode-bidi: isolate !important;
-    white-space: nowrap !important;
-}
-
-.money-inline .icon-saudi_riyal {
-    display: inline-block !important;
-    direction: ltr !important;
-    unicode-bidi: isolate !important;
-    margin-left: 3px !important;
-}
+          .contract-paragraph, .contract-paragraph1, .audit-bullet-text, .para {
+            direction: rtl; text-align: right; font-size: 20px; line-height: 1.75;
+            margin: 0 22px 8px 0; padding: 0; border: 0 !important;
+          }
+          .fees-summary-table {
+            width: 90%; margin: 8px auto 14px auto; border-collapse: collapse !important;
+            direction: rtl !important; font-size: 19px; line-height: 1.7;
+          }
+          .fees-summary-table th, .fees-summary-table td {
+            border: 1px solid #000 !important; padding: 3px 8px !important;
+            vertical-align: middle !important;
+          }
+          img.o-inline-seal { display:inline-block; border:0; }
       </style>
       <t t-foreach="docs or (doc and [doc]) or []" t-as="o">
         <t t-set="q0" t-value="(o and (o._name in ('sijil.contract','zofirm.contract') and o.quotation_id)) or (o and o._name == 'sale.order' and o) or False"/>
@@ -270,986 +39,219 @@
         <t t-set="partner_lang" t-value="(partner and partner.lang) or 'ar_001'"/>
         <t t-set="dt" t-value="(q and (q.date_order or q.create_date or q.write_date)) or False"/>
         <t t-set="contract_ref" t-value="(q and (q.name or q.client_order_ref)) or ''"/>
-        <t t-set="yy" t-value="(q and q.date_order and q.date_order.year)"/>
-        <t t-set="dd" t-value="(dt and dt.day) or ''"/>
-        <t t-set="mm" t-value="(dt and dt.month) or ''"/>
         <t t-set="fee_base" t-value="(q and q.amount_untaxed) or 0.0"/>
         <t t-set="vat_rate" t-value="0.15"/>
         <t t-set="vat_amount" t-value="fee_base * vat_rate"/>
         <t t-set="grand_total" t-value="fee_base + vat_amount"/>
-        <t t-set="cur_sym" t-value="(q and q.currency_id and (q.currency_id.name == 'SAR' or q.currency_id.symbol in ('ر.س','SAR','SR'))) and ' ر.س' or (q and q.currency_id and (' ' + (q.currency_id.symbol or q.currency_id.name)) or '')"/>
-        <t t-set="auth_person" t-value="o.partner_id.commercial_partner_id.authorized_person or False"/>
-        <t t-set="contract_start_date" t-value="('start_date' in o._fields and o.start_date) or False"/>
         <t t-set="auth_person" t-value="o.partner_id.commercial_partner_id.authorized_person or False"/>
         <t t-set="auth_title" t-value="(auth_person and auth_person.function) or ''"/>
-        <!-- <div class="contract-b"> -->
+        <t t-set="contract_start_date" t-value="('start_date' in o._fields and o.start_date) or False"/>
+
         <div class="contract-body">
           <div style="margin:0 0 10px 0; text-align:left;">
-            <!-- <span t-if="contract_start_date" t-esc="contract_start_date.year"/> -->
-            <span t-if="o.end_date_number" t-esc="o.end_date_number"/>
-            /
-            <span t-att-style="'min-width:160px; vertical-align:baseline;'" t-esc="contract_ref"/>
+            <span t-if="o.end_date_number" t-esc="o.end_date_number"/> / 
+            <span t-esc="contract_ref"/>
           </div>
+
           <div style="margin:0 0 12px 0; text-align:center; font-weight:bold;">
-          الموضوع: خطاب ارتباط 
+            ..............................................................
           </div>
+
           <div style="margin:0 0 18px 0;">
-           السادة/  
-            <span style=" min-width:420px; vertical-align:baseline;" t-esc="(partner and partner.name) or ''"/>
+            ..............................................................
+            <span t-esc="(partner and partner.name) or ''"/>
           </div>
+
           <div style="margin:0 0 10px 0; font-weight:bold;">
-          غرض خطاب الارتباط
+            ..............................................................
           </div>
+
           <div style="margin:0 0 10px 0;">
-            إن الغرض من هذا الخطاب هو تأكيد شروط ارتباط
-            <span style=" min-width:300px; vertical-align:baseline;" t-esc="(partner and partner.name) or ''"/>
-            <!-- (الرقم الموحد  
-           <span t-esc="q.l10n_sa_edi_additional_identification_number  or '…'"/>
-            ) -->
-            (الرقم الموحد
-            <t t-set="unified_number" t-value="(partner and 'l10n_sa_edi_additional_identification_number' in partner._fields and partner.l10n_sa_edi_additional_identification_number)
-                or (partner and 'commercial_registry' in partner._fields and partner.commercial_registry)
-                or (q and 'l10n_sa_edi_additional_identification_number' in q._fields and q.l10n_sa_edi_additional_identification_number)
-                or '…'"/>
-                "            <span t-esc="unified_number"/>
-"
-                )
-            مع شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون، لتقديم خدمات المراجعة والخدمات الأخرى المحددة أدناه للمنشأة. وتخضع أي أعمال تم إنجازها سابقًا فيما يتعلق بهذا الارتباط، قبل تاريخ هذا الخطاب، لأحكام وشروط هذا الخطاب.
+            ..............................................................
+            ..............................................................
+            ..............................................................
           </div>
+
           <div style="margin:0 0 14px 0;">
-           تنطبق هذه الشروط على الخدمات المقدمة عام (
-            <t t-set="year_names" t-value="sorted(set([ year.name for line in ((q and q.order_line) or []) if not line.display_type and line.financial_year_ids for year in line.financial_year_ids if year.name ]))"/>
-            <t t-if="year_names">
-              <t t-esc="' - '.join(['%sم' % year for year in year_names])"/>
-            </t>
-            <t t-else="">...</t>)
-             وأي إعادة تعيين لاحقة ما لم يتم الاتفاق على خلاف ذلك خطيًا وللأعمال الأخرى المتعلقة والعرضية لأي خدمات تم أداؤها بموجب هذا الخطاب. سيتم الاتفاق معكم على الترتيبات العملية التفصيلية بشكل منفصل.
-          </div>
-          <div class="contract-section-title">
-          1)   المعايير المهنية
-          </div>
-          <div class="contract-paragraph">
-            سوف تتم أعمال المراجعة وفقًا لمبادئ الاستقلالية، والنزاهة، والموضوعية، والكفاءة المهنية، وبذل العناية المطلوبة، والسرية، والسلوك المهني، والمعايير الدولية للمراجعة المعتمدة للتطبيق في المملكة العربية السعودية.
-          </div>
-          <div class="contract-section-title">
-          2) نطاق العمل
-          </div>
-          <div class="contract-paragraph">
-           لقد طلبتم أن نقوم بمراجعة القوائم المالية 
-              <t t-if="o.show_Quarterly">
-        الربعية
-    </t>
-            <span style=" min-width:420px;" t-esc="(partner and partner.name) or ''"/>
-              والتي تشمل قائمة المركز المالي كما في
-            <t t-set="fee_lines" t-value="(q and q.order_line) or []"/>
-            <t t-set="fee_lines" t-value="fee_lines.filtered(lambda l: l.fees_period_end)"/>
-            <t t-set="fee_date_names" t-value="[o._format_fees_date_ar(line.fees_period_end) for line in fee_lines]"/>
-            <t t-set="fee_lines" t-value="q.order_line.filtered(lambda l: l.fees_period_end) if q else []"/>
-            <t t-if="fee_date_names">
-              <t t-esc="'، '.join(fee_date_names)"/>
-            </t>
-    
-           وقائمة الدخل والدخل الشامل، وقائمة التغيرات في حقوق الملكية، وقائمة التدفقات النقدية عن السنة المنتهية في ذلك التاريخ، بالإضافة إلى الإيضاحات المرفقة بالقوائم المالية، والتي تتضمن ملخصًا للسياسات المحاسبية المطبقة والمعلومات التفسيرية الأخرى. ‬
-          </div>
-          <div class="contract-paragraph">
-          يُسعدنا أن نؤكد لكم، بموجب خطابنا هذا، قبولنا وفهمنا لطلب ارتباط المراجعة الموجه إلينا، وأن مراجعتنا سوف تتم بهدف إبداء الرأي حول القوائم المالية.
-          </div>
-          <div class="contract-paragraph">
-          وتتمثل أهداف مراجعتنا في الوصول إلى تأكيد معقول حول ما إذا كانت القوائم المالية ككل خالية من التحريف الجوهري، سواء كان ناتجًا عن غش أو خطأ، وفي إصدار تقرير المراجع الذي سيتضمن رأينا. ويُعد التأكيد المعقول مستوى عاليًا من التأكيد، لكنه لا يضمن أن المراجعة التي تم القيام بها وفقًا للمعايير الدولية للمراجعة المعتمدة في المملكة العربية السعودية ستكشف دائمًا عن التحريف الجوهري في حال وجوده. قد تنشأ التحريفات عن غش أو خطأ، وتُعتبر التحريفات جوهرية إذا كان من المتوقع بدرجة معقولة أن تؤثر، منفردة أو مجتمعة، على القرارات الاقتصادية التي يتخذها المستخدمون استنادًا إلى هذه القوائم المالية.
-          </div>
-          <div class="contract-paragraph">
-          تعتمد الإجراءات التي نختارها على تقديرنا المهني، بما في ذلك تقييمنا لمخاطر وجود تحريفات جوهرية في القوائم المالية ومرفقاتها، سواء كانت ناتجة عن غش أو خطأ. كما تتضمن أعمال المراجعة تقييم مدى ملاءمة السياسات المحاسبية المستخدمة، وكذلك معقولية التقديرات المحاسبية التي أعدتها الإدارة.
-          </div>
-          <div class="contract-paragraph">
-          خلال قيامنا بأعمال المراجعة وأثناء عملية تقييم المخاطر، نأخذ في الاعتبار نظام الرقابة الداخلية الخاص بإعداد القوائم المالية ومرفقاتها للمنشأة , وذلك بهدف تصميم إجراءات مراجعة مناسبة للظروف، وليس بهدف إبداء رأي حول فاعلية نظام الرقابة الداخلية للمنشأة.
-          </div>
-          <div class="contract-paragraph">
-          في نهاية عملية المراجعة، سنبدي رأينا حول ما إذا كانت القوائم المالية ومرفقاتها قد أُعدت، من جميع الجوانب الجوهرية، وفقًا لأساس الإعداد الموضح في الإيضاحات المرفقة بالقوائم المالية. كما سيتم توجيه تقارير مراجعتنا إلى الللمنشأة والجهات ذات العلاقة
-          .
-          </div>
-          <div class="contract-paragraph">
-          قد تطرأ بعض التغييرات في الأوضاع مما يستدعي تعديل تقريرنا أو الانسحاب من الارتباط. في مثل هذه الحالات، سنقدم للمنشأة النتائج التي توصلنا إليها أو الأسباب التي أدت إلى انسحابنا.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          3) التسجيل
-          </div>
-          <div class="contract-paragraph">
-توافق المنشأة على تقديم إخطار كتابي فوري لنا في حال إدراج المنشأة أو أي من المنشآت ذات العلاقة، أو إذا كانت تخطط لإدراج أسهمها أو ديونها أو أي شكل آخر من الأوراق المالية، فور علمها بأي من هذه القوائم المدرجة أو التي سيتم إدراجها في الأسواق المحلية أو الأجنبية. ذلك لأننا في هذه الحالة سنكون مطالبين بالامتثال لمتطلبات الاستقلالية المعمول بها و/أو المتطلبات التنظيمية. كما أن المنشأة مسؤولة عن تزويدنا بقائمة تضم جميع المنشآت ذات العلاقة وتحديثها من وقت لآخر خلال فترة الارتباط، لتمكيننا من الامتثال لمتطلبات الاستقلالية المعمول بها. 
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          4) متطلبات ومحددات التقارير
+            ..............................................................
+            ..............................................................
           </div>
 
-          <div class="contract-paragraph">
-إن تقرير المراجعة الرسمي هو النسخة التي تحمل توقيع مراجعي الحسابات، ولن نتحمل مسؤولية أي أخطاء أو عدم صحة المعلومات الناتجة عن إنشاء أي نسخ أخرى. في حال علمنا باستخدام تقرير مراجعي الحسابات في أي مستند أو إنشاء قوائم مالية ومرفقاتها بشكل مضلل، فإننا نحتفظ بالحق في طلب إزالة تقريرنا من هذه المستندات أو المعلومات المستحدثة.
-          </div>
-          <div class="contract-paragraph">
-نظرًا لوجود بعض المحددات المرتبطة بالأنظمة المحاسبية والرقابة الداخلية، وكذلك طبيعة عملية المراجعة ومحدداتها، فإنه توجد بعض المخاطر التي لا يمكن تجنبها والتي قد تؤدي إلى عدم اكتشاف بعض الأخطاء الجوهرية، على الرغم من أن عملية المراجعة يتم التخطيط لها وتنفيذها وفقًا لمعايير المراجعة الدولية المعتمدة في المملكة العربية السعودية. يعود ذلك إلى أننا نأخذ في الاعتبار المخاطر التي تؤثر على أعمال المنشأة وأنظمتها المحاسبية والرقابية، والتي نراها ضرورية فقط لأغراض التخطيط للمراجعة وللحصول على مراجعة فعّالة. لذا، لا ينبغي الاعتماد على مراجعتنا لاكتشاف الغش أو الاختلاس أو أي مخالفات أخرى للأنظمة واللوائح التي يصعب اكتشافها من خلال إجراءات المراجعة العادية. 
-          </div>
-          <div class="contract-paragraph">
-مع ذلك، سنكون على تواصل معكم وسنقدم خطابًا منفصلًا يتعلق بأي نقاط ضعف جوهرية في أنظمة الحسابات أو الرقابة الداخلية التي قد نكتشفها خلال عملية المراجعة، والتي قد تكون ذات فائدة للإدارة في تنفيذ مهامها.         
-          </div>
+          <div class="contract-section-title">1) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <div class="audit-responsibility-title">
-    5) مسؤوليات المراجع
-          </div>
+          <div class="contract-section-title">2) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <div class="audit-responsibility-intro">
-    سنقوم بالمراجعة وفقًا للمعايير الدولية للمراجعة المعتمدة في المملكة العربية السعودية. تتطلب هذه المعايير منا الالتزام بالمتطلبات المهنية. وكجزء من المراجعة وفقًا لهذه المعايير، نمارس الحكم المهني ونلتزم بمبدأ الشك المهني طوال عملية المراجعة. كما نقوم بما يلي:
-          </div>
+          <div class="contract-section-title">3) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">❖</td>
-                <td class="audit-bullet-text">
-            تحديد وتقييم مخاطر التحريف الجوهري في القوائم المالية، سواء كان ناتجًا عن غش أو خطأ، وتصميم وتنفيذ إجراءات مراجعة تستجيب لتلك المخاطر، والحصول على أدلة مراجعة كافية ومناسبة لتوفير أساس لرأينا. يُعد خطر عدم اكتشاف التحريف الجوهري الناتج عن الغش أعلى من الخطر الناتج عن الخطأ،
-            نظرًا لأن الغش قد ينطوي على تواطؤ أو تزوير أو إغفالات متعمدة أو إفادات مضللة أو تجاوز للرقابة الداخلية.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="contract-section-title">4) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
+          <div class="contract-section-title">5) ..............................................................</div>
+          <div class="audit-responsibility-intro">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">❖</td>
-                <td class="audit-bullet-text">
-التوصل إلى فهم للرقابة الداخلية ذات الصلة بالمراجعة بهدف تصميم إجراءات مراجعة مناسبة في ظل الظروف القائمة، وليس لغرض إبداء رأي حول فاعلية الرقابة الداخلية للمنشأة. ومع ذلك، سنقوم بإبلاغكم كتابة بأي أوجه قصور مهمة في الرقابة الداخلية ذات الصلة بمراجعة القوائم المالية التي نكتشفها خلال المراجعة. 
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="contract-section-title">6) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">6.1/ ..............................................................</div>
+          <div class="contract-paragraph">6.2/ ..............................................................</div>
+          <div class="contract-paragraph">6.3/ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph">6.4/ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph">6.5/ ..............................................................</div>
+          <div class="contract-paragraph">6.6/ ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph1">▪ ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
+          <div class="contract-section-title">7) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <tbody style="border: 0 !important;">
+          <div class="contract-section-title">8) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">❖</td>
-                <td class="audit-bullet-text">
-            تقييم مدى ملاءمة السياسات المحاسبية المستخدمة ومعقولية التقديرات المحاسبية والإفصاحات المتعلقة بها التي أعدتها الإدارة.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="contract-section-title">9) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
+          <div class="contract-section-title">10) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <tbody style="border: 0 !important;">
+          <div class="contract-section-title">11) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">❖</td>
-                <td class="audit-bullet-text">
-                التوصل إلى استنتاج بشأن مدى مناسبة استخدام الإدارة لأساس الاستمرارية في المحاسبة، واستنادًا إلى أدلة المراجعة التي تم الحصول عليها، ما إذا كان هناك عدم تأكد جوهري يتعلق بأحداث أو ظروف قد تثير شكًا كبيرًا حول قدرة المنشأة على الاستمرار كمنشأة مستمرة. وإذا خلصنا إلى وجود عدم تأكد جوهري، سنكون مطالبين بلفت الانتباه في تقريرنا إلى الإفصاحات ذات الصلة الواردة في القوائم المالية، أو إذا كانت تلك الإفصاحات غير كافية، سنكون مطالبين بتعديل رأينا. تستند استنتاجاتنا إلى أدلة المراجعة التي يتم الحصول عليها حتى تاريخ تقرير المراجع. ومع ذلك، قد تتسبب أحداث أو ظروف مستقبلية في توقف المنشأة عن الاستمرار كمنشأة مستمرة. 
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">❖</td>
-                <td class="audit-bullet-text">
-            تقييم العرض العام للقوائم المالية وهيكلها ومحتواها، بما في ذلك الإفصاحات، وما إذا كانت القوائم المالية تعكس المعاملات والأحداث التي تمثلها بطريقة تحقق العرض العادل.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-
-          <div class="audit-responsibility-intro">
-    وبسبب القيود الملازمة للمراجعة، إضافة إلى القيود الملازمة للرقابة الداخلية، فإن هناك خطرًا لا يمكن تفاديه يتمثل في أن بعض التحريفات الجوهرية قد لا يتم اكتشافها، حتى إذا تم التخطيط للمراجعة وتنفيذها بشكل سليم وفقًا لمعايير المراجعة المنطبقة.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          6) مسؤوليات الادارة وتحديد إطار التقرير المالي المنطبق
-          </div>
-          <div class="contract-paragraph">
-          سيتم إجراء مراجعتنا على أساس أن (الإدارة والمكلفين بالحوكمة، حسب مقتضى الحال) يقرّون ويفهمون أنهم يتحملون المسؤولية الكاملة عما يلي:
-          </div>
-          <div class="contract-paragraph">
-         6.1/ إعداد وعرض القوائم المالية بشكل عادل وفقًا للمعايير الدولية للتقرير المالي المعتمدة في المملكة العربية السعودية.
-          </div>
-          <div class="contract-paragraph">
-         6.2/ الرقابة الداخلية التي تراها (الإدارة) ضرورية لتمكينها من إعداد قوائم مالية خالية من التحريف الجوهري، سواء كان بسبب غش أو خطأ.
-          </div>
-          <div class="contract-paragraph">
-       6.3/ تمكيننا مما يلي:
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-             ▪
-            </span>
-  
- الوصول إلى جميع المعلومات التي تعيها الإدارة بأنها ذات صلة بإعداد القوائم المالية، مثل السجلات والوثائق وغيرها من الأمور الأخرى.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-           
-          المعلومات الإضافية التي قد نطلبها من (الإدارة) لغرض المراجعة.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪ 
-            </span>
-           
-          الوصول غير المقيد إلى الأشخاص داخل المنشأة الذين نرى أنه من الضروري الحصول منهم على أدلة المراجعة.
-          </div>
-          <div class="contract-paragraph">
-6.4/ إبلاغنا بالأحداث اللاحقة التي تتطلب تعديلًا أو إفصاحًا في القوائم المالية ومرفقاتها وفقًا لمعيار المراجعة الدولي 560 "الأحداث اللاحقة" المعتمد في المملكة العربية السعودية. وهذا يشمل، على سبيل المثال:          
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-            الأحداث التي تقع بين تاريخ القوائم المالية ومرفقاتها وتاريخ تقرير المراجع.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-            الحقائق التي أصبحت معروفة للإدارة بعد تاريخ تقرير المراجع ولكن قبل تاريخ إصدار القوائم المالية ومرفقاتها.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-            الحقائق التي أصبحت معروفة للإدارة بعد إصدار القوائم المالية ومرفقاتها، والتي تم التعرف عليها عند الموافقة على القوائم المالية ومرفقاتها أو في تاريخ تقرير المراجعة وتسببت في تعديل القوائم المالية ومرفقاتها.
-          </div>
-          <div class="contract-paragraph">
-       6.5/ تزويدنا بمعلومات أخرى قبل تاريخ إصدار تقرير المراجع وفقًا لمعيار المراجعة الدولي 720 "مسؤوليات المراجع ذات العلاقة بالمعلومات الأخرى" المعتمد في المملكة العربية السعودية، إن وجدت.
-          </div>
-          <div class="contract-paragraph">
-         6.6/ التأكد من أن المعلومات المقدمة لنا خلال مراجعتنا: (1) تم الحصول عليها من مصادر وقنوات مشروعة، (2) دقيقة وصحيحة وكاملة وتم الإفصاح عنها بشكل عادل، (3) لم تُحذف منها أي معلومات جوهرية تجعلها غير صحيحة أو غير دقيقة أو مضللة، حيث إننا سنعتمد عليها في مراجعتنا
-          </div>
-          <div class="contract-paragraph">
-          وعليه، فإن إدارة المنشأة  مسئولة بشكل خاص عما يلي:
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-تصميم وتطبيق والحفاظ على نظام رقابة داخلية ملائم لإعداد القوائم المالية (الموحدة) المعدة لغرض خاص، والخالية من أي تحريفات سواء كانت ناتجة عن غش أو خطأ.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-            الاحتفاظ بسجلات محاسبية موثوقة.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-            اختيار وتطبيق سياسات محاسبية ملائمة.
-          </div>
-          <div class="contract-paragraph1">
-            <span style="font-size: 10px;">
-           ▪
-            </span>
-إجراء تقديرات محاسبية تتناسب مع الظروف المحيطة.
-          </div>
-          <div class="contract-paragraph">
-          وسنطلب من الإدارات المالية للمنشأة إعداد مسودة القوائم المالية عن السنة المالية كاملة، مع التسويات النهائية وبعض الجداول والبيانات التحليلية التي سنوضح نماذجها ومحتوياتها لهم، بالإضافة إلى تقديم مسودة النماذج، إذا لزم الأمر. وكجزء من آلية مراجعتنا، سنطلب من (الإدارة والمكلفين بالحوكمة، حسب مقتضى الحال) تقديم مصادقة مكتوبة تتعلق بالإفادات المقدمة لنا بشأن المراجعة. نتطلع إلى التعاون التام من جانب موظفي شركتكم أثناء المراجعة.
-          </div>
-
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          7) الغش والمخالفات
-          </div>
-          <div class="contract-paragraph">
-إن الإدارة مسؤولة عن حماية موجودات المنشأة ومنع واكتشاف محاولات الغش والخطأ، وكذلك الالتزام بالأنظمة واللوائح. كما أن الإدارة مسؤولة عن تصميم وتطبيق أنظمة رقابة داخلية فعالة لمنع واكتشاف محاولات الغش، وإبلاغنا عن: 
-(1) كافة أعمال الاحتيال المعروفة أو المحتملة التي تؤثر على عمليات المنشأة، والتي تشمل: (أ) الإدارة، (ب) الموظفين أصحاب الصلاحيات والذين لهم أدوار هامة في عمليات الرقابة الداخلية، (ج) الأمور الأخرى التي قد يكون لعمليات الاحتيال فيها تأثير جوهري على القوائم المالية. 
-(2) أي معلومات يتم الوصول إليها عن طريق الموظفين فيما يتعلق بالغش المحتمل الذي يؤثر على المنشأة، سواء من الموظفين السابقين أو المحللين أو المنظمين أو مندوبي المبيعات أو الآخرين. 
-كما أن الإدارة مسؤولة عن التأكد من التزام المنشأة بالأنظمة واللوائح التي تنطبق على عملياتها. سنقوم بتصميم مراجعتنا للحصول على تأكيد معقول، وليس مطلقًا، فيما يتعلق باكتشاف الأخطاء أو الغش أو الاحتيال الذي قد يكون له تأثير جوهري على القوائم المالية. نظرًا لطبيعة عملية الغش، خاصة تلك المتعلقة بالإخفاء والتواطؤ وتزوير المستندات، فإن أعمال المراجعة التي يتم تصميمها وتنفيذها وفقًا لمعايير المراجعة قد لا تكتشف عمليات الاحتيال والغش. وعلى الرغم من أن الرقابة الداخلية الفعالة تقلل من احتمال حدوث الأخطاء، إلا أنه من الممكن حدوث عمليات احتيال أو تصرفات غير قانونية أخرى قد لا يتم اكتشافها. ولهذه الأسباب، لا يمكننا التأكيد على أن الأخطاء أو الغش أو التصرفات غير القانونية الأخرى سيتم اكتشافها، إن وجدت. ومع ذلك، سنقوم بإعلامكم فورًا خلال عمليات المراجعة إذا تنامى إلى علمنا وجود أي تصرفات غير قانونية، أو أخطاء جوهرية، أو دليل على احتمال وجود عمليات غش أو احتيال. 
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          8) تأكيدات الإدارة
-          </div>
-          <div class="contract-paragraph">
-          وفقًا لمعايير المراجعة المعمول بها، سنقوم بإجراء استفسارات محددة مع الإدارة بشأن فعالية الرقابة الداخلية، والحصول على خطاب التمثيل من الإدارة فيما يتعلق بكافة البيانات والمعلومات والمستندات والسجلات والإفادات والإقرارات ذات الصلة بعملية المراجعة.
-          تُعتبر الردود على استفساراتنا، وخطاب التمثيل الذي سيتم الحصول عليه، ونتائج اختبارات المراجعة، بالإضافة إلى المستندات الأخرى، هي الأدلة الواضحة التي سنعتمد عليها في تحديد رأينا حيال القوائم المالية.
-          الإدارة مسؤولة عن إجراء التعديلات في القوائم المالية ومرفقاتها وتصحيح الأخطاء الجوهرية، والتأكيد في خطاب التمثيل على أن تأثير أي من الأخطاء غير المسجلة التي ظهرت خلال الارتباط الحالي أو المتعلقة بالفترة/السنة السابقة هي أخطاء غير مؤثرة، سواء كانت منفردة أو مجتمعة، على القوائم المالية ومرفقاتها ككل.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          9) الاستقلالية
-          </div>
-          <div class="contract-paragraph">
-          عند البدء في تنفيذ خدمات المراجعة أو أي خدمات تأكيدية أخرى للمنشأة، وفي حال حدوث أي ظروف قد تؤثر على استقلاليتنا خلال أداء هذا العمل للمنشأة أو لأي شركة تابعة أو زميلة ضمن هيكل المجموعة، فقد يؤدي ذلك إلى توقفنا عن أداء الأعمال. في حال حدوث ذلك، سنسعى لحل الموقف بأسرع وقت ممكن، والبحث عن حل يسمح لنا بالاستمرار في تنفيذ هذا الارتباط. وإذا تعذر حل الموقف، قد نضطر إلى التوقف عن تقديم الخدمات بعد تقديم إخطار بذلك يكون ساري المفعول فورًا عند التسليم، على أن نبلغكم قبل اتخاذ هذا الإجراء. 
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          10) أوراق العمل
-          </div>
-          <div class="contract-paragraph">
-          تعد أوراق العمل الخاصة بهذه المهمة ملكية حصرية للمنشأة  محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون. لن يتم السماح بالوصول إلى أوراق العمل إلا في حال طلب ذلك بموجب القانون أو متطلبات أي أنظمة أو وفقًا للمعايير المهنية المحددة.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          11) استخدام البريد الالكتروني
-          </div>
-          <div class="contract-paragraph">
-          يعد هذا الخطاب تفويضًا من المنشأة باستخدام البريد الإلكتروني وأي وسائل اتصال إلكترونية أخرى لنقل واستلام المعلومات، بما في ذلك المعلومات السرية، بين شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون والمنشأة، وبين شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون والاستشاريين الخارجيين أو أي جهات أخرى ذات صلة بشركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون. تدرك المنشأة أن البريد الإلكتروني يمر عبر شبكة الإنترنت العامة، وهي وسيلة اتصال غير مأمونة، وبالتالي فإن سرية المعلومات المنقولة قد يتم اختراقها دون ارتكاب أي خطأ من قبل شركة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون. 
-
-لا ينبغي الاعتماد على النصائح أو الآراء المنقولة عبر الوسائل الإلكترونية إلا إذا تم تأكيدها لاحقًا عبر الفاكس أو الخطابات الموقعة من قبل الشريك أو التوقيع المعتمد لشركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون. 
-
-يقتصر التواصل بين طرفي الارتباط عبر البريد الإلكتروني المبين أسفل التواقيع، وما عدا ذلك لا يعد تواصلًا رسميًا. 
-          </div>
           <div style="page-break-inside: avoid !important;">
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          12) الوقت
-          </div>
-          <div class="contract-paragraph">
-          سيتم التنسيق معكم بشأن الجدول الزمني وفقًا لمتطلباتكم وتوقعاتكم. وستتولى الإدارات المالية إعداد الجداول المطلوبة والمعلومات الضرورية لإتمام عملية المراجعة. ما لم تكن هناك أي أمور جوهرية، سنتمكن من تسليم التقارير المدرجة في قسم "التقارير المقدمة" ضمن الإطار الزمني المتفق عليه، ووفقا لدرجة تعاونكم معنا في إنهاء عملية المراجعة في الزمن المتفق عليه من خلال تقديم متطلبات المراجعة التي ستطلب منكم في أسرع وقت ممكن.
-          </div>
-</div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          13) فريق العمل
-          </div>
-          <div class="contract-paragraph">
-          إن الشريك/المدير التنفيذي المسؤول عن الارتباط، ويساعده مدير الارتباط، سيكونان مسؤولين عن إدارة عملية المراجعة، كما سيكونان حلقة الوصل مع الإدارة العليا والإدارة المالية. وسيكون مسؤول خدمة العملاء حاضرًا أيضًا لمناقشة خدمات المراجعة التي سنؤديها ونتائج عملنا مع لجنة المراجعة أو مجلس الإدارة أو رئيس مجلس الإدارة. سيتم تخصيص عدد كافٍ من الموظفين المهنيين المؤهلين لأداء الخدمات، وذلك لتمكيننا من الالتزام بالزمن المحدد لتقديم تقاريرنا.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          14) تنفيذ أعمال المراجعة:
-          </div>
-          <div class="contract-paragraph">
-          1.
-ستتم مراجعتنا وفقاً لمعايير المراجعة الدولية المعتمدة في المملكة العربية السعودية والتي تتطلب منا ان نقوم بتخطيط وتنفيذ أعمال المراجعة للحصول على درجة معقولة من القناعة بأن القوائم المالية خالية من أي خطأ جوهري. تشتمل المراجعة على فحص الأدلة، على أساس العينة، المؤيدة للمبالغ والإيضاحات حول القوائم المالية. كما تشتمل عملية المراجعة على تقييم المبادئ المحاسبية المتبعة والتقديرات الهامة المطبقة من قبل الإدارة بالإضافة إلى العرض العام للقوائم المالية. سنقوم بالحصول على فهم للأنظمة المحاسبية وأنظمة الرقابة الداخلية للمنشأة لتقييم مدى كفايتها لكي تستخدم كأساس في إعداد القوائم المالية ولهدف تحديد طبيعة وتوقيت ومدى إجراءات المراجعة التي سنقوم بها. يجب عدم الاعتماد على مراجعتنا في كشف كافة الاختلاسات والمخالفات الأخرى التي ربما حدثت والتي يمكن كشفها، إن وجدت، من خلال اختبارات المراجعة التي نقوم بها، وعند ذلك سنقوم بإبلاغكم فورا بمثل هذه الحالات. 
-          </div>
-          <div class="contract-paragraph">
-          2.
-          تختلف طبيعة ومدى إجراءات مراجعتنا حسب تقييمنا للنظام المحاسبي للمنشأة ونظام الرقابة الداخلية وقد تشتمل إجراءات مراجعتنا على أية نواحي متعلقة بعمليات المنشأة التي نراها ملائمة. إن دراستنا للنظام المحاسبي وأنظمة الرقابة الداخلية لن تتطلب منا إجراء دراسة وتقييم تفصيلي، ولن تكون كافية لتمكيننا من تقديم رأي مستقل حول مدى فاعلية وكفاءة نظام الرقابة الداخلية المتعلقة بإعداد التقارير المالية. لن يتم تصميم أعمال المراجعة لتحديد كافة نقاط الضعف الهامة في أنظمة المنشأة والتي سيتم إبلاغكم بها في حالة ملاحظتنا لها أثناء القيام بأعمال المراجعة. 
-          </div>
-          <div class="contract-paragraph">
-          3.
-          سنوجه استفسارات محددة إلى الإدارة وغيرها بشأن البنود المدرجة في القوائم المالية ومدى فعالية العمليات المحاسبية. تتطلب معايير المراجعة الدولية المعتمدة في المملكة العربية السعودية بأن يتم الحصول على تأكيدات خطية من الإدارة بشأن الافصاحات الهامة المقدمة لنا. تعتبر نتائج اختبارات المراجعة وردود الإدارة على استفساراتنا والافصاحات الخطية التي تقدمها الإدارة لنا بمثابة الأدلة والقرائن التي نعتزم الاعتماد عليها في تكوين رأينا حول القوائم المالية. ونظراً لأهمية الافصاحات الشفهية والخطية التي تقدمها الإدارة للقيام بأعمال المراجعة بشكل فعال، توافق المنشأة على إبراء ذمة المنشأة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون وموظفيها من اية التزامات وتكاليف تتعلق بالخدمات التي سنقدمها بموجب خطاب التعيين هذا والمترتبة على أية افصاحات غير صحيحة يتضمنها خطاب الافصاح المقدم من قبل الإدارة.
-          </div>
-          <div class="contract-paragraph">
-          4.
-          لكي نتمكن من القيام بمسؤولياتنا، فإن تقديم أية معلومات لأعضاء آخرين من مكتبنا من غير فريق المراجعة (مثل المعلومات المقدمة بشأن الخدمات المحاسبية والزكوية وغيرها) لا يعتبر بمثابة إخطار لنا بتلك المعلومات.
-          </div>
-          <div class="contract-paragraph">
-          5.
-          بمجرد إصدار تقرير مراجعتنا، فإنه لن تكون هناك مسؤوليات إضافية مباشرة ملقاة على عاتقنا بشأن القوائم المالية لتلك السنة المالية.
-          </div>
-          <div class="contract-paragraph">
-          6.
-          في حالة رغبتكم نشر أو نسخ القوائم المالية مع تقريرنا (أو إشارة إلى مكتبنا) في أي مستند يتضمن معلومات أخرى، فإنه يجب أن تسمحوا لنا بقراءة مسودة ذلك المستند، وتزويدنا بصورة من المستند النهائي لاعتماده من قبلنا قبل طباعته وتوزيعه.
-          </div>
-          <div class="contract-paragraph">
-          7.
-         وفقاً للمعايير المهنية، فإننا في الحالات غير المعتادة التي يتعذر علينا فيها إتمام أعمال المراجعة أو تكوين رأي، أو في الحالات التي لم نكون فيها رأي، فإنه يجوز لنا الامتناع عن إبداء رأي أو إصدار تقرير.
-          </div>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          15) التقارير المقدمة
-          </div>
-          <div class="contract-paragraph">
-          إن تقاريرنا ستتمثل فيما يلي:
-          </div>
-          <div class="contract-paragraph">
-            <div class="contract-paragraph">
-              <span style="font-size: 10px;">
-           ▪
-              </span>
-            تقرير المراجعة حول القوائم المالية ومرفقاتها.
-            </div>
-            <div class="contract-paragraph">
-              <span style="font-size: 10px;">
-           ▪
-              </span>
-            تُقدَّم تقارير المراجعة باللغة العربية.
-            </div>
-          </div>
-          <div class="contract-paragraph">
-          إضافة إلى ذلك، وفي سياق ممارساتنا العادية، فإننا نتوقع أن نقدم لكم خطاباً مستقلاً يوضح أية نقاط ضعف جوهرية استرعت انتباهنا في النظم المحاسبية والرقابة الداخلية. وسنبلغكم أيضاً بأية أمور أخرى خاصة بالحوكمة التي تسترعي انتباهنا نتيجة أعمال المراجعة التي نقوم بها. على اية حال فانه غير مطلوب منا ان نقوم بتصميم إجراءات مراجعة خاصة لغرض تحديد هذه الأمور.          
+            <div class="contract-section-title">12) ..............................................................</div>
+            <div class="contract-paragraph">..............................................................</div>
           </div>
 
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          16) الأتعاب
-          </div>
+          <div class="contract-section-title">13) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-<!-- <div class="contract-paragraph amount-paragraph" dir="rtl">
-            <t t-set="fee_lines" t-value="(q and q.order_line) or []" />
-            <t t-set="fee_lines" t-value="fee_lines.filtered(lambda l: l.fees_period_end)" />
-         إن أتعابنا المهنية التي سيتم تحصيلها خلال مراحل العمل تعتمد على المدة المطلوبة لتنفيذ المهام المكلف بها فريق العمل. تبلغ أتعابنا المهنية المقدرة مقابل مراجعة القوائم المالية ومرفقاتها للللمنشأة، وفقًا لنطاق العمل وما تم الاتفاق عليه معكم، كما يلي: 
-            <t t-if="fee_lines">
-              <t t-foreach="fee_lines" t-as="line" t-foreach-index="line_index">
-                <t t-if="line_index != 0">
-                 ، و
+          <div class="contract-section-title">14) ..............................................................</div>
+          <div class="contract-paragraph">1. ..............................................................</div>
+          <div class="contract-paragraph">2. ..............................................................</div>
+          <div class="contract-paragraph">3. ..............................................................</div>
+          <div class="contract-paragraph">4. ..............................................................</div>
+          <div class="contract-paragraph">5. ..............................................................</div>
+          <div class="contract-paragraph">6. ..............................................................</div>
+          <div class="contract-paragraph">7. ..............................................................</div>
+
+          <div class="contract-section-title">15) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">▪ ..............................................................</div>
+          <div class="contract-paragraph">▪ ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+
+          <div class="contract-section-title">16) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+
+          <t t-set="fee_lines" t-value="(q and q.order_line) or []"/>
+          <t t-set="fee_lines" t-value="q.order_line.filtered(lambda l: not l.display_type and l.product_id)"/>
+
+          <table class="fees-summary-table" data-no-auto-justify="1">
+            <thead>
+              <tr>
+                <th style="width:65%;">............................</th>
+                <th style="width:35%;">............................</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-if="fee_lines">
+                <t t-foreach="fee_lines" t-as="line">
+                  <tr>
+                    <td class="fees-service-cell">..............................................................</td>
+                    <td class="fees-amount-cell">........................................</td>
+                  </tr>
                 </t>
-                <t t-esc="o._format_fee_line_sentence(line)"/>
-                <span class="icon-saudi_riyal"></span>
               </t>
-            </t>
-  ليكون الإجمالي قبل الضريبة مبلغ
-            <t t-esc="o._format_amount_no_decimals(fee_base)"/>
-            <span class="icon-saudi_riyal"></span>
-  ،
-   يضاف إليه 15% ضريبة القيمة المضافة بمبلغ
-            <t t-esc="o._format_amount_no_decimals(vat_amount)"/>
-            <span class="icon-saudi_riyal"></span>
-   ،
-   ليصبح الإجمالي (شاملًا ضريبة القيمة المضافة) مبلغ
-            <t t-esc="o._format_amount_no_decimals(grand_total)"/>
-            <span class="icon-saudi_riyal"></span> 
-  ،
-   وذلك وفقًا لما تم الاتفاق عليه معكم.
-          </div> -->
+              <tr>
+                <td class="fees-total-label">............................................</td>
+                <td class="fees-amount-cell">........................................</td>
+              </tr>
+              <tr>
+                <td class="fees-total-label">............................................</td>
+                <td class="fees-amount-cell">........................................</td>
+              </tr>
+              <tr>
+                <td class="fees-total-label">............................................</td>
+                <td class="fees-amount-cell">........................................</td>
+              </tr>
+            </tbody>
+          </table>
 
-          <div class="contract-paragraph">
-          إن أتعابنا المهنية التي سيتم تحصيلها خلال مراحل العمل تعتمد على المدة المطلوبة لتنفيذ المهام المكلف بها فريق العمل. تبلغ أتعابنا المهنية المقدرة مقابل مراجعة القوائم المالية ومرفقاتها للمنشأة ، وفقًا لنطاق العمل وما تم الاتفاق عليه معكم، كما يلي: 
-          </div>          
-<t t-set="fee_lines" t-value="(q and q.order_line) or []"/>
-<t t-set="fee_lines" t-value="q.order_line.filtered(lambda l: not l.display_type and l.product_id)"/>
+          <div class="contract-paragraph">..............................................................</div>
 
-<table class="fees-summary-table" data-no-auto-justify="1">
-    <thead>
-        <tr>
-            <th style="width:65%;">وصف الخدمة</th>
-            <th style="width:35%;">
-                قيمة الأتعاب
-               (ريال سعودي)
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-      <t t-if="fee_lines">
-    <t t-foreach="fee_lines" t-as="line">
-        <tr>
-            <td class="fees-service-cell">
-                <t t-set="service_name"
-                  t-value="(('product_template_id' in line._fields and line.product_template_id and line.product_template_id.with_context(lang=partner_lang).name) or (line.product_id and line.product_id.with_context(lang=partner_lang).display_name) or line.name or '')"/>
-                <span t-esc="service_name"/>
-                <t t-if="'fees_period_end' in line._fields and line.fees_period_end">
-                <span> عن السنة المالية المنتهية في </span>
-                <t t-if="'fees_period_end' in line._fields and line.fees_period_end">
-                    <span t-esc="o._format_fees_date_ar(line.fees_period_end)"/>
-                </t>
-                <t t-else="">
-                    <span></span>
-                </t>
-                </t>
-            </td>
-
-            <td class="fees-amount-cell">
-                <span class="money-inline">
-                    <span class="icon-saudi_riyal"></span>
-                    <span t-esc="o._format_amount_no_decimals(line.price_subtotal)"/>
-                </span>
-            </td>
-        </tr>
-    </t>
-</t>
-
-        <tr>
-            <td class="fees-total-label">
-                الإجمالي قبل ضريبة القيمة المضافة
-            </td>
-            <td class="fees-amount-cell">
-                    <span class="money-inline">
-                        <span class="icon-saudi_riyal"></span>
-                        <span t-esc="o._format_amount_no_decimals(fee_base)"/>
-                    </span>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="fees-total-label">
-                ضريبة القيمة المضافة (15%)
-            </td>
-            <td class="fees-amount-cell">
-                    <span class="money-inline">
-                        <span class="icon-saudi_riyal"></span>
-                        <span t-esc="o._format_amount_no_decimals(vat_amount)"/>
-                    </span>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="fees-total-label">
-                الإجمالي المستحق شامل ضريبة القيمة المضافة
-            </td>
-            <td class="fees-amount-cell">
-                    <span class="money-inline">
-                        <span class="icon-saudi_riyal"></span>
-                        <span t-esc="o._format_amount_no_decimals(grand_total)"/>
-                    </span>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-          <div class="contract-paragraph">
-سيتم احتساب ودفع أتعابنا لمراجعة القوائم المالية ومرفقاتها، مضافًا إليها أي ضريبة قيمة مضافة مطبقة، بنسبة 50٪ (غير مستردة) عند البدء في العمل الأولي، وبنسبة 50٪ عند تقديم المسودة النهائية لتقرير المراجع ومرفقاته من القوائم المالية النهائية للمنشأة. 
-المصروفات التي تم تكبدها بالضرورة أثناء ارتباطنا بهذه المهمة سيتم إصدار فاتورة بها بالتكلفة، مضافًا إليها أي ضريبة قيمة مضافة مطبقة، وستتكون من التكاليف المباشرة المتكبدة مثل السفر والتنقل وغير ذلك (والتي سيتم احتسابها بالتكلفة الفعلية بالاتفاق مع المنشأة). 
-تم الاتفاق على الأتعاب المقدرة المذكورة أعلاه وفقًا لما ورد في هذا الخطاب. وفي حال تطلبت الظروف خلال عملية أداء هذه الخدمات تمديد الوقت أو المصروفات بسبب عدم جاهزية المنشأة للإعداد لعملية المراجعة، بما يؤثر على تقديم تقرير المراجعة في الوقت المحدد، سنقوم بإعلامكم والاتفاق معكم على الأتعاب المهنية الإضافية، إذا ما دعت الحاجة إلى ذلك. 
-          </div>
-
-          <table style="width:100%; border-collapse:collapse; border:0 !important; margin:6px 100px 14px 0; text-align:center; page-break-inside: avoid;">
+          <table style="width:100%; border-collapse:collapse; border:0 !important; margin:6px 100px 14px 0; text-align:center;">
             <tbody style="border:0 !important;">
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                الحساب البنكي
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                للمنشأة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                اسم البنك
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                البنك الأهلي السعودي
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                رقم الحساب
-                </th>
-                <td style="border:0 !important; padding:10px 0px; font-size:18px;">
-                23900000276709
-                </td>
-              </tr>
-              <tr style="border:0 !important;">
-                <th style="border:0 !important; padding:0 5px; font-size:18px;">
-                رقم الايبان
-                </th>
-                <td style="border:0 !important; padding:0 5px; font-size:18px;">
-                SA6310000023900000276709
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          17) سرية المعلومات
-          </div>
-          <div class="contract-paragraph">
-          يجوز لنا الحصول على معلومات حساسة بشأن أعمالكم أو شؤونكم خلال تقديم الخدمات ("معلومات سرية"). سنحافظ على سرية هذه المعلومات ولن نفصح عنها خارج نطاق فريق الارتباط ما لم تسمحوا لنا بذلك أو كما يسمح به هذا البند. سنلتزم بمعايير السرية لنظامنا الداخلي وسنمتثل للقيود المتعلقة بالسرية المفروضة علينا من قبل أي سلطة أخرى في المملكة العربية السعودية والتي يتعين علينا الالتزام بمتطلباتها، وكذلك أي التزامات تفرض علينا بموجب القوانين في المملكة العربية السعودية. يحق لنا الالتزام بأي متطلبات يفرضها القانون السعودي أو نظامنا الداخلي أو أي سلطة أخرى في المملكة فيما يتعلق بالإفصاح عن المعلومات السرية. 
-          </div>
-          <div class="contract-paragraph">
-            يجوز لنا مشاركة المعلومات المتعلقة بكم، بما في ذلك المعلومات السرية، مع: 
-            (1) الأشخاص الآخرين في للمنشأة محمد عبدالرحمن الزامل محاسبون قانونيون ومستشارون، و/أو الأطراف الأخرى التي تسهل إدارة أعمالنا أو تدعم بنيتنا الأساسية، وذلك في الحالات التالية: 
-            القيام بإجراءات قبول العميل والارتباط (بما في ذلك، وليس حصرًا، تحديد تضارب المصالح المحتمل أو الالتزام بمتطلبات الاستقلالية)، لأغراض تقييم المخاطر الداخلية، ولدعم الحفاظ على الجودة والمعايير المهنية عند تقديم الخدمات (على سبيل المثال من خلال مشاركة الممارسات المهنية، وإدارات السياسات، والمشاركة في تدابير ضمان الجودة أو إنشاء والحفاظ على قواعد بيانات المعرفة). 
-            سنظل مسؤولين عن الحفاظ على سرية المعلومات إذا تمت مشاركتها مع الأشخاص الآخرين في المنشأة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون أو إذا تم الوصول إليها من قبل أطراف أخرى. قد نقوم بإزالة الأسماء أو أي معرّفات من المعلومات السرية واستخدام المعلومات مجهولة المصدر لأغراض مشروعة نحددها بناءً على تقديرنا. ولا تنطبق هذه المادة في الحالات التي تصبح فيها المعلومات السرية متاحة للجميع. كما لا تمنع هذه المادة إفصاحنا عن المعلومات السرية لجهات التأمين المهني القائمة على تعويضنا أو لمستشارينا. 
-          </div>
-
-          <div style="margin:18px 0 6px 0; font-weight:bold;">
-          18) أمور أخرى
-          </div>
-
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-تؤكد إدارة المنشأة وتضمن وتتعهد (إلى الحد الذي يتوقع فيه ذلك) أنه، في تاريخ هذا خطاب الارتباط، فإن المنشأة ملتزمة بشكل كامل بجميع الأنظمة والقوانين الواجبة التطبيق المتعلقة بمكافحة الفساد والرشوة ("أنظمة مكافحة الفساد")، ولم تقم بمخالفتها. كما توافق وتتعهد بعدم مخالفة قوانين مكافحة الفساد، سواء بصورة مباشرة أو غير مباشرة، من خلال أي من مالكيها، أو مديريها الأساسيين، أو مديريها التنفيذيين، أو الشركاء، أو الوكلاء أو مقاولي الباطن أو الموظفين أو الممثلين المفوضين. 
-                </td>
-              </tr>
+              <tr><th style="border:0 !important;">...................</th><td style="border:0 !important;">...................</td></tr>
+              <tr><th style="border:0 !important;">...................</th><td style="border:0 !important;">...................</td></tr>
+              <tr><th style="border:0 !important;">...................</th><td style="border:0 !important;">...................</td></tr>
+              <tr><th style="border:0 !important;">...................</th><td style="border:0 !important;">...................</td></tr>
             </tbody>
           </table>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
+          <div class="contract-section-title">17) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
 
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-عندما يتعين على المكتب (شركة محمد عبد الرحمن الزامل محاسبون قانونيون ومستشارون) تقديم معلومات تتعلق بالمنشأة بموجب متطلبات تنظيمية أو طلب أو من خلال أي إجراءات نظامية، توافق المنشأة على تعويض المكتب عن التكاليف التي تكبدها والعاملين فيها والتي تتعلق بهذه المتطلبات أو الطلب أو الإجراءات النظامية، حيث أن إجراءات المكتب لم تكن تخضع لهذه المتطلبات أو الطلب أو الإجراءات النظامية. 
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="contract-section-title">18) ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
+          <div class="contract-paragraph">• ..............................................................</div>
 
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
+          <div class="contract-section-title">19) ..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph">..............................................................</div>
+          <div class="contract-paragraph" style="min-width:240px;">......../......../........ هـ — ......../......../........ م</div>
 
-            <tbody style="border: 0 !important;">
-
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	            قد نقدم استشارة خطية أو نؤكد إفادة شفهية بصورة خطية أو نقدم تقريرًا كتابيًا نهائيًا أو عرضًا شفهيًا. كما قد نقدم إفادة أو تقارير أو عروضًا شفهية أو مسودات مبدئية عنها. في مثل هذه الحالات، فإن الاعتبار سيكون للإفادة الخطية أو التقرير الخطي النهائي. يجب ألا تعتمدوا على أي مسودة أو إفادة مبدئية. وفي حال رغبتكم في الاعتماد على إفادة شفهية أو عرض شفهي، يتعين عليكم إبلاغنا بذلك وسنقدم تأكيدًا خطيًا للإفادة المعنية.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-                نحن غير ملزمين بتحديث أي إفادة أو تقرير أو خدمات مقدمة، سواء شفهية أو خطية، فيما يتعلق بأحداث تقع بعد صدور تقريرنا النهائي أو الإفادة أو المنتج المعني بصورة نهائية.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-                يقتصر التعويض عن أي ضرر على قيمة الأتعاب المهنية المدفوعة، وستُقدم الخدمات بكل عناية ومهارة مناسبة.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	          لتسنى لنا تأدية الخدمات، يتعين عليكم تقديم المعلومات والمساعدة على الفور، وتمكيننا من الاطلاع على الوثائق والمستندات التي بحوزتكم أو عهدتكم أو تحت تصرفكم، وعلى مستندات الموظفين الذين هم تحت سيطرتكم، متى ما كان ذلك مطلوبًا منا. يتعين عليكم بذل أفضل جهودكم لتقديم هذه الأمور عندما لا تكون في حوزتكم أو عهدتكم أو تحت تصرفكم. كما يجب عليكم إبلاغنا بأي معلومات أو تطورات تتنامى إلى علمكم والتي قد يكون لها تأثير على الخدمة المقدمة. كما يجب عليكم تقديم المعلومات استجابة لاستفساراتنا (إن وجدت).
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	          يجوز لنا تلقي المعلومات منكم أو من أي مصادر أخرى أثناء تقديم الخدمات، وإلى أبعد مدى يسمح به القانون، لن نكون مسؤولين لديكم عن أي خسارة أو ضرر ينشأ عن الغش أو التدليس أو حجب معلومات جوهرية متعلقة بالخدمات أو مطلوبة من قبلنا، أو عن أي تقصير آخر يتعلق بتلك المعلومات، سواء من جهتكم أو من جهة مصادر المعلومات الأخرى، ما لم يكن ذلك الغش، أو التدليس، أو الحجب أو التقصير الآخر واضحًا لدينا دون استقصاء إضافي.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- <table class="audit-bullet-table"> -->
-          <table class="contract-paragraph">
-
-            <tbody style="border: 0 !important;">
-              <tr style="border: 0 !important;">
-                <td class="audit-bullet-symbol">•</td>
-                <td class="audit-bullet-text">
-	        لن يُعد أي منا أو منكم مخالفًا لالتزاماتنا التعاقدية أو يترتب عليه أي مسؤولية تجاه الطرف الآخر إذا كان أي منا غير قادر على الالتزام بعقد الخدمات نتيجة لأي سبب خارج عن السيطرة المعقولة لنا أو لكم. في حال حدوث مثل هذه الظروف التي تؤثر على أي منا، سيكون لزامًا على ذلك الطرف إخطار الطرف الآخر في أقرب فرصة مناسبة، وسيكون للطرف الآخر الخيار في تعليق أو إنهاء عقد الخدمات بموجب إخطار يسري فورًا عند تسليمه.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div style="margin:0px 0 6px 0; font-weight:bold;">
-          19) الإنهاء
-          </div>
-          <div class="contract-paragraph">
-          يستطيع كل منا إنهاء عقد الخدمات أو تعليق سريانه في أي وقت عن طريق تقديم إشعار خطي إلى الطرف الآخر على عنوان المراسلة المدون في الخطاب. وتكون جميع المبالغ المستحقة لللمنشأة المراجعة واجبة الدفع بالكامل عند سريان الإنهاء أو التعليق من جانب العميل
-            <span t-esc="(partner and partner.name) or 'المنشأة.........................................................'"/>
-           أو كان الإنهاء من جانب للمنشأة المراجعة في حال عدم وفاء العميل بمسؤولياته بشأن تقديم كافة البيانات والمعلومات التي يطلبها فريق المراجعة وتكون لازمة لعملية المراجعة بمستوي الجودة المطلوب ، أو تأخره في تقديم هذه البيانات والمعلومات لوقت يزيد عن  الوقت المحدد لإنهاء عملية المراجعة وبحد أقصي ثلاثون يوما من تاريخ طلب البيانات والمعلومات، لن يؤثر الإنهاء أو التعليق بموجب هذه المادة على أي حقوق قد تكون مترتبة لأي منا قبل الإنهاء أو التعليق، في أي مادة من مواد الشروط العامة التي بحكم طبيعتها أو مضمونها أو لإنفاذ الغرض منها تظل قائمة حتى بعد انتهاء أو إنهاء عقد الخدمات، مثل القيود على الاستخدام أو السرية أو شروط حماية المسؤولية. 
-          </div>
-          <div class="contract-paragraph">
-          وتفضلوا بقبول فائق الاحترام،
-          </div>
-          <div class="contract-paragraph">
-        تحريراً في
-          </div>
-
-        
-          <div class="contract-paragraph" style="min-width:240px;">
-  <t t-set="hijri_raw" t-value="(o.start_hijiry_date or '').replace('-', '/').strip()"/>
-  <t t-set="hijri_parts" t-value="[p.strip() for p in hijri_raw.split('/') if p.strip()]"/>
-
-  <div>
-    <t t-if="len(hijri_parts) == 3">
-      <t t-set="hdd" t-value="hijri_parts[2] if len(hijri_parts[0]) == 4 else hijri_parts[0]"/>
-      <t t-set="hmm" t-value="hijri_parts[1]"/>
-      <t t-set="hyy" t-value="hijri_parts[0] if len(hijri_parts[0]) == 4 else hijri_parts[2]"/>
-      <t t-esc="hdd"/>
-      /
-      <t t-esc="hmm"/>
-      /
-      <t t-esc="hyy"/>
-      هـ
-    </t>
-    <t t-elif="hijri_raw">
-      <t t-esc="hijri_raw"/>
-      هـ
-    </t>
-  </div>
-
-  <!-- التاريخ الميلادي من o.start_date -->
-  <t t-set="gregorian_start_date"
-     t-value="('start_date' in o._fields and o.start_date) or False"/>
-
-  <div>
-    <t t-if="gregorian_start_date">
-      <t t-esc="'%02d' % gregorian_start_date.day"/>
-      /
-      <t t-esc="'%02d' % gregorian_start_date.month"/>
-      /
-      <t t-esc="gregorian_start_date.year"/>
-      م
-    </t>
-  </div>
-</div>
-
-          <table style="width:100%; border-collapse:collapse; table-layout:fixed; border:0 !important; margin-right:90px; text-align:center; page-break-inside: avoid;">
+          <table style="width:100%; border-collapse:collapse; border:0 !important; text-align:center;">
             <tbody style="border:0 !important;">
-              <tr style="border:0 !important;">
-                <td style="width:30%; vertical-align:top; text-align:right; border:0 !important;">
-                  <div style="margin:0 0 8px 0;">
-                  عن / للمنشأة محمد عبدالرحمن الزامل
-                  </div>
-                  <div style="margin:0 0 8px 0;">
-                  محاسبون قانونيون ومستشارون
-                  </div>
-                  <br/>
-                  <div style="margin:0 0 6px 0;">
-
-                    <t t-set="att_sign" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_sign')], limit=1)"/>
-                    <t t-set="att_seal" t-value="env['ir.attachment'].sudo().search([('name','=','Elzamil_seal')], limit=1)"/>
-                    <t t-set="sign_b64" t-value="(att_sign.datas and att_sign.datas.decode().replace('\n','').replace('\r','')) or ''"/>
-                    <t t-set="seal_b64" t-value="(att_seal.datas  and att_seal.datas.decode().replace('\n','').replace('\r','')) or ''"/>
-                  التوقيع المعتمد:
-                    <span style="min-width:220px; vertical-align:baseline;">
-                    (.............................)
-                    </span>
-                  </div>
-                  <br/>
-                  <div style="margin:0 0 6px 0;">
-                  الاسم: محمد بن عبد الرحمن الزامل
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الوظيفة: شريك مؤسس
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  ترخيص رقم 837
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  البريد الالكتروني المعتمد
-                    <br/>
-                  malzamel@zofirm.com
-                  </div>
-                  <img class="o-inline-seal" t-attf-src="data:#{att_seal.mimetype or 'image/png'};base64,#{seal_b64}"/>
-                  <!-- <img groups="base.group_system" class="o-inline-seal" t-attf-src="data:#{att_seal.mimetype or 'image/png'};base64,#{seal_b64}"/> -->
+              <tr>
+                <td style="width:30%; border:0 !important;">
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................
                 </td>
-                <td style="width:50%; vertical-align:top; text-align:right; border:0 !important;">
-                  <div style="margin:0 0 6px 0;">
-                  الإقرار والقبول نيابة عن المنشأة:
-                  </div>
-                  <div style="margin:0 0 10px 0;">
-                  أؤكد بأن الشروط الواردة في هذا الخطاب مقبولة لدينا ونيابة عن
-                  </div>
-                  <div style="margin:0 0 12px 0;">
-                  (
-                    <span style=" min-width:360px; vertical-align:baseline;" t-esc="(partner and partner.name) or 'المنشأة.........................................................'"/>
-                )
-                  </div>
-                  <div style="margin:12px 0 6px 0;">
-                  التوقيع المعتمد:
-                    <span style=" min-width:220px; vertical-align:baseline;">
-                    (..............................)
-                    </span>
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الاسم:
-                    <span style=" min-width:260px; vertical-align:baseline;" t-esc="(o.partner_id.commercial_partner_id.authorized_person and
-                        o.partner_id.commercial_partner_id.authorized_person.name)
-                        or '........................'"/>
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  الوظيفة:
-                    <span style=" min-width:260px; vertical-align:baseline;" t-esc="auth_title or '........................'"/>
-                  </div>
-                  <div style="margin:0 0 6px 0;">
-                  البريد الالكتروني المعتمد:
-                    <span style=" min-width:300px; vertical-align:baseline;" t-esc="(o.partner_id and o.partner_id.email) or '........................'"/>
-                  </div>
+                <td style="width:50%; border:0 !important;">
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................<br/><br/>
+                  ..............................................................
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-      <!-- </div> -->
       </t>
-      <script type="text/javascript">
-<![CDATA[
-(function () {
-    function hasClass(node, className) {
-        return node.className && (" " + node.className + " ").indexOf(" " + className + " ") >= 0;
-    }
-
-    function hasAnyClass(node, classNames) {
-        for (var i = 0; i < classNames.length; i++) {
-            if (hasClass(node, classNames[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function getTextLength(node) {
-        return (node.textContent || "").replace(/\s+/g, " ").replace(/ـ/g, "").trim().length;
-    }
-
-    function shouldSkipElement(node) {
-        if (!node || node.nodeType !== 1) {
-            return true;
-        }
-
-        if (hasClass(node, "ar-auto-justify") || node.getAttribute("data-no-auto-justify") === "1") {
-            return true;
-        }
-
-        var tag = node.tagName.toLowerCase();
-        if (
-            tag === "script" || tag === "style" || tag === "img" || tag === "svg" ||
-            tag === "table" || tag === "thead" || tag === "tbody" || tag === "tr" ||
-            tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "h5" || tag === "h6"
-        ) {
-            return true;
-        }
-
-        if (hasAnyClass(node, [
-            "title",
-            "section-title",
-            "contract-section-title",
-            "audit-responsibility-title",
-            "audit-bullet-symbol",
-            "signatures-section",
-            "sign-table",
-            "bank-table",
-            "doc-table"
-        ])) {
-            return true;
-        }
-
-        var styleText = (node.getAttribute("style") || "").replace(/\s+/g, "").toLowerCase();
-        if (styleText.indexOf("text-align:left") >= 0 || styleText.indexOf("text-align:center") >= 0) {
-            return true;
-        }
-
-        if (node.closest && node.closest(".signatures-section, .sign-table, .bank-table")) {
-            return true;
-        }
-
-        /* لا نطبق على النصوص القصيرة جداً إلا لو كانت من كلاس معروف */
-        if (
-            !hasAnyClass(node, ["contract-paragraph", "contract-paragraph1", "audit-bullet-text", "para", "ar-js-justify"]) &&
-            getTextLength(node) < 80
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    function wrapTextNode(textNode) {
-        var text = textNode.nodeValue;
-
-        if (!text || !text.replace(/\s+/g, "")) {
-            return;
-        }
-
-        /* إزالة أي كشيدة موجودة فعليًا في النص */
-        text = text.replace(/ـ/g, "");
-
-        var parts = text.split(/(\s+)/);
-        var frag = document.createDocumentFragment();
-
-        for (var i = 0; i < parts.length; i++) {
-            var part = parts[i];
-
-            if (!part) {
-                continue;
-            }
-
-            if (/^\s+$/.test(part)) {
-                frag.appendChild(document.createTextNode(part));
-            } else {
-                var span = document.createElement("span");
-                span.className = "ar-word";
-                span.appendChild(document.createTextNode(part));
-                frag.appendChild(span);
-            }
-        }
-
-        textNode.parentNode.replaceChild(frag, textNode);
-    }
-
-    function walk(node) {
-        if (node.nodeType === 3) {
-            wrapTextNode(node);
-            return;
-        }
-
-        if (node.nodeType !== 1) {
-            return;
-        }
-
-        var tag = node.tagName.toLowerCase();
-
-        if (
-            tag === "script" || tag === "style" || tag === "img" || tag === "svg" ||
-            tag === "br" || tag === "table" || tag === "thead" || tag === "tbody" || tag === "tr" ||
-            tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "h5" || tag === "h6" ||
-            hasClass(node, "ar-word") || hasClass(node, "icon-saudi_riyal")
-        ) {
-            return;
-        }
-
-        var children = [];
-        for (var i = 0; i < node.childNodes.length; i++) {
-            children.push(node.childNodes[i]);
-        }
-
-        for (var j = 0; j < children.length; j++) {
-            walk(children[j]);
-        }
-    }
-
-    function runArabicJustifyFix() {
-        var selector = [
-            ".contract-paragraph",
-            ".contract-paragraph1",
-            ".audit-bullet-text",
-            ".para",
-            ".ar-js-justify",
-            ".time-section",
-            ".contract-page > div",
-            ".contract-body > div"
-        ].join(", ");
-
-        var elements = document.querySelectorAll(selector);
-
-        for (var i = 0; i < elements.length; i++) {
-            if (shouldSkipElement(elements[i])) {
-                continue;
-            }
-
-            elements[i].className += " ar-auto-justify";
-            walk(elements[i]);
-        }
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runArabicJustifyFix);
-    } else {
-        runArabicJustifyFix();
-    }
-})();
-]]>
-</script>
     </main>
   </template>
 </odoo>
